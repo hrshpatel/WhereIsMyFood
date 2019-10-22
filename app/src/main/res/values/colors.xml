@@ -3,4 +3,12 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="activity_background">#F0F0F0</color>
+    <color name="login_bottom_clr">#FFD200</color>
+    <color name="yellow_stripe">#FFD200</color>
+
+    <color name="hint_color">#7A7A7A</color>
+    <color name="text_color_gray">#353535</color>
+
 </resources>

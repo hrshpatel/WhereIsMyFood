@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?><!--<shape xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:shape="rectangle">--><!--<solid android:color="#88074B75" />--><!--<stroke--><!--android:width="1dip"--><!--android:color="@android:color/transparent" />--><!--<corners--><!--android:bottomLeftRadius="360dp"--><!--android:topLeftRadius="360dp"--><!--/>-->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <corners android:radius="@dimen/dimen_30" />
+
+    <solid android:color="@android:color/transparent" />
+
+    <stroke
+        android:width="@dimen/dimen_02"
+        android:color="@android:color/darker_gray" />
+
+</shape><!--
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    &lt;!&ndash;<solid android:color="#00ffffff" />&ndash;&gt;
+
+    <stroke
+        android:width="2dp"
+        android:color="@android:color/darker_gray" />
+
+    <corners
+        android:bottomLeftRadius="@dimen/dimen_360"
+        android:bottomRightRadius="@dimen/dimen_360"
+        android:topLeftRadius="@dimen/dimen_360"
+        android:topRightRadius="@dimen/dimen_360" />
+</shape>-->

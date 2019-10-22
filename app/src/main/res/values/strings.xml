@@ -1,3 +1,39 @@
 <resources>
     <string name="app_name">WhereIsMyFood</string>
+    <string name="show_logo_of_application">Show logo of application.</string>
+    <string name="shows_arrow_on_title_tag">shows arrow on title tag</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_title">Login as User</string>
+    <string name="vendor_title">Login as Vendor</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="hint_signup">SignUp</string>
+    <string name="hint_vendor_name">Vendor Name</string>
+    <string name="hint_phone">Phone Number</string>
+
+    <!--Toast Messages-->
+    <string name="toast_no_internet">No Internet Connection Available</string>
+    <string name="toast_no_firstname">First Name is Required</string>
+    <string name="toast_first_name_length_invalid">Please Enter First Name Between 2 To 30 Characters!</string>
+    <string name="toast_last_name_length_invalid">Please Enter Last Name Between 2 To 30 Characters!</string>
+
+    <string name="toast_no_valid_firstname">Please Enter Valid First Name</string>
+    <string name="toast_no_valid_lastname">Please Enter Valid Last Name</string>
+    <string name="toast_no_email">Email is Required</string>
+    <string name="toast_email_format_wrong">Email is Invalid</string>
+    <string name="toast_no_password">Password is Required</string>
+    <string name="toast_password_length_invalid">Please Enter Password Between 8 To 30 Characters!</string>
+    <string name="toast_new_password_length_invalid">Please Enter New Password Between 8 To 30 Characters!</string>
+    <string name="toast_no_valid_password">Please Enter Valid Password</string>
+    <string name="toast_no_valid_new_password">Please Enter Valid New Password</string>
+    <string name="toast_no_valid_confirm_password">Please Enter Valid Confirm Password</string>
+    <string name="toast_no_confirm_password">Confirm Password is Required</string>
+    <string name="toast_password_mismatch">Please Enter Same Password</string>
+    <string name="internetmsg">Please check your Internet Connection</string>
+
 </resources>

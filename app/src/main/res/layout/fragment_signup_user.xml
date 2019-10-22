@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/linearLayout_activity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            style="@style/linearLayout_activity"
+            android:padding="@dimen/dimen_25">
+
+            <EditText
+                android:id="@+id/frg_signup_edt_fname"
+                style="@style/editText_signup"
+                android:layout_marginTop="@dimen/dimen_0"
+                android:drawableStart="@drawable/ic_user"
+                android:drawableLeft="@drawable/ic_user"
+                android:hint="@string/hint_first_name"
+                android:importantForAutofill="no"
+                android:inputType="textCapSentences" />
+
+            <EditText
+                android:id="@+id/frg_signup_edt_last_name"
+                style="@style/editText_signup"
+                android:drawableStart="@drawable/ic_user"
+                android:drawableLeft="@drawable/ic_user"
+                android:hint="@string/hint_last_name"
+                android:importantForAutofill="no"
+                android:inputType="textCapSentences" />
+
+            <EditText
+                android:id="@+id/frg_signup_edt_email"
+                style="@style/editText_signup"
+                android:drawableStart="@drawable/ic_mail"
+                android:drawableLeft="@drawable/ic_mail"
+                android:hint="@string/hint_email"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/frg_signup_edt_password"
+                style="@style/editText_signup"
+                android:drawableStart="@drawable/ic_lock"
+                android:drawableLeft="@drawable/ic_lock"
+                android:hint="@string/hint_password"
+                android:importantForAutofill="no"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/frg_signup_edt_cnfm_pwd"
+                style="@style/editText_signup"
+                android:drawableStart="@drawable/ic_lock"
+                android:drawableLeft="@drawable/ic_lock"
+                android:hint="@string/hint_confirm_password"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/frg_signup_btn_signup"
+                style="@style/button_signup"
+                android:text="@string/hint_signup"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

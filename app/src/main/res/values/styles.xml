@@ -8,4 +8,66 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="imageView_login_logo">
+        <item name="android:background">@drawable/ic_logo</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/dimen_15</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="linearLayout_activity">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/activity_background</item>
+        <item name="android:padding">@dimen/dimen_10</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:descendantFocusability">beforeDescendants</item>
+        <item name="android:focusableInTouchMode">true</item>
+    </style>
+
+    <style name="imageView_login_bg">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:src">@drawable/ic_arrow</item>
+    </style>
+
+    <style name="appBarLayout_signup">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:layout_marginTop">@dimen/dimen_10</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
+
+    <style name="editText_signup">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/edittext_bg</item>
+        <item name="android:padding">@dimen/dimen_05</item>
+        <item name="android:drawablePadding">@dimen/dimen_10</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_marginTop">@dimen/dimen_15</item>
+        <item name="android:textColor">@color/text_color_gray</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:textSize">@dimen/dimen_16_sp</item>
+    </style>
+
+    <style name="button_signup">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginTop">@dimen/dimen_20</item>
+        <item name="android:textColor">@color/text_color_gray</item>
+        <item name="android:background">@drawable/button_bg</item>
+        <item name="android:textSize">@dimen/dimen_16_sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
 </resources>
