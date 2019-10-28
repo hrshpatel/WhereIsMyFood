@@ -15,8 +15,30 @@ public class UserDetails {
     @SerializedName("user_type")
     private String mUserType;
 
+    @SerializedName("vendor_name")
+    private String mVendorName;
+
+    @SerializedName("phone_no")
+    private String mPhoneNo;
+
     @SerializedName("password")
     private String mPassword;
+
+    public String getPhoneNo() {
+        return mPhoneNo;
+    }
+
+    public void setPhoneNo(String mPhoneNo) {
+        this.mPhoneNo = mPhoneNo;
+    }
+
+    public String getVendorName() {
+        return mVendorName;
+    }
+
+    public void setVendorName(String mVendorName) {
+        this.mVendorName = mVendorName;
+    }
 
     public String getPassword() {
         return mPassword;

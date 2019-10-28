@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/act_edt_profile_root_view"
+    style="@style/linearLayout_activity"
+    android:padding="@dimen/dimen_0">
+
+    <include layout="@layout/application_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout style="@style/edit_add_linearlayout">
+
+            <com.conestoga.whereismyfood.customviews.RoundedImageView
+                android:id="@+id/act_edit_profile_img_profilePic"
+                style="@style/edit_add_circularImageview" />
+
+            <LinearLayout
+                style="@style/linearLayout_activity"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_25"
+                android:background="@android:color/white">
+
+                <RelativeLayout
+                    android:id="@+id/rel_first_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_20"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/act_edit_profile_txt_firstName"
+                        style="@style/txtview_edit_profile"
+                        android:text="@string/edit_profile_first_name" />
+
+                    <EditText
+                        android:id="@+id/act_edit_profile_edt_firstName"
+                        style="@style/edttxt_edit_profile"
+                        android:layout_alignBottom="@id/act_edit_profile_txt_firstName"
+                        android:layout_toRightOf="@id/act_edit_profile_txt_firstName"
+                        android:inputType="textCapSentences" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rel_vendor_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_20"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/act_edit_profile_txt_v_name"
+                        style="@style/txtview_edit_profile"
+                        android:text="@string/hint_vendor_name" />
+
+                    <EditText
+                        android:id="@+id/act_edit_profile_edt_v_Name"
+                        style="@style/edttxt_edit_profile"
+                        android:layout_alignBottom="@id/act_edit_profile_txt_v_name"
+                        android:layout_toRightOf="@id/act_edit_profile_txt_v_name"
+                        android:inputType="textCapSentences" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rel_last_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_20">
+
+                    <TextView
+                        android:id="@+id/act_edit_profile_txt_lastName"
+                        style="@style/txtview_edit_profile"
+                        android:text="@string/edit_profile_last_name" />
+
+                    <EditText
+                        android:id="@+id/act_edit_profile_edt_lastName"
+                        style="@style/edttxt_edit_profile"
+                        android:layout_alignBottom="@id/act_edit_profile_txt_lastName"
+                        android:layout_toRightOf="@id/act_edit_profile_txt_lastName"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapSentences" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_20"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/act_edit_profile_txt_phone"
+                        style="@style/txtview_edit_profile"
+                        android:text="@string/hint_phone" />
+
+                    <EditText
+                        android:id="@+id/act_edit_profile_edt_phone"
+                        style="@style/edttxt_edit_profile"
+                        android:layout_alignBottom="@id/act_edit_profile_txt_phone"
+                        android:layout_toRightOf="@id/act_edit_profile_txt_phone"
+                        android:inputType="textCapSentences" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_20"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/act_edit_profile_txt_email"
+                        style="@style/txtview_edit_profile"
+                        android:text="@string/hint_email" />
+
+                    <EditText
+                        android:id="@+id/act_edit_profile_edt_email"
+                        style="@style/edttxt_edit_profile"
+                        android:layout_alignBottom="@id/act_edit_profile_txt_email"
+                        android:layout_toRightOf="@id/act_edit_profile_txt_email"
+                        android:inputType="textEmailAddress" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_20"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/act_edit_profile_txt_curr_pwd"
+                        style="@style/txtview_edit_profile"
+                        android:text="@string/old_password" />
+
+                    <EditText
+                        android:id="@+id/act_edit_profile_edt_curr_pwd"
+                        style="@style/edttxt_edit_profile"
+                        android:layout_alignBottom="@id/act_edit_profile_txt_curr_pwd"
+                        android:layout_toRightOf="@id/act_edit_profile_txt_curr_pwd"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_20"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/act_edit_profile_txt_new_pwd"
+                        style="@style/txtview_edit_profile"
+                        android:text="@string/new_password" />
+
+                    <EditText
+                        android:id="@+id/act_edit_profile_edt_new_pwd"
+                        style="@style/edttxt_edit_profile"
+                        android:layout_alignBottom="@id/act_edit_profile_txt_new_pwd"
+                        android:layout_toRightOf="@id/act_edit_profile_txt_new_pwd"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_20"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/act_edit_profile_txt_cnfrm_new_pwd"
+                        style="@style/txtview_edit_profile"
+                        android:text="@string/cnfrm_new_pwd" />
+
+                    <EditText
+                        android:id="@+id/act_edit_profile_edt_cnfrm_new_pwd"
+                        style="@style/edttxt_edit_profile"
+                        android:layout_alignBottom="@id/act_edit_profile_txt_cnfrm_new_pwd"
+                        android:layout_toRightOf="@id/act_edit_profile_txt_cnfrm_new_pwd"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/str_addresses" />
+
+                <ImageView
+                    android:id="@+id/act_edit_profile_iv_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_10"
+                    android:src="@drawable/ic_add" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/act_edit_profile_recycler_addresses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

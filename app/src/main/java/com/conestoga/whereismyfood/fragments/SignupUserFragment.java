@@ -26,6 +26,8 @@ import com.conestoga.whereismyfood.utils.ProgressDialogUtil;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.GsonBuilder;
 
+import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -169,12 +171,22 @@ public class SignupUserFragment extends Fragment implements View.OnClickListener
                         Log.e("/////////////", "UserName : " + signUpResponse.getSuccess());
 
                         ProgressDialogUtil.dismissProgress();
+
+                        if (signUpResponse.getSuccess() == 0) {
+                            Toast.makeText(getActivity(), "" + signUpResponse.getMessage()
+                                    , Toast.LENGTH_SHORT).show();
+                        } else if (signUpResponse.getSuccess() == 1) {
+                            Toast.makeText(getActivity(), "Registered successfully. Please login", Toast.LENGTH_LONG).show();
+                            Objects.requireNonNull(getActivity()).finish();
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<SignUp> call, Throwable t) {
                         call.cancel();
                         ProgressDialogUtil.dismissProgress();
+                        Toast.makeText(getActivity(), getResources().getString(R.string.str_something_went_worng)
+                                , Toast.LENGTH_LONG).show();
                     }
                 });
             }

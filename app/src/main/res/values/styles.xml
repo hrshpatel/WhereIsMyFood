@@ -70,4 +70,71 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="textView_titleBar">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/dimen_16_sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="imageView_toolbar">
+        <item name="android:layout_gravity">right|center_vertical</item>
+        <item name="android:layout_marginRight">@dimen/dimen_15</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <!--        <item name="android:src">@drawable/ic_add_black_24dp</item>-->
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="edit_add_linearlayout">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_margin">@dimen/dimen_10</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingLeft">@dimen/dimen_20</item>
+        <item name="android:paddingRight">@dimen/dimen_20</item>
+    </style>
+
+    <style name="textView_titleBar_save">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">right</item>
+        <item name="android:textSize">@dimen/dimen_14_sp</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="edit_add_circularImageview">
+        <item name="android:layout_height">@dimen/dimen_100</item>
+        <item name="android:layout_width">@dimen/dimen_100</item>
+        <item name="android:layout_marginTop">@dimen/dimen_20</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:src">@drawable/ic_user_placeholder</item>
+    </style>
+
+    <style name="edttxt_edit_profile" parent="android:Widget.Holo.Light.EditText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/edittext_bg</item>
+        <item name="android:padding">@dimen/dimen_05</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/text_color_gray</item>
+        <item name="android:textSize">@dimen/dimen_12_sp</item>
+    </style>
+
+    <style name="txtview_edit_profile">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:ems">5</item>
+        <item name="android:paddingTop">@dimen/dimen_05</item>
+        <item name="android:textSize">@dimen/dimen_12_sp</item>
+    </style>
+
+    <dimen name="dimen_12_sp">12sp</dimen>
 </resources>

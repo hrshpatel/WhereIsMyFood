@@ -19,6 +19,7 @@ public class CommonUtils {
     private final static Pattern INVALID_EMAIL_PATTERN = Pattern.compile("^[0-9-]+[_0-9-]*(\\.[_0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
     private final static Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9-]+[_A-Za-z0-9-]*(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
     private final static Pattern PASSWORD_VALIDATION = Pattern.compile("[A-Za-z0-9\\@\\#\\_\\'\\^\\*\\=\\:\\-\\+\\`]+$");
+    private final static Pattern PHONE_NO_PATTERN = Pattern.compile("^[0-9]{10}$");
 
     /**
      * checks if the name is correct or not
@@ -30,6 +31,18 @@ public class CommonUtils {
      */
     public static boolean checkName(String name) {
         return FIRST_LAST_NAME_PATTERN.matcher(name).matches();
+    }
+
+    /**
+     * checks if phone number is correct or not
+     *
+     * @param phoneNo Phone number to verify
+     * @return true if name matches the pattern
+     * @Date :  26/10/2019
+     * @author : Harsh Patel
+     */
+    public static boolean checkPhoneNo(String phoneNo) {
+        return PHONE_NO_PATTERN.matcher(phoneNo).matches();
     }
 
     /**

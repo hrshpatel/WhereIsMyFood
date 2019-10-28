@@ -3,10 +3,8 @@
     <string name="show_logo_of_application">Show logo of application.</string>
     <string name="shows_arrow_on_title_tag">shows arrow on title tag</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="user_title">Login as User</string>
-    <string name="vendor_title">Login as Vendor</string>
+    <string name="user_title">Sign Up as User</string>
+    <string name="vendor_title">Sign Up as Vendor</string>
     <string name="hint_first_name">First Name</string>
     <string name="hint_last_name">Last Name</string>
     <string name="hint_email">Email</string>
@@ -19,10 +17,14 @@
     <!--Toast Messages-->
     <string name="toast_no_internet">No Internet Connection Available</string>
     <string name="toast_no_firstname">First Name is Required</string>
+    <string name="toast_no_vname">Vendor Name is Required</string>
     <string name="toast_first_name_length_invalid">Please Enter First Name Between 2 To 30 Characters!</string>
+    <string name="toast_v_name_length_invalid">Please Enter Vendor Name Between 2 To 30 Characters!</string>
     <string name="toast_last_name_length_invalid">Please Enter Last Name Between 2 To 30 Characters!</string>
 
     <string name="toast_no_valid_firstname">Please Enter Valid First Name</string>
+    <string name="toast_no_phone">Please Enter Phone Number.</string>
+    <string name="toast_no_valid_vname">Please Enter Valid Vendor Name</string>
     <string name="toast_no_valid_lastname">Please Enter Valid Last Name</string>
     <string name="toast_no_email">Email is Required</string>
     <string name="toast_email_format_wrong">Email is Invalid</string>
@@ -35,5 +37,16 @@
     <string name="toast_no_confirm_password">Confirm Password is Required</string>
     <string name="toast_password_mismatch">Please Enter Same Password</string>
     <string name="internetmsg">Please check your Internet Connection</string>
+    <string name="str_something_went_worng">Server is not responding. Please try again after sometime.</string>
+    <string name="toast_invalid_phone">Invalid Phone number.</string>
+    <string name="edit_profile_first_name">First Name</string>
+    <string name="edit_profile_last_name">Last Name</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="cnfrm_new_pwd">Confirm New Password</string>
+    <string name="str_addresses">Addresses</string>
+
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="str_login">Login</string>
 
 </resources>
