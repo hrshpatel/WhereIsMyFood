@@ -177,7 +177,9 @@ public class SignupUserFragment extends Fragment implements View.OnClickListener
                                     , Toast.LENGTH_SHORT).show();
                         } else if (signUpResponse.getSuccess() == 1) {
                             Toast.makeText(getActivity(), "Registered successfully. Please login", Toast.LENGTH_LONG).show();
-                            Objects.requireNonNull(getActivity()).finish();
+                            if (getActivity() != null) {
+                                getActivity().finish();
+                            }
                         }
                     }
 

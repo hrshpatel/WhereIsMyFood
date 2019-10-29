@@ -18,6 +18,10 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
         <activity
+            android:name=".activities.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".activities.EditProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -36,10 +40,6 @@
         <activity
             android:name=".activities.LoginActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
