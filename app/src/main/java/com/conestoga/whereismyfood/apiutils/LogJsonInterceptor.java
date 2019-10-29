@@ -2,8 +2,6 @@ package com.conestoga.whereismyfood.apiutils;
 
 import android.util.Log;
 
-import com.conestoga.whereismyfood.BuildConfig;
-
 import java.io.IOException;
 
 import okhttp3.Interceptor;

@@ -16,4 +16,6 @@ public interface APIInterface {
     @POST("register.php")
     Call<SignUp> registerUser(@Body UserDetails userDetails);
 
+    @POST("login.php")
+    Call<SignUp> loginUser(@Body UserDetails userDetails);
 }
