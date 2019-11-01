@@ -153,7 +153,7 @@ public class SignupUserFragment extends Fragment implements View.OnClickListener
             if (CommonUtils.isInternetAvailable(getActivity())) {
                 UserDetails userDetails = new UserDetails();
                 userDetails.setFirstName(mStrFirstName);
-                userDetails.setLastName(mStrFirstName);
+                userDetails.setLastName(mStrLastName);
                 userDetails.setEmailId(mStrEmail);
                 userDetails.setPassword(mStrPwd);
                 userDetails.setUserType("0");
