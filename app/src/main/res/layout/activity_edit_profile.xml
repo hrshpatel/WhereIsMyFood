@@ -119,6 +119,7 @@
                         style="@style/edttxt_edit_profile"
                         android:layout_alignBottom="@id/act_edit_profile_txt_email"
                         android:layout_toRightOf="@id/act_edit_profile_txt_email"
+                        android:enabled="false"
                         android:inputType="textEmailAddress" />
 
                 </RelativeLayout>

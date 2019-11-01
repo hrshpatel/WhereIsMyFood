@@ -166,6 +166,16 @@ public class SignupVendorFragment extends Fragment implements View.OnClickListen
                         Log.e("/////////////", "UserName : " + signUpResponse.getSuccess());
 
                         ProgressDialogUtil.dismissProgress();
+
+                        if (signUpResponse.getSuccess() == 0) {
+                            Toast.makeText(getActivity(), "" + signUpResponse.getMessage()
+                                    , Toast.LENGTH_SHORT).show();
+                        } else if (signUpResponse.getSuccess() == 1) {
+                            Toast.makeText(getActivity(), "Registered successfully. Please login", Toast.LENGTH_LONG).show();
+                            if (getActivity() != null) {
+                                getActivity().finish();
+                            }
+                        }
                     }
 
                     @Override

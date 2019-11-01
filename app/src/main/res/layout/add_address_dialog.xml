@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="beforeDescendants"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/dialog_edt_suite_number"
+                style="@style/editText_signup"
+                android:hint="@string/hint_suite_no"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no" />
+
+            <EditText
+                android:id="@+id/dialog_edt_street_name"
+                style="@style/editText_signup"
+                android:hint="@string/hint_street"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no" />
+
+            <EditText
+                android:id="@+id/dialog_edt_zipcode"
+                style="@style/editText_signup"
+                android:hint="@string/hint_zipcode"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no" />
+
+            <EditText
+                android:id="@+id/dialog_edt_city"
+                style="@style/editText_signup"
+                android:hint="@string/hint_city"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no" />
+
+            <EditText
+                android:id="@+id/dialog_edt_province"
+                style="@style/editText_signup"
+                android:hint="@string/hint_province"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no" />
+
+            <EditText
+                android:id="@+id/dialog_edt_phone"
+                style="@style/editText_signup"
+                android:hint="@string/hint_phone"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_20"
+                android:padding="@dimen/dimen_15">
+
+                <Button
+                    android:id="@+id/dialog_btn_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/text_Save"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/dimen_14_sp" />
+
+                <Button
+                    android:id="@+id/dialog_btn_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/darker_gray"
+                    android:text="@string/cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/dimen_14_sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

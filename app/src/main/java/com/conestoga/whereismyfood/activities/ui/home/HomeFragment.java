@@ -18,6 +18,11 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
+    public static HomeFragment newInstance() {
+        HomeFragment fragment = new HomeFragment();
+        return fragment;
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =

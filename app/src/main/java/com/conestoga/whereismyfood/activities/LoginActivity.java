@@ -35,10 +35,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
-        initializeView();
-        setListeners();
+        if (AppSharedPref.getInstance(this).getIsLogin()) {
+            finish();
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        } else {
+            setContentView(R.layout.activity_login);
+
+            initializeView();
+            setListeners();
+        }
+
     }
 
     @Override
@@ -128,10 +136,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 sharedPref.setLastName(responseDetails.getLastName());
                             } else {
                                 sharedPref.setVendorName(responseDetails.getVendorName());
-                                sharedPref.setPhoneNumber(responseDetails.getPhoneNo());
                             }
+                            sharedPref.setPhoneNumber(responseDetails.getPhoneNo());
 
+                            sharedPref.setIsLogin(true);
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            finish();
                             startActivity(intent);
                         }
                     }

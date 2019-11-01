@@ -99,4 +99,12 @@ public class AppSharedPref {
     public String getPhoneNumber() {
         return sh.getString("phone_no", "");
     }
+
+    public void setIsLogin(boolean isLogin) {
+        sh.edit().putBoolean("isLogin", isLogin).apply();
+    }
+
+    public boolean getIsLogin() {
+        return sh.getBoolean("isLogin", false);
+    }
 }

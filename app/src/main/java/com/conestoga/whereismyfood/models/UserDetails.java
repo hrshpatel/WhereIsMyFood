@@ -5,87 +5,109 @@ import com.google.gson.annotations.SerializedName;
 public class UserDetails {
 
     @SerializedName("email_id")
-    private String mEmailId;
+    private String emailId;
     @SerializedName("first_name")
-    private String mFirstName;
+    private String firstName;
     @SerializedName("id")
-    private String mId;
+    private String id;
     @SerializedName("last_name")
-    private String mLastName;
+    private String lastName;
     @SerializedName("user_type")
-    private String mUserType;
+    private String userType;
 
     @SerializedName("vendor_name")
-    private String mVendorName;
+    private String vendorName;
 
     @SerializedName("phone_no")
-    private String mPhoneNo;
+    private String phoneNo;
 
     @SerializedName("password")
-    private String mPassword;
+    private String password;
+
+    @SerializedName("oldPassword")
+    private String oldPassword;
+
+    @SerializedName("newPassword")
+    private String newPassword;
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
 
     public String getPhoneNo() {
-        return mPhoneNo;
+        return phoneNo;
     }
 
     public void setPhoneNo(String mPhoneNo) {
-        this.mPhoneNo = mPhoneNo;
+        this.phoneNo = mPhoneNo;
     }
 
     public String getVendorName() {
-        return mVendorName;
+        return vendorName;
     }
 
     public void setVendorName(String mVendorName) {
-        this.mVendorName = mVendorName;
+        this.vendorName = mVendorName;
     }
 
     public String getPassword() {
-        return mPassword;
+        return password;
     }
 
     public void setPassword(String mPassword) {
-        this.mPassword = mPassword;
+        this.password = mPassword;
     }
 
     public void setEmailId(String mEmailId) {
-        this.mEmailId = mEmailId;
+        this.emailId = mEmailId;
     }
 
     public void setFirstName(String mFirstName) {
-        this.mFirstName = mFirstName;
+        this.firstName = mFirstName;
     }
 
     public void setId(String mId) {
-        this.mId = mId;
+        this.id = mId;
     }
 
     public void setLastName(String mLastName) {
-        this.mLastName = mLastName;
+        this.lastName = mLastName;
     }
 
     public void setUserType(String mUserType) {
-        this.mUserType = mUserType;
+        this.userType = mUserType;
     }
 
     public String getEmailId() {
-        return mEmailId;
+        return emailId;
     }
 
     public String getFirstName() {
-        return mFirstName;
+        return firstName;
     }
 
     public String getId() {
-        return mId;
+        return id;
     }
 
     public String getLastName() {
-        return mLastName;
+        return lastName;
     }
 
     public String getUserType() {
-        return mUserType;
+        return userType;
     }
 
 }
