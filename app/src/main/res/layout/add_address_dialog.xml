@@ -17,6 +17,13 @@
             android:orientation="vertical">
 
             <EditText
+                android:id="@+id/dialog_edt_name"
+                style="@style/editText_signup"
+                android:hint="@string/hint_name"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no" />
+
+            <EditText
                 android:id="@+id/dialog_edt_suite_number"
                 style="@style/editText_signup"
                 android:hint="@string/hint_suite_no"

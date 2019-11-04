@@ -75,5 +75,17 @@
     <string name="hint_zipcode">Zipcode</string>
     <string name="hint_province">Province</string>
     <string name="cancel">Cancel</string>
+    <string name="no_suite_no">Suite number is required.</string>
+    <string name="toast_suite_length_invalid">Please Enter suite number Between 2 To 30 Characters!</string>
+    <string name="toast_city_length_invalid">Please Enter city Between 2 To 30 Characters!</string>
+    <string name="toast_province_length_invalid">Please Enter province Between 2 To 30 Characters!</string>
+    <string name="toast_no_street">Enter Street Name.</string>
+    <string name="invalid_street_name">Enter Valid Street name.</string>
+    <string name="no_zipcode">Enter zipcode.</string>
+    <string name="invalid_zipcode">Invalid zip code.</string>
+    <string name="no_city">Enter city.</string>
+    <string name="no_province">Enter province.</string>
+    <string name="hint_name">Name</string>
+    <string name="toast_no_name">Enter Name.</string>
 
 </resources>

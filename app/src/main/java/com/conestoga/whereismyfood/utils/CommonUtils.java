@@ -20,6 +20,7 @@ public class CommonUtils {
     private final static Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9-]+[_A-Za-z0-9-]*(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
     private final static Pattern PASSWORD_VALIDATION = Pattern.compile("[A-Za-z0-9\\@\\#\\_\\'\\^\\*\\=\\:\\-\\+\\`]+$");
     private final static Pattern PHONE_NO_PATTERN = Pattern.compile("^[0-9]{10}$");
+    private final static Pattern ZIP_CODE_PATTERN = Pattern.compile("^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$");
 
     /**
      * checks if the name is correct or not
@@ -43,6 +44,18 @@ public class CommonUtils {
      */
     public static boolean checkPhoneNo(String phoneNo) {
         return PHONE_NO_PATTERN.matcher(phoneNo).matches();
+    }
+
+    /**
+     * checks if zip code is correct or not
+     *
+     * @param zipCode Zip code to verify
+     * @return true if zip code matches the pattern
+     * @Date :  11/01/2019
+     * @author : Harsh Patel
+     */
+    public static boolean checkZipCode(String zipCode) {
+        return ZIP_CODE_PATTERN.matcher(zipCode).matches();
     }
 
     /**

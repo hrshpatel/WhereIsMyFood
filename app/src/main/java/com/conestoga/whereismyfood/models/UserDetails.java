@@ -2,6 +2,8 @@ package com.conestoga.whereismyfood.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class UserDetails {
 
     @SerializedName("email_id")
@@ -29,6 +31,17 @@ public class UserDetails {
 
     @SerializedName("newPassword")
     private String newPassword;
+
+    @SerializedName("addressList")
+    private ArrayList<AddressDetails> addressDetailsList;
+
+    public ArrayList<AddressDetails> getAddressDetailsList() {
+        return addressDetailsList;
+    }
+
+    public void setAddressDetailsList(ArrayList<AddressDetails> addressDetailsList) {
+        this.addressDetailsList = addressDetailsList;
+    }
 
     public String getOldPassword() {
         return oldPassword;

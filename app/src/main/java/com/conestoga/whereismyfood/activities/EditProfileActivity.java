@@ -4,10 +4,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,14 +22,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.conestoga.whereismyfood.R;
+import com.conestoga.whereismyfood.adapters.AddressListAdapter;
 import com.conestoga.whereismyfood.apiutils.APIClient;
 import com.conestoga.whereismyfood.apiutils.APIInterface;
 import com.conestoga.whereismyfood.customviews.RoundedImageView;
+import com.conestoga.whereismyfood.models.AddressDetails;
 import com.conestoga.whereismyfood.models.UserDetails;
+import com.conestoga.whereismyfood.response.AddAddress;
+import com.conestoga.whereismyfood.response.GetUserDetails;
 import com.conestoga.whereismyfood.response.SignUp;
 import com.conestoga.whereismyfood.utils.AppSharedPref;
 import com.conestoga.whereismyfood.utils.CommonUtils;
 import com.conestoga.whereismyfood.utils.ProgressDialogUtil;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,6 +62,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private APIInterface mApiInterface;
     private EditText mEdtEmail;
     private AppSharedPref sharedPref;
+    private UserDetails mUserDetails;
+    private ArrayList<AddressDetails> mAddressArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +146,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             mRelFirstName.setVisibility(View.GONE);
             mRelLastName.setVisibility(View.GONE);
         }
+
+        getUserDetailsApi();
     }
 
     private void setListeners() {
@@ -146,12 +156,49 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         mIvAdd.setOnClickListener(this);
     }
 
+    private void getUserDetailsApi() {
+        Call<GetUserDetails> userDetailsApi = mApiInterface.getUserDetails(sharedPref.getEmailId());
+
+        ProgressDialogUtil.showProgress(EditProfileActivity.this, "Loading", "Please Wait...", false);
+
+        userDetailsApi.enqueue(new Callback<GetUserDetails>() {
+            @Override
+            public void onResponse(Call<GetUserDetails> call, Response<GetUserDetails> response) {
+
+                ProgressDialogUtil.dismissProgress();
+                GetUserDetails userDetailsResponse = response.body();
+
+                if (userDetailsResponse.getSuccess().equals("0")) {
+                    Toast.makeText(EditProfileActivity.this, "" + userDetailsResponse.getMessage()
+                            , Toast.LENGTH_SHORT).show();
+                } else if (userDetailsResponse.getSuccess().equals("1")) {
+                    mUserDetails = userDetailsResponse.getUserDetails();
+                    mAddressArray = userDetailsResponse.getUserDetails().getAddressDetailsList();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<GetUserDetails> call, Throwable t) {
+                call.cancel();
+                ProgressDialogUtil.dismissProgress();
+                Toast.makeText(EditProfileActivity.this, getResources().getString(R.string.str_something_went_worng)
+                        , Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     private void setUserData() {
-        mEdtPhone.setText(sharedPref.getPhoneNumber());
-        mEdtEmail.setText(sharedPref.getEmailId());
-        mEdtFirstName.setText(sharedPref.getFirstName());
-        mEdtLastName.setText(sharedPref.getLastName());
-        mEdtVName.setText(sharedPref.getVendorName());
+        mEdtPhone.setText(mUserDetails.getPhoneNo());
+        mEdtEmail.setText(mUserDetails.getEmailId());
+        mEdtFirstName.setText(mUserDetails.getFirstName());
+        mEdtLastName.setText(mUserDetails.getLastName());
+        mEdtVName.setText(mUserDetails.getVendorName());
+
+        mRecyclerAddresses.setLayoutManager(new LinearLayoutManager(this));
+
+        AddressListAdapter adapter = new AddressListAdapter(this, mAddressArray);
+        mRecyclerAddresses.setAdapter(adapter);
     }
 
     private void validateData() {
@@ -372,6 +419,116 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         Button btnSave = dialog.findViewById(R.id.dialog_btn_save);
         Button btnCancel = dialog.findViewById(R.id.dialog_btn_cancel);
+
+        final EditText edtSuiteNo = dialog.findViewById(R.id.dialog_edt_suite_number);
+        final EditText edtStreetName = dialog.findViewById(R.id.dialog_edt_street_name);
+        final EditText edtZipCode = dialog.findViewById(R.id.dialog_edt_zipcode);
+        final EditText edtCity = dialog.findViewById(R.id.dialog_edt_city);
+        final EditText edtProvince = dialog.findViewById(R.id.dialog_edt_province);
+        final EditText edtPhone = dialog.findViewById(R.id.dialog_edt_phone);
+        final EditText edtName = dialog.findViewById(R.id.dialog_edt_name);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*else if (!CommonUtils.checkName(strStreetName)) {
+                    Toast.makeText(EditProfileActivity.this, getResources().getString(R.string.invalid_street_name), Toast.LENGTH_SHORT).show();
+                } */
+                String strSuiteNumber = edtSuiteNo.getText().toString();
+                String strStreetName = edtStreetName.getText().toString();
+                String strZipCode = edtZipCode.getText().toString();
+                String strCity = edtCity.getText().toString();
+                String strProvince = edtProvince.getText().toString();
+                String strPhone = edtPhone.getText().toString();
+                String strName = edtName.getText().toString();
+
+                if (CommonUtils.isNullString(strName)) {
+                    Toast.makeText(EditProfileActivity.this, getResources().getString(R.string.toast_no_name), Toast.LENGTH_SHORT).show();
+                } else if (CommonUtils.isNullString(strSuiteNumber)) {
+                    Toast.makeText(EditProfileActivity.this
+                            , "" + getResources().getString(R.string.no_suite_no)
+                            , Toast.LENGTH_SHORT).show();
+                } else if (strSuiteNumber.length() < 2 || strSuiteNumber.length() > 30) {
+                    Toast.makeText(EditProfileActivity.this
+                            , "" + getResources().getString(R.string.toast_suite_length_invalid)
+                            , Toast.LENGTH_SHORT).show();
+                } else if (CommonUtils.isNullString(strStreetName)) {
+                    Toast.makeText(EditProfileActivity.this, getResources().getString(R.string.toast_no_street), Toast.LENGTH_SHORT).show();
+                } else if (CommonUtils.isNullString(strZipCode)) {
+                    Toast.makeText(EditProfileActivity.this, getResources().getString(R.string.no_zipcode), Toast.LENGTH_SHORT).show();
+                } else if (!CommonUtils.checkZipCode(strZipCode)) {
+                    Toast.makeText(EditProfileActivity.this, getResources().getString(R.string.invalid_zipcode), Toast.LENGTH_SHORT).show();
+                } else if (CommonUtils.isNullString(strCity)) {
+                    Toast.makeText(EditProfileActivity.this, getResources().getString(R.string.no_city), Toast.LENGTH_SHORT).show();
+                } else if (strCity.length() < 2 || strCity.length() > 30) {
+                    Toast.makeText(EditProfileActivity.this, getResources().getString(R.string.toast_city_length_invalid), Toast.LENGTH_SHORT).show();
+                } else if (CommonUtils.isNullString(strProvince)) {
+                    Toast.makeText(EditProfileActivity.this, getResources().getString(R.string.no_province), Toast.LENGTH_SHORT).show();
+                } else if (strProvince.length() < 2 || strProvince.length() > 30) {
+                    Toast.makeText(EditProfileActivity.this, getResources().getString(R.string.toast_province_length_invalid), Toast.LENGTH_SHORT).show();
+                } else if (!CommonUtils.isNullString(strPhone) && !CommonUtils.checkPhoneNo(strPhone)) {
+                    Toast.makeText(EditProfileActivity.this, "" + getResources().getString(R.string.toast_invalid_phone)
+                            , Toast.LENGTH_SHORT).show();
+                } else {
+                    if (CommonUtils.isInternetAvailable(EditProfileActivity.this)) {
+                        AddressDetails addressDetails = new AddressDetails();
+                        addressDetails.setUserId(sharedPref.getUserId());
+                        addressDetails.setCity(strCity);
+                        addressDetails.setEmailId(sharedPref.getEmailId());
+                        addressDetails.setPhoneNo(strPhone);
+                        addressDetails.setProvince(strProvince);
+                        addressDetails.setStreet(strStreetName);
+                        addressDetails.setSuite_no(strSuiteNumber);
+                        addressDetails.setZipCode(strZipCode);
+                        addressDetails.setName(strName);
+
+                        ProgressDialogUtil.showProgress(EditProfileActivity.this, "Loading", "Please Wait...", false);
+
+                        Call<AddAddress> addAddressApi = mApiInterface.addAddress(addressDetails);
+
+                        addAddressApi.enqueue(new Callback<AddAddress>() {
+                            @Override
+                            public void onResponse(Call<AddAddress> call, Response<AddAddress> response) {
+                                Log.e("/////////////", "Response : " + response.body());
+                                AddAddress addAddressResponse = response.body();
+                                Log.e("/////////////", "UserName : " + addAddressResponse.getMessage());
+                                Log.e("/////////////", "UserName : " + addAddressResponse.getSuccess());
+
+                                ProgressDialogUtil.dismissProgress();
+
+                                if (addAddressResponse.getSuccess().equals("0")) {
+                                    Toast.makeText(EditProfileActivity.this, "" + addAddressResponse.getMessage()
+                                            , Toast.LENGTH_SHORT).show();
+                                } else if (addAddressResponse.getSuccess().equals("1")) {
+                                    Toast.makeText(EditProfileActivity.this, "Address added successfully.", Toast.LENGTH_LONG).show();
+                                    mAddressArray.clear();
+                                    mAddressArray.addAll(addAddressResponse.getAddressDetailList());
+                                    mRecyclerAddresses.getAdapter().notifyDataSetChanged();
+                                    dialog.dismiss();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<AddAddress> call, Throwable t) {
+                                call.cancel();
+                                ProgressDialogUtil.dismissProgress();
+                                Toast.makeText(EditProfileActivity.this, getResources().getString(R.string.str_something_went_worng)
+                                        , Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }
+
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
 
     }
 
