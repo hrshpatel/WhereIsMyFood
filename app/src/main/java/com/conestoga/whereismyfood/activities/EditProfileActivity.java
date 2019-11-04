@@ -72,7 +72,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         setUpToolbar();
         initializeView();
-        setUserData();
         setListeners();
     }
 
@@ -174,6 +173,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 } else if (userDetailsResponse.getSuccess().equals("1")) {
                     mUserDetails = userDetailsResponse.getUserDetails();
                     mAddressArray = userDetailsResponse.getUserDetails().getAddressDetailsList();
+                    setUserData();
                 }
 
             }
