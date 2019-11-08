@@ -212,6 +212,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/act_edit_profile_recycler_addresses"
                 android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/dimen_10"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
