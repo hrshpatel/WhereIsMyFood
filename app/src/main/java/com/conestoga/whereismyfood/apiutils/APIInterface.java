@@ -29,6 +29,6 @@ public interface APIInterface {
     @POST("addAddress.php")
     Call<AddAddress> addAddress(@Body AddressDetails addressDetails);
 
-    @GET("getUserDetails.php?email_id = {emailId}")
-    Call<GetUserDetails> getUserDetails(@Path("emailId") String emailId);
+    @GET("getUserDetails.php")
+    Call<GetUserDetails> getUserDetails(@Query("email_id") String emailId);
 }
