@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,14 +29,23 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import com.conestoga.whereismyfood.R;
 import com.conestoga.whereismyfood.activities.ui.home.HomeFragment;
+import com.conestoga.whereismyfood.utils.CommonUtils;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
 
 import static androidx.core.view.GravityCompat.START;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, VendorAdappter.Callback {
 
     private AppBarConfiguration mAppBarConfiguration;
     private Toolbar mToolbar;
@@ -47,6 +57,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private TextView mTxtDrwrEmail;
     private ImageView mIvEdtProfile;
 
+    @BindView(R.id.mRecyclerView)
+    RecyclerView mRecyclerView;
+    VendorAdappter mVendorAdapter;
+
+    LinearLayoutManager mLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +70,44 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         initializeView();
         setListeners();
+        ButterKnife.bind(this);
+        setUp();
+    }
+
+    private void setUp() {
+        mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        Drawable dividerDrawable = ContextCompat.getDrawable(this, R.drawable.divider_drawable);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(dividerDrawable));
+        mVendorAdapter = new VendorAdappter(new ArrayList<>());
+
+        prepareDemoContent();
+    }
+
+    private void prepareDemoContent() {
+        CommonUtils.showLoading(HomeActivity.this);
+        new Handler().postDelayed(() -> {
+            //prepare data and show loading
+            CommonUtils.hideLoading();
+            ArrayList<Vendor> mVendors = new ArrayList<>();
+            String[] vendorsList = getResources().getStringArray(R.array.vendor_name);
+            String[] vendorsInfo = getResources().getStringArray(R.array.vendor_info);
+            String[] vendorsImage = getResources().getStringArray(R.array.vendor_list);
+            for (int i = 0; i < vendorsList.length; i++) {
+                mVendors.add(new Vendor(vendorsImage[i], vendorsInfo[i], "News", vendorsList[i]));
+            }
+            mVendorAdapter.addItems(mVendors);
+            mRecyclerView.setAdapter(mVendorAdapter);
+        }, 2000);
+
+
+    }
+
+    @Override
+    public void onEmptyViewRetryClick() {
+        prepareDemoContent();
     }
 
     @Override

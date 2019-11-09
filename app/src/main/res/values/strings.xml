@@ -88,4 +88,24 @@
     <string name="hint_name">Name</string>
     <string name="toast_no_name">Enter Name.</string>
 
+    <string-array name="vendor_list">
+        <item>@drawable/ic_logo</item>
+        <item>@drawable/ic_logo</item>
+        <item>@drawable/ic_logo</item>
+        <item>@drawable/ic_logo</item>
+    </string-array>
+    
+    <string-array name="vendor_name">
+        <item>Dhruv</item>
+        <item>Harsh</item>
+        <item>Priyank</item>
+        <item>Jay</item>
+    </string-array>
+    
+    <string-array name="vendor_info">
+        <item>ddsewfedwfew</item>
+        <item>ddsewfedwfew</item>
+        <item>ddsewfedwfew</item>
+        <item>ddsewfedwfew</item>
+    </string-array>
 </resources>

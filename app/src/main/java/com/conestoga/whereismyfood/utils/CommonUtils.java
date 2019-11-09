@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.conestoga.whereismyfood.R;
+import com.conestoga.whereismyfood.activities.HomeActivity;
 
 import java.util.regex.Pattern;
 
@@ -139,4 +140,9 @@ public class CommonUtils {
         }
     }
 
+    public static void hideLoading() {
+    }
+
+    public static void showLoading(HomeActivity homeActivity) {
+    }
 }
