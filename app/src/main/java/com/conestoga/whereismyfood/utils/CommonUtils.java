@@ -9,7 +9,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.conestoga.whereismyfood.R;
-import com.conestoga.whereismyfood.activities.HomeActivity;
 
 import java.util.regex.Pattern;
 
@@ -17,6 +16,7 @@ public class CommonUtils {
 
     public static final String BASE_URL = "http://10.0.2.2/Capstone_project/apis/";
     private final static Pattern FIRST_LAST_NAME_PATTERN = Pattern.compile("^[A-Za-z0-9]+[A-Za-z-\\.\\-\\_\\']*$");
+    public final static Pattern DISH_NAME_PATTERN = Pattern.compile("^[A-Za-z0-9]+[a-zA-Z0-9\\(\\)\\.\\-\\_\\{\\}\\@\\*\\s*]*$");
     private final static Pattern INVALID_EMAIL_PATTERN = Pattern.compile("^[0-9-]+[_0-9-]*(\\.[_0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
     private final static Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9-]+[_A-Za-z0-9-]*(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
     private final static Pattern PASSWORD_VALIDATION = Pattern.compile("[A-Za-z0-9\\@\\#\\_\\'\\^\\*\\=\\:\\-\\+\\`]+$");
@@ -33,6 +33,10 @@ public class CommonUtils {
      */
     public static boolean checkName(String name) {
         return FIRST_LAST_NAME_PATTERN.matcher(name).matches();
+    }
+
+    public static boolean checkDishName(String dishName) {
+        return DISH_NAME_PATTERN.matcher(dishName).matches();
     }
 
     /**
@@ -140,9 +144,4 @@ public class CommonUtils {
         }
     }
 
-    public static void hideLoading() {
-    }
-
-    public static void showLoading(HomeActivity homeActivity) {
-    }
 }

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/linearLayout_activity"
+    tools:context=".activities.AddSubsciptionActivity">
+
+    <include layout="@layout/application_toolbar" />
+
+    <ScrollView
+        android:id="@+id/act_sub_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/dimen_15">
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/act_add_sub_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_200" />
+
+            <Button
+                android:id="@+id/act_sub_btn_add_photo"
+                style="@style/button_signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:paddingLeft="@dimen/dimen_20"
+                android:paddingRight="@dimen/dimen_20"
+                android:text="@string/str_add_photo" />
+
+            <EditText
+                android:id="@+id/act_sub_edt_name"
+                style="@style/editText_signup"
+                android:hint="@string/str_subscription_name"
+                android:imeOptions="actionNext" />
+
+            <EditText
+                android:id="@+id/act_sub_edt_vendor_name"
+                style="@style/editText_signup"
+                android:hint="@string/hint_vendor_name" />
+
+            <EditText
+                android:id="@+id/act_sub_edt_description"
+                style="@style/editText_signup"
+                android:hint="@string/str_description"
+                android:maxLength="1000"
+                android:maxLines="7"
+                android:singleLine="false" />
+
+            <EditText
+                android:id="@+id/act_sub_edt_price"
+                style="@style/editText_signup"
+                android:hint="@string/str_price"
+                android:inputType="numberDecimal" />
+
+            <CheckBox
+                android:id="@+id/act_sub_chk_monday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15"
+                android:checked="true"
+                android:text="@string/str_monday" />
+
+            <LinearLayout
+                android:id="@+id/act_sub_lin_monday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_10">
+
+                <EditText
+                    android:id="@+id/act_sub_edt_mon_dish_name"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_dish_name"
+                    android:imeOptions="actionNext" />
+
+                <EditText
+                    android:id="@+id/act_sub_edt_mon_ingredients"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_ingredients"
+                    android:singleLine="false" />
+
+                <EditText
+                    android:id="@+id/act_sub_edt_mon_desc"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_description"
+                    android:singleLine="false" />
+
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/act_sub_chk_tuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15"
+                android:checked="true"
+                android:text="@string/str_tuesday" />
+
+            <LinearLayout
+                android:id="@+id/act_sub_lin_tuesday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_10">
+
+                <EditText
+                    android:id="@+id/act_sub_edt_tues_dish_name"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_dish_name"
+                    android:imeOptions="actionNext" />
+
+                <EditText
+                    android:id="@+id/act_sub_edt_tues_ingredients"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_ingredients"
+                    android:singleLine="false" />
+
+                <EditText
+                    android:id="@+id/act_sub_edt_tues_desc"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_description"
+                    android:singleLine="false" />
+
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/act_sub_chk_wednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15"
+                android:checked="true"
+                android:text="@string/str_wednesday" />
+
+            <LinearLayout
+                android:id="@+id/act_sub_lin_wednesday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_10">
+
+                <EditText
+                    android:id="@+id/act_sub_edt_wed_dish_name"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_dish_name"
+                    android:imeOptions="actionNext" />
+
+                <EditText
+                    android:id="@+id/act_sub_edt_wed_ingredients"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_ingredients"
+                    android:singleLine="false" />
+
+                <EditText
+                    android:id="@+id/act_sub_edt_wed_desc"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_description"
+                    android:singleLine="false" />
+
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/act_sub_chk_thursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15"
+                android:checked="true"
+                android:text="@string/str_thursday" />
+
+            <LinearLayout
+                android:id="@+id/act_sub_lin_thursday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_10">
+
+                <EditText
+                    android:id="@+id/act_sub_edt_thurs_dish_name"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_dish_name"
+                    android:imeOptions="actionNext" />
+
+                <EditText
+                    android:id="@+id/act_sub_edt_thurs_ingredients"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_ingredients"
+                    android:singleLine="false" />
+
+                <EditText
+                    android:id="@+id/act_sub_edt_thurs_desc"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_description"
+                    android:singleLine="false" />
+
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/act_sub_chk_friday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15"
+                android:checked="true"
+                android:text="@string/str_friday" />
+
+            <LinearLayout
+                android:id="@+id/act_sub_lin_friday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_10">
+
+                <EditText
+                    android:id="@+id/act_sub_edt_fri_dish_name"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_dish_name"
+                    android:imeOptions="actionNext" />
+
+                <EditText
+                    android:id="@+id/act_sub_edt_fri_ingredients"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_ingredients"
+                    android:singleLine="false" />
+
+                <EditText
+                    android:id="@+id/act_sub_edt_fri_desc"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_description"
+                    android:singleLine="false" />
+
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/act_sub_chk_sat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15"
+                android:checked="true"
+                android:text="@string/str_saturday" />
+
+            <LinearLayout
+                android:id="@+id/act_sub_lin_sat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_10">
+
+                <EditText
+                    android:id="@+id/act_sub_edt_sat_dish_name"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_dish_name"
+                    android:imeOptions="actionNext" />
+
+                <EditText
+                    android:id="@+id/act_sub_edt_sat_ingredients"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_ingredients"
+                    android:singleLine="false" />
+
+                <EditText
+                    android:id="@+id/act_sub_edt_sat_desc"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_description"
+                    android:singleLine="false" />
+
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/act_sub_chk_sun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15"
+                android:checked="true"
+                android:text="@string/str_sunday" />
+
+            <LinearLayout
+                android:id="@+id/act_sub_lin_sun"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_10">
+
+                <EditText
+                    android:id="@+id/act_sub_edt_sun_dish_name"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_dish_name"
+                    android:imeOptions="actionNext" />
+
+                <EditText
+                    android:id="@+id/act_sub_edt_sun_ingredients"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_ingredients"
+                    android:singleLine="false" />
+
+                <EditText
+                    android:id="@+id/act_sub_edt_sun_desc"
+                    style="@style/editText_signup"
+                    android:hint="@string/str_description"
+                    android:singleLine="false" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/act_sub_btn_save"
+                style="@style/button_signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dimen_15"
+                android:paddingLeft="@dimen/dimen_20"
+                android:paddingRight="@dimen/dimen_20"
+                android:text="@string/text_Save" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

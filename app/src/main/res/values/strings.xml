@@ -87,25 +87,26 @@
     <string name="no_province">Enter province.</string>
     <string name="hint_name">Name</string>
     <string name="toast_no_name">Enter Name.</string>
+    <string name="str_subscription_name">Subscription name</string>
+    <string name="str_add_photo">Add photo</string>
+    <string name="str_description">Description</string>
+    <string name="str_monday">Monday</string>
+    <string name="str_dish_name">Dish name</string>
+    <string name="str_ingredients">Ingredients</string>
+    <string name="str_price">Price</string>
+    <string name="str_tuesday">Tuesday</string>
+    <string name="str_wednesday">Wednesday</string>
+    <string name="str_thursday">Thursday</string>
+    <string name="str_friday">Friday</string>
+    <string name="str_saturday">Saturday</string>
+    <string name="str_sunday">Sunday</string>
+    <string name="str_enter_valid_subscription_name">Enter valid subscription name</string>
+    <string name="str_invalid_description">Enter valid description.</string>
+    <string name="str_enter_price">Enter price.</string>
+    <string name="str_no_dish_name">Enter dish name.</string>
+    <string name="str_invalid_dish_name">Enter valid dish name.</string>
+    <string name="str_no_description">Enter description for dish.</string>
+    <string name="str_no_ingredients">Enter ingredients.</string>
+    <string name="str_invalid_ingredients">Enter valid ingredients</string>
 
-    <string-array name="vendor_list">
-        <item>@drawable/ic_logo</item>
-        <item>@drawable/ic_logo</item>
-        <item>@drawable/ic_logo</item>
-        <item>@drawable/ic_logo</item>
-    </string-array>
-    
-    <string-array name="vendor_name">
-        <item>Dhruv</item>
-        <item>Harsh</item>
-        <item>Priyank</item>
-        <item>Jay</item>
-    </string-array>
-    
-    <string-array name="vendor_info">
-        <item>ddsewfedwfew</item>
-        <item>ddsewfedwfew</item>
-        <item>ddsewfedwfew</item>
-        <item>ddsewfedwfew</item>
-    </string-array>
 </resources>
