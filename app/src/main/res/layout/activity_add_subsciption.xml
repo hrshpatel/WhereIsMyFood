@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="@dimen/dimen_15">
-
+<!--Test cases, -->
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/act_add_sub_view_pager"
                 android:layout_width="match_parent"
