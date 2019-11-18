@@ -111,10 +111,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toolbar_title = findViewById(R.id.toolbar_title);
         mIvAdd = findViewById(R.id.toolbar_iv_add);
 
-        if (mSharedPref.getUserType().equals("1")) {
-            mIvAdd.setVisibility(View.VISIBLE);
-        }
-
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -190,6 +186,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         mDrawerLayout.setScrimColor(ContextCompat.getColor(this, android.R.color.transparent));
+
+        mTxtDrwrEmail.setText(mSharedPref.getEmailId());
+        if (mSharedPref.getUserType().equals("1")) {
+            mIvAdd.setVisibility(View.VISIBLE);
+            mTxtDrwrName.setText(mSharedPref.getVendorName());
+        } else {
+            mTxtDrwrName.setText(mSharedPref.getFirstName() + " " + mSharedPref.getLastName());
+        }
+
 
     }
 
