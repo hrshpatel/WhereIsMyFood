@@ -17,8 +17,18 @@ import android.widget.Toast;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.conestoga.whereismyfood.R;
+import com.conestoga.whereismyfood.apiutils.APIClient;
+import com.conestoga.whereismyfood.apiutils.APIInterface;
+import com.conestoga.whereismyfood.models.SubscriptionModel;
+import com.conestoga.whereismyfood.response.SignUp;
+import com.conestoga.whereismyfood.utils.AppSharedPref;
 import com.conestoga.whereismyfood.utils.CommonUtils;
+import com.conestoga.whereismyfood.utils.ProgressDialogUtil;
 import com.google.common.collect.Range;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddSubsciptionActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
@@ -66,6 +76,8 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
     private Button mBtnSave;
     private Button mBtnAddPhoto;
     private ScrollView mScrollView;
+    private APIInterface mApiInterface;
+    private AppSharedPref mSharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -272,7 +284,99 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
                         mEdtSunIngredients.setError(getString(R.string.str_invalid_ingredients));
                         mScrollView.smoothScrollTo(0, mEdtSunIngredients.getBottom());
                     } else {
-                        Toast.makeText(AddSubsciptionActivity.this, "Added Successfully.", Toast.LENGTH_SHORT).show();
+                        if (CommonUtils.isInternetAvailable(AddSubsciptionActivity.this)) {
+                            SubscriptionModel subscriptionModel = new SubscriptionModel();
+
+                            subscriptionModel.setUserId(mSharedPref.getUserId());
+                            subscriptionModel.setPhone_no(mSharedPref.getPhoneNumber());
+                            subscriptionModel.setEmailId(mSharedPref.getEmailId());
+                            subscriptionModel.setSubDescription(mEdtDescription.getText().toString());
+                            subscriptionModel.setSubName(mEdtName.getText().toString());
+                            subscriptionModel.setVendorName(mEdtVendorName.getText().toString());
+                            subscriptionModel.setPrice(mEdtPrice.getText().toString());
+
+                            if (mChkMonday.isChecked()) {
+                                subscriptionModel.setMonday(true);
+                                subscriptionModel.setDishNameMon(mEdtMonDishName.getText().toString());
+                                subscriptionModel.setIngredientsMon(mEdtMonIngredients.getText().toString());
+                                subscriptionModel.setDishDescMon(mEdtMonDesc.getText().toString());
+                            }
+
+                            if (mChkTuesday.isChecked()) {
+                                subscriptionModel.setTuesday(true);
+                                subscriptionModel.setDishNameTue(mEdtTuesDishName.getText().toString());
+                                subscriptionModel.setIngredientsTue(mEdtTuesIngredients.getText().toString());
+                                subscriptionModel.setDishDescTue(mEdtTuesDesc.getText().toString());
+                            }
+
+                            if (mChkWednesday.isChecked()) {
+                                subscriptionModel.setWednesday(true);
+                                subscriptionModel.setDishNameWed(mEdtWedDishName.getText().toString());
+                                subscriptionModel.setIngredientsWed(mEdtWedIngredients.getText().toString());
+                                subscriptionModel.setDishDescWed(mEdtWedDesc.getText().toString());
+                            }
+
+                            if (mChkThursday.isChecked()) {
+                                subscriptionModel.setThursday(true);
+                                subscriptionModel.setDishNameThurs(mEdtThursDishName.getText().toString());
+                                subscriptionModel.setIngredientsThurs(mEdtThursIngredients.getText().toString());
+                                subscriptionModel.setDishDescThurs(mEdtThursDesc.getText().toString());
+                            }
+
+                            if (mChkFriday.isChecked()) {
+                                subscriptionModel.setFriday(true);
+                                subscriptionModel.setDishNameFri(mEdtFriDishName.getText().toString());
+                                subscriptionModel.setIngredientsFri(mEdtFriIngredients.getText().toString());
+                                subscriptionModel.setDishDescFri(mEdtFriDesc.getText().toString());
+                            }
+
+                            if (mChkSat.isChecked()) {
+                                subscriptionModel.setSaturday(true);
+                                subscriptionModel.setDishNameSat(mEdtSatDishName.getText().toString());
+                                subscriptionModel.setIngredientsSat(mEdtSatIngredients.getText().toString());
+                                subscriptionModel.setDishDescSat(mEdtSatDesc.getText().toString());
+                            }
+
+                            if (mChkSun.isChecked()) {
+                                subscriptionModel.setSunday(true);
+                                subscriptionModel.setDishNameSun(mEdtSunDishName.getText().toString());
+                                subscriptionModel.setIngredientsSun(mEdtSunIngredients.getText().toString());
+                                subscriptionModel.setDishDescSun(mEdtSunDesc.getText().toString());
+                            }
+
+                            ProgressDialogUtil.showProgress(AddSubsciptionActivity.this, "Loading", "Please Wait...", false);
+
+                            Call<SignUp> addSubApi = mApiInterface.addSubscription(subscriptionModel);
+
+                            addSubApi.enqueue(new Callback<SignUp>() {
+                                @Override
+                                public void onResponse(Call<SignUp> call, Response<SignUp> response) {
+                                    SignUp signUpResponse = response.body();
+                                    Log.e("/////////////", "UserName : " + signUpResponse.getMessage());
+                                    Log.e("/////////////", "UserName : " + signUpResponse.getSuccess());
+
+                                    ProgressDialogUtil.dismissProgress();
+
+                                    if (signUpResponse.getSuccess() == 0) {
+                                        Toast.makeText(AddSubsciptionActivity.this, "" + signUpResponse.getMessage()
+                                                , Toast.LENGTH_SHORT).show();
+                                    } else if (signUpResponse.getSuccess() == 1) {
+                                        Toast.makeText(AddSubsciptionActivity.this,
+                                                signUpResponse.getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<SignUp> call, Throwable t) {
+                                    call.cancel();
+                                    ProgressDialogUtil.dismissProgress();
+                                    Toast.makeText(AddSubsciptionActivity.this, getResources().getString(R.string.str_something_went_worng)
+                                            , Toast.LENGTH_LONG).show();
+                                }
+
+                            });
+
+                        }
                     }
 
                 }
@@ -290,7 +394,10 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
     }
 
     private void initView() {
+        mSharedPref = AppSharedPref.getInstance(this);
+
         mAwesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+        mApiInterface = APIClient.getClient().create(APIInterface.class);
 
         mBtnSave = findViewById(R.id.act_sub_btn_save);
         mBtnAddPhoto = findViewById(R.id.act_sub_btn_add_photo);

@@ -2,12 +2,9 @@ package com.conestoga.whereismyfood.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,13 +21,11 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.conestoga.whereismyfood.R;
-import com.conestoga.whereismyfood.activities.ui.home.HomeFragment;
+import com.conestoga.whereismyfood.fragments.HomeFragment;
+import com.conestoga.whereismyfood.utils.AppSharedPref;
 import com.google.android.material.navigation.NavigationView;
 
 import static androidx.core.view.GravityCompat.START;
@@ -46,6 +41,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private TextView mTxtDrwrName;
     private TextView mTxtDrwrEmail;
     private ImageView mIvEdtProfile;
+    private ImageView mIvAdd;
+    private AppSharedPref mSharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,8 +105,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private void initializeView() {
 
+        mSharedPref = AppSharedPref.getInstance(this);
+
         mToolbar = findViewById(R.id.toolbar);
         toolbar_title = findViewById(R.id.toolbar_title);
+        mIvAdd = findViewById(R.id.toolbar_iv_add);
+
+        if (mSharedPref.getUserType().equals("1")) {
+            mIvAdd.setVisibility(View.VISIBLE);
+        }
+
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);

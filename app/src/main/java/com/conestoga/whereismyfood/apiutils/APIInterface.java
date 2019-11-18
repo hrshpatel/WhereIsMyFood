@@ -1,6 +1,7 @@
 package com.conestoga.whereismyfood.apiutils;
 
 import com.conestoga.whereismyfood.models.AddressDetails;
+import com.conestoga.whereismyfood.models.SubscriptionModel;
 import com.conestoga.whereismyfood.models.UserDetails;
 import com.conestoga.whereismyfood.response.AddAddress;
 import com.conestoga.whereismyfood.response.GetUserDetails;
@@ -31,4 +32,7 @@ public interface APIInterface {
 
     @GET("getUserDetails.php")
     Call<GetUserDetails> getUserDetails(@Query("email_id") String emailId);
+
+    @POST("addSubscription.php")
+    Call<SignUp> addSubscription(@Body SubscriptionModel subscriptionModel);
 }

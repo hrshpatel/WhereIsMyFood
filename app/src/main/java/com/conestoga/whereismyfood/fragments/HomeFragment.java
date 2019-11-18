@@ -1,4 +1,4 @@
-package com.conestoga.whereismyfood.activities.ui.home;
+package com.conestoga.whereismyfood.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.conestoga.whereismyfood.R;
+import com.conestoga.whereismyfood.activities.ui.home.HomeViewModel;
 
 public class HomeFragment extends Fragment {
 
