@@ -74,6 +74,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(this, EditProfileActivity.class);
                 startActivity(intent);
                 break;
+
+            case R.id.toolbar_iv_add:
+                intent = new Intent(this, AddSubsciptionActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 
@@ -191,6 +196,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (mSharedPref.getUserType().equals("1")) {
             mIvAdd.setVisibility(View.VISIBLE);
             mTxtDrwrName.setText(mSharedPref.getVendorName());
+            mIvAdd.setOnClickListener(this);
         } else {
             mTxtDrwrName.setText(mSharedPref.getFirstName() + " " + mSharedPref.getLastName());
         }

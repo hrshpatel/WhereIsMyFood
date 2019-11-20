@@ -108,5 +108,6 @@
     <string name="str_no_description">Enter description for dish.</string>
     <string name="str_no_ingredients">Enter ingredients.</string>
     <string name="str_invalid_ingredients">Enter valid ingredients</string>
+    <string name="str_add_sub">Add Subscription</string>
 
 </resources>

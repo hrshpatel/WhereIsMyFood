@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/linearLayout_activity"
+    android:padding="@dimen/dimen_0"
     tools:context=".activities.AddSubsciptionActivity">
 
     <include layout="@layout/application_toolbar" />
@@ -17,7 +18,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="@dimen/dimen_15">
-<!--Test cases, -->
+
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/act_add_sub_view_pager"
                 android:layout_width="match_parent"

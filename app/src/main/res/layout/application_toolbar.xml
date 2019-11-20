@@ -19,13 +19,13 @@
 
         <TextView
             android:id="@+id/toolbar_txt_save_edit"
+            android:visibility="gone"
             style="@style/textView_titleBar_save"
             android:layout_marginRight="@dimen/dimen_10" />
 
         <ImageView
             android:id="@+id/toolbar_iv_add"
-            style="@style/imageView_toolbar"
-            android:tint="@android:color/black" />
+            style="@style/imageView_toolbar" />
 
     </androidx.appcompat.widget.Toolbar>
 

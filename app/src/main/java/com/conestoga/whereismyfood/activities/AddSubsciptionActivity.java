@@ -1,17 +1,24 @@
 package com.conestoga.whereismyfood.activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
@@ -78,15 +85,24 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
     private ScrollView mScrollView;
     private APIInterface mApiInterface;
     private AppSharedPref mSharedPref;
+    private Toolbar mToolbar;
+    private TextView toolbarTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_subsciption);
 
+        setUpToolbar();
         initView();
         addValidations();
         setListeners();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override
@@ -391,6 +407,29 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
                 , getResources().getString(R.string.toast_no_valid_vname));
         mAwesomeValidation.addValidation(mEdtDescription, CommonUtils.DISH_NAME_PATTERN, getString(R.string.str_invalid_description));
         mAwesomeValidation.addValidation(mEdtPrice, Range.greaterThan(1f), getString(R.string.str_enter_price));
+    }
+
+    private void setUpToolbar() {
+        Window window = getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        }
+
+        mToolbar = findViewById(R.id.toolbar);
+        toolbarTitle = findViewById(R.id.toolbar_title);
+        toolbarTitle.setText(getString(R.string.str_add_sub));
+
+        setSupportActionBar(mToolbar);
+
+        ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null) {
+            supportActionBar.setDisplayShowTitleEnabled(false);
+            supportActionBar.setDisplayHomeAsUpEnabled(true);
+            supportActionBar.setDisplayShowHomeEnabled(true);
+        }
+
     }
 
     private void initView() {

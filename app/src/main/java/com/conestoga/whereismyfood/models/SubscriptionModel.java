@@ -2,10 +2,15 @@ package com.conestoga.whereismyfood.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class SubscriptionModel {
 
     @SerializedName("user_id")
     private String userId;
+
+    @SerializedName("daily_details")
+    private ArrayList<DailyDetail> dailyDetailList;
 
     @SerializedName("sub_id")
     private String subId;
@@ -104,6 +109,14 @@ public class SubscriptionModel {
 
     @SerializedName("dish_desc_sun")
     private String dishDescSun;
+
+    public ArrayList<DailyDetail> getDailyDetailList() {
+        return dailyDetailList;
+    }
+
+    public void setDailyDetailList(ArrayList<DailyDetail> dailyDetailList) {
+        this.dailyDetailList = dailyDetailList;
+    }
 
     public String getUserId() {
         return userId;

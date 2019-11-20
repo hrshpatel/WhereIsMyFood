@@ -104,7 +104,7 @@ public class SignupVendorFragment extends Fragment implements View.OnClickListen
             Toast.makeText(getActivity()
                     , "" + getResources().getString(R.string.toast_first_name_length_invalid)
                     , Toast.LENGTH_SHORT).show();
-        } else if (!CommonUtils.checkName(mStrVendorName)) {
+        } else if (!CommonUtils.checkDishName(mStrVendorName)) {
             Toast.makeText(getActivity()
                     , "" + getResources().getString(R.string.toast_no_valid_vname)
                     , Toast.LENGTH_SHORT).show();

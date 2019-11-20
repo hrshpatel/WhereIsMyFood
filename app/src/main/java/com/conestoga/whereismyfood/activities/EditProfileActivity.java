@@ -224,7 +224,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                         , "" + getResources().getString(R.string.toast_first_name_length_invalid)
                         , Toast.LENGTH_SHORT).show();
                 return;
-            } else if (!CommonUtils.checkName(mStrFirstName)) {
+            } else if (!CommonUtils.checkDishName(mStrFirstName)) {
                 Toast.makeText(EditProfileActivity.this
                         , "" + getResources().getString(R.string.toast_no_valid_firstname)
                         , Toast.LENGTH_SHORT).show();
