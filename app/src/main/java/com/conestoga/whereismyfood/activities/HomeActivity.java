@@ -57,11 +57,31 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
-                Log.e("///////////////", "Navigation Home");
+                setDefaultFragment(HomeFragment.newInstance());
                 break;
 
             case R.id.nav_logout:
-                Log.e("/////////", "Logout");
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                dialog.setTitle(R.string.logout_prompt);
+
+                dialog.setPositiveButton(getString(R.string.set_yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mSharedPref.logout();
+                        finish();
+                        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
+                dialog.setNegativeButton(getString(R.string.set_no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
                 break;
         }
         return false;

@@ -107,4 +107,16 @@ public class AppSharedPref {
     public boolean getIsLogin() {
         return sh.getBoolean("isLogin", false);
     }
+
+    public void logout() {
+        setIsLogin(false);
+        setEmailId("");
+        setFirstName("");
+        setLastName("");
+        setPhoneNumber("");
+        setUserId("");
+        setUserType("");
+        setVendorName("");
+    }
+
 }

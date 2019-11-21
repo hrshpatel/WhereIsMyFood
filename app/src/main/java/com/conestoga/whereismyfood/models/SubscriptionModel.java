@@ -110,12 +110,23 @@ public class SubscriptionModel {
     @SerializedName("dish_desc_sun")
     private String dishDescSun;
 
+    @SerializedName("images")
+    private ArrayList<String> imageList;
+
     public ArrayList<DailyDetail> getDailyDetailList() {
         return dailyDetailList;
     }
 
     public void setDailyDetailList(ArrayList<DailyDetail> dailyDetailList) {
         this.dailyDetailList = dailyDetailList;
+    }
+    
+    public ArrayList<String> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(ArrayList<String> imageList) {
+        this.imageList = imageList;
     }
 
     public String getUserId() {

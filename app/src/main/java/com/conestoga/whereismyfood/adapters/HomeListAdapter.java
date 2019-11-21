@@ -48,7 +48,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeVi
         holder.txtSubName.setText(subscriptionModel.getSubName());
         holder.txtVendorName.setText(subscriptionModel.getVendorName());
 
-        imagePagerAdapter = new ImagePagerAdapter(mContext, new ArrayList<String>());
+        imagePagerAdapter = new ImagePagerAdapter(mContext, subscriptionModel.getImageList());
         holder.itemViewPager.setAdapter(imagePagerAdapter);
         holder.itemViewPager.setOffscreenPageLimit(0);
         holder.itemTabLayout.setupWithViewPager(holder.itemViewPager, true);
