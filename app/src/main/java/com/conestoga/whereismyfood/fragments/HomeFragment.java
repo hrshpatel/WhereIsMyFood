@@ -72,7 +72,6 @@ public class HomeFragment extends Fragment {
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
-        fragment.mApiInterface = APIClient.getClient().create(APIInterface.class);
 
         return fragment;
     }
@@ -108,7 +107,7 @@ public class HomeFragment extends Fragment {
 
     private void initializeView(View view) {
         mRecyclerView = view.findViewById(R.id.recycler_view_home);
-
+        mApiInterface = APIClient.getClient().create(APIInterface.class);
         mSharedPref = AppSharedPref.getInstance(getActivity());
 //        if (mSharedPref.getUserType().equals("1")) {
 //            ProgressDialogUtil.showProgress(getActivity(), "Loading", "Please Wait...", false);

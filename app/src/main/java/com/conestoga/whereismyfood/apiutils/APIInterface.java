@@ -8,12 +8,18 @@ import com.conestoga.whereismyfood.response.GetSubscriptionResponse;
 import com.conestoga.whereismyfood.response.GetUserDetails;
 import com.conestoga.whereismyfood.response.SignUp;
 
+import java.util.List;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -34,8 +40,9 @@ public interface APIInterface {
     @GET("getUserDetails.php")
     Call<GetUserDetails> getUserDetails(@Query("email_id") String emailId);
 
+    @Multipart
     @POST("addSubscription.php")
-    Call<SignUp> addSubscription(@Body SubscriptionModel subscriptionModel);
+    Call<SignUp> addSubscription(@Part("json")RequestBody jsonBody, @Part List<MultipartBody.Part> imageFiles);
 
     @GET("getSubscription.php")
     Call<GetSubscriptionResponse> getSubscription(@Query("email_id") String emailId);

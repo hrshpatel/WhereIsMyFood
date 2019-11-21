@@ -109,5 +109,13 @@
     <string name="str_no_ingredients">Enter ingredients.</string>
     <string name="str_invalid_ingredients">Enter valid ingredients</string>
     <string name="str_add_sub">Add Subscription</string>
+    <string name="take_photo">Take photo</string>
+    <string name="from_library">Choose from library</string>
+    <string name="add_pic">Add photo!</string>
+    <string name="allow">Allow</string>
+    <string name="permission_never_asked">Permission has not been granted, please allow it.</string>
+    <string name="image_not_loaded">Image is not loaded</string>
+    <string name="invalid_image_file">Please select valid image file.</string>
+    <string name="read_image_fail">Failed to read image</string>
 
 </resources>

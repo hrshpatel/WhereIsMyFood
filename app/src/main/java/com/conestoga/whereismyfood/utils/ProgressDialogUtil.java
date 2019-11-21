@@ -85,7 +85,7 @@ public class ProgressDialogUtil {
      * @see ProgressDialogUtil
      */
     public static void dismissProgress() {
-        if (progressDialog.isShowing()) {
+        if (progressDialog!=null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
         progressDialog = null;

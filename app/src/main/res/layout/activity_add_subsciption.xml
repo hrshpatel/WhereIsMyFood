@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/act_add_sub_root"
     style="@style/linearLayout_activity"
     android:padding="@dimen/dimen_0"
     tools:context=".activities.AddSubsciptionActivity">
@@ -19,10 +20,26 @@
             android:orientation="vertical"
             android:padding="@dimen/dimen_15">
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/act_add_sub_view_pager"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_200" />
+                android:layout_height="wrap_content">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/act_add_sub_view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_200" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/act_add_sub_tab_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimen_30"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    app:tabBackground="@drawable/tab_selector"
+                    app:tabGravity="center"
+                    app:tabIndicatorHeight="0dp" />
+
+            </RelativeLayout>
 
             <Button
                 android:id="@+id/act_sub_btn_add_photo"

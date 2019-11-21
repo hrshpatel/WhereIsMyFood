@@ -1,13 +1,27 @@
 package com.conestoga.whereismyfood.activities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -24,6 +38,7 @@ import android.widget.Toast;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.conestoga.whereismyfood.R;
+import com.conestoga.whereismyfood.adapters.ImagePagerAdapter;
 import com.conestoga.whereismyfood.apiutils.APIClient;
 import com.conestoga.whereismyfood.apiutils.APIInterface;
 import com.conestoga.whereismyfood.models.SubscriptionModel;
@@ -31,13 +46,28 @@ import com.conestoga.whereismyfood.response.SignUp;
 import com.conestoga.whereismyfood.utils.AppSharedPref;
 import com.conestoga.whereismyfood.utils.CommonUtils;
 import com.conestoga.whereismyfood.utils.ProgressDialogUtil;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
 import com.google.common.collect.Range;
+import com.google.gson.Gson;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddSubsciptionActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
+
+    private static final int STORAGE_PERMS = 452;
+    private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
 
     private AwesomeValidation mAwesomeValidation;
     private ViewPager mViewPager;
@@ -87,6 +117,13 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
     private AppSharedPref mSharedPref;
     private Toolbar mToolbar;
     private TextView toolbarTitle;
+    private View mRoot;
+    private File mFileImagePath;
+
+    private ArrayList<File> mImageFileList;
+    private ArrayList<String> mImagePathList;
+    private ImagePagerAdapter imagePagerAdapter;
+    private TabLayout mTabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +197,47 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SELECT_FILE)
+                onSelectFromGalleryResult(data);
+            else if (requestCode == REQUEST_CAMERA)
+                onCaptureImageResult(data);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case STORAGE_PERMS:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    selectImage();
+                } else {
+                    if (!(shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
+                        Snackbar snackbar = Snackbar.make(mRoot, getString(R.string.permission_never_asked)
+                                , Snackbar.LENGTH_INDEFINITE);
+                        snackbar.setAction(getString(R.string.allow), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent();
+                                intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                intent.setData(uri);
+                                startActivity(intent);
+                            }
+                        });
+                        snackbar.show();
+                    }
+                }
+                break;
+        }
+    }
+
     private void setListeners() {
         mChkMonday.setOnCheckedChangeListener(this);
         mChkTuesday.setOnCheckedChangeListener(this);
@@ -168,6 +246,27 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
         mChkFriday.setOnCheckedChangeListener(this);
         mChkSat.setOnCheckedChangeListener(this);
         mChkSun.setOnCheckedChangeListener(this);
+
+        mBtnAddPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (AddSubsciptionActivity.this.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            != PackageManager.PERMISSION_GRANTED &&
+                            AddSubsciptionActivity.this.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                                    != PackageManager.PERMISSION_GRANTED) {
+
+                        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE
+                                        , Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                STORAGE_PERMS);
+                    } else {
+                        selectImage();
+                    }
+                } else {
+                    selectImage();
+                }
+            }
+        });
 
         mBtnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -362,7 +461,16 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
 
                             ProgressDialogUtil.showProgress(AddSubsciptionActivity.this, "Loading", "Please Wait...", false);
 
-                            Call<SignUp> addSubApi = mApiInterface.addSubscription(subscriptionModel);
+                            ArrayList<MultipartBody.Part> partArrayList = new ArrayList<>();
+                            for (int i = 0; i < mImageFileList.size(); i++) {
+                                Log.d("//////////", "requestUploadSurvey: survey image " + i + "  " + mImagePathList.get(i));
+                                RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), mImageFileList.get(i));
+                                partArrayList.add(MultipartBody.Part.createFormData("file_" + i, mImageFileList.get(i).getName(), surveyBody));
+                            }
+
+                            Call<SignUp> addSubApi = mApiInterface.addSubscription(RequestBody.create(MediaType.parse("application/json"),
+                                    new Gson().toJson(subscriptionModel))
+                                    , partArrayList);
 
                             addSubApi.enqueue(new Callback<SignUp>() {
                                 @Override
@@ -400,6 +508,63 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
         });
     }
 
+    /**
+     * this method is used to selecting the option for image pickup from camera/gallery
+     *
+     * @Date : 11/21/2019
+     * @author :Harsh Patel
+     */
+    private void selectImage() {
+        final CharSequence[] items = {getString(R.string.take_photo), getString(R.string.from_library),
+                getString(R.string.cancel)};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(AddSubsciptionActivity.this);
+        builder.setTitle(getString(R.string.add_pic));
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                //boolean result=Utility.checkPermission(MainActivity.this);
+
+                if (items[item].equals(getString(R.string.take_photo))) {
+                    //if(result)
+                    cameraIntent();
+
+                } else if (items[item].equals(getString(R.string.from_library))) {
+                    //if(result)
+                    galleryIntent();
+
+                } else if (items[item].equals(getString(R.string.cancel))) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    /**
+     * this method is used to pass intent to  gallery
+     *
+     * @Date : 11/21/2019
+     * @author :Harsh Patel
+     */
+    private void galleryIntent() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, SELECT_FILE);
+    }
+
+    /**
+     * this method is used to pass intent to  camera
+     *
+     * @Date : 11/21/2019
+     * @author :Harsh Patel
+     */
+    private void cameraIntent() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_CAMERA);
+    }
+
     private void addValidations() {
         mAwesomeValidation.addValidation(this, R.id.act_sub_edt_name, CommonUtils.DISH_NAME_PATTERN
                 , R.string.str_enter_valid_subscription_name);
@@ -433,6 +598,9 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
     }
 
     private void initView() {
+        mImageFileList = new ArrayList<>();
+        mImagePathList = new ArrayList<>();
+
         mSharedPref = AppSharedPref.getInstance(this);
 
         mAwesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
@@ -484,6 +652,81 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
         mEdtSunIngredients = findViewById(R.id.act_sub_edt_sun_ingredients);
         mEdtSunDesc = findViewById(R.id.act_sub_edt_sun_desc);
 
+        mTabLayout = findViewById(R.id.act_add_sub_tab_layout);
+
+        mRoot = findViewById(R.id.act_add_sub_root);
+
+        imagePagerAdapter = new ImagePagerAdapter(this, mImagePathList);
+        mViewPager.setAdapter(imagePagerAdapter);
+        mViewPager.setOffscreenPageLimit(0);
+        mTabLayout.setupWithViewPager(mViewPager, true);
+
+    }
+
+    /**
+     * this method is used to set Camera image to imageview
+     *
+     * @param data response from camera after capturing image
+     * @Date : 11/21/2019
+     * @author :Harsh Patel
+     */
+    private void onCaptureImageResult(Intent data) {
+        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        if (thumbnail != null) {
+            thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        }
+
+        mFileImagePath = new File(Environment.getExternalStorageDirectory(),
+                System.currentTimeMillis() + ".jpg");
+
+        FileOutputStream fo;
+        try {
+            mFileImagePath.createNewFile();
+            fo = new FileOutputStream(mFileImagePath);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mImageFileList.add(mFileImagePath);
+        mImagePathList.add(mFileImagePath.getAbsolutePath());
+        imagePagerAdapter = new ImagePagerAdapter(this, mImagePathList);
+        mViewPager.setAdapter(imagePagerAdapter);
+    }
+
+    /**
+     * this method is used to set Gallery image to imageview
+     *
+     * @param data response from gallery after selecting image
+     * @Date : 11/21/2019
+     * @author : Harsh Patel
+     */
+    private void onSelectFromGalleryResult(Intent data) {
+
+        if (data != null) {
+            String path = CommonUtils.getFilePath(this, data.getData());
+            Bitmap bitmap = CommonUtils.getBitmapFromUri(this, data.getData());
+
+            if (bitmap != null) {
+                Bitmap rotatedBitmap = CommonUtils.getRotatedBitmap(path, bitmap);
+
+                Uri tempUri = CommonUtils.getImageUri(this, rotatedBitmap);
+
+                String fileUri = CommonUtils.getRealPathFromURI(this, tempUri);
+
+                if (fileUri != null) {
+                    mFileImagePath = new File(fileUri);
+                    mImageFileList.add(mFileImagePath);
+                    mImagePathList.add(mFileImagePath.getAbsolutePath());
+                    imagePagerAdapter = new ImagePagerAdapter(this, mImagePathList);
+                    mViewPager.setAdapter(imagePagerAdapter);
+                }
+
+            } else {
+                Toast.makeText(this, R.string.invalid_image_file, Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 }
