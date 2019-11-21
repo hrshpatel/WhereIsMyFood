@@ -22,6 +22,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeVi
     private final AppSharedPref mSharedPref;
     private final Context mContext;
     private final ArrayList<SubscriptionModel> mSubscriptionModelList;
+    private ImagePagerAdapter imagePagerAdapter;
 
     public HomeListAdapter(Context context, ArrayList<SubscriptionModel> subscriptionModelList) {
         this.mContext = context;
@@ -46,6 +47,11 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeVi
         holder.txtPrice.setText("$" + subscriptionModel.getPrice());
         holder.txtSubName.setText(subscriptionModel.getSubName());
         holder.txtVendorName.setText(subscriptionModel.getVendorName());
+
+        imagePagerAdapter = new ImagePagerAdapter(mContext, new ArrayList<String>());
+        holder.itemViewPager.setAdapter(imagePagerAdapter);
+        holder.itemViewPager.setOffscreenPageLimit(0);
+        holder.itemTabLayout.setupWithViewPager(holder.itemViewPager, true);
     }
 
     @Override

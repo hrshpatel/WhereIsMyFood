@@ -1,34 +1,26 @@
 package com.conestoga.whereismyfood.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.VideoView;
 
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
 import com.conestoga.whereismyfood.R;
-import com.google.android.material.tabs.TabLayout;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class ImagePagerAdapter extends PagerAdapter {
     private ArrayList<String> imagePathList;
-    private Activity mContext;
+    private Context mContext;
     private LayoutInflater mLayoutInflater;
     private ImageView mImageView;
 
-    public ImagePagerAdapter(Activity context, ArrayList<String> imagePathList) {
+    public ImagePagerAdapter(Context context, ArrayList<String> imagePathList) {
         this.mContext = context;
         this.imagePathList = imagePathList;
 
@@ -41,12 +33,13 @@ public class ImagePagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
 
+    @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View itemView = mLayoutInflater.inflate(R.layout.image_pager, container, false);
         if (imagePathList.size() == 0) {
             mImageView = itemView.findViewById(R.id.image_view_pager);
@@ -69,7 +62,7 @@ public class ImagePagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         try {
             // Remove the view from the container
             container.removeView((View) object);
