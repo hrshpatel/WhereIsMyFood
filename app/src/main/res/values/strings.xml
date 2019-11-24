@@ -118,5 +118,6 @@
     <string name="invalid_image_file">Please select valid image file.</string>
     <string name="read_image_fail">Failed to read image</string>
     <string name="logout_prompt">Do you want to logout?</string>
+    <string name="str_home">Home</string>
 
 </resources>

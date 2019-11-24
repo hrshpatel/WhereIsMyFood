@@ -136,6 +136,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toolbar_title = findViewById(R.id.toolbar_title);
         mIvAdd = findViewById(R.id.toolbar_iv_add);
 
+        toolbar_title.setText(R.string.str_home);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
