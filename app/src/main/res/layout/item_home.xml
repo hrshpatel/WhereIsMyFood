@@ -60,6 +60,7 @@
                     android:id="@+id/item_home_txt_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_star"
                     android:drawableLeft="@drawable/ic_star"
                     android:gravity="center"
                     android:text="4.5" />

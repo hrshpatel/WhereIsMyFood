@@ -119,5 +119,8 @@
     <string name="read_image_fail">Failed to read image</string>
     <string name="logout_prompt">Do you want to logout?</string>
     <string name="str_home">Home</string>
+    <string name="str_description_">Description :</string>
+    <string name="str_ingredients_list">Ingredients list :</string>
+    <string name="str_dish_name_">Dish Name :</string>
 
 </resources>

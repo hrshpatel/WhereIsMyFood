@@ -1,67 +1,677 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/activity_background"
-    android:orientation="vertical"
-    tools:context=".activities.ShowSubscriptionActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <include layout="@layout/application_toolbar" />
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/dimen_15">
+        android:background="@color/activity_background"
+        android:orientation="vertical"
+        tools:context=".activities.ShowSubscriptionActivity">
 
-        <LinearLayout
+        <include layout="@layout/application_toolbar" />
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:padding="@dimen/dimen_15">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/act_show_sub_view_pager"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_200" />
+                    android:layout_height="wrap_content">
 
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/act_show_sub_tab_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimen_30"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    app:tabBackground="@drawable/tab_selector"
-                    app:tabGravity="center"
-                    app:tabIndicatorHeight="0dp" />
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/act_show_sub_view_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_200" />
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/act_show_sub_tab_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dimen_30"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        app:tabBackground="@drawable/tab_selector"
+                        app:tabGravity="center"
+                        app:tabIndicatorHeight="0dp" />
+
+                </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/item_home_txt_name"
+                    android:id="@+id/act_show_sub_txt_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/recycler_view_pager"
-                    android:layout_margin="@dimen/dimen_10"
+                    android:layout_marginTop="@dimen/dimen_10"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/dimen_18_sp"
+                    android:textSize="@dimen/dimen_24_sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/item_home_txt_vendor_name"
+                    android:id="@+id/act_show_sub_txt_vendor_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/item_home_txt_name"
-                    android:layout_margin="@dimen/dimen_10" />
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/dimen_18_sp" />
 
-            </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/lin_rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_10"
+                    android:layout_marginTop="@dimen/dimen_10">
+
+                    <TextView
+                        android:id="@+id/act_show_sub_txt_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dimen_15"
+                        android:layout_marginRight="@dimen/dimen_15"
+                        android:drawableStart="@drawable/ic_star"
+                        android:drawableLeft="@drawable/ic_star"
+                        android:gravity="center"
+                        android:text="4.5"
+                        android:textColor="@android:color/black" />
 
 
+                    <TextView
+                        android:id="@+id/act_show_sub_txt_rating_count"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dimen_10"
+                        android:layout_marginRight="@dimen/dimen_10"
+                        android:layout_weight="1"
+                        android:text="20 Ratings"
+                        android:textColor="@android:color/black" />
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/act_show_sub_txt_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Price"
+                        android:textColor="@android:color/black" />
 
-    </ScrollView>
+                </LinearLayout>
 
-</LinearLayout>
+                <LinearLayout
+                    android:id="@+id/show_lin_mon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/act_show_sub_txt_monday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_15"
+                        android:drawableEnd="@drawable/ic_collapse"
+                        android:drawableRight="@drawable/ic_collapse"
+                        android:gravity="center_vertical"
+                        android:text="@string/str_monday"
+                        android:textColor="@android:color/black" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_name_mon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_dish_name_"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_dish_mon"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_name_mon"
+                            android:layout_toEndOf="@id/act_show_sub_txt_name_mon"
+                            android:layout_toRightOf="@id/act_show_sub_txt_name_mon" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_ing_mon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_ingredients_list"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_ingredients_mon"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_ing_mon"
+                            android:layout_toEndOf="@id/act_show_sub_txt_ing_mon"
+                            android:layout_toRightOf="@id/act_show_sub_txt_ing_mon" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_des_mon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_description_"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_desc_mon"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_des_mon"
+                            android:layout_toEndOf="@id/act_show_sub_txt_des_mon"
+                            android:layout_toRightOf="@id/act_show_sub_txt_des_mon" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/show_lin_tues"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/act_show_sub_txt_tuesday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_15"
+                        android:drawableEnd="@drawable/ic_collapse"
+                        android:drawableRight="@drawable/ic_collapse"
+                        android:gravity="center_vertical"
+                        android:text="@string/str_tuesday"
+                        android:textColor="@android:color/black" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_name_tues"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_dish_name_"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_dish_tues"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_name_tues"
+                            android:layout_toEndOf="@id/act_show_sub_txt_name_tues"
+                            android:layout_toRightOf="@id/act_show_sub_txt_name_tues" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_ing_tues"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_ingredients_list"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_ingredients_tues"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_ing_tues"
+                            android:layout_toEndOf="@id/act_show_sub_txt_ing_tues"
+                            android:layout_toRightOf="@id/act_show_sub_txt_ing_tues" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_des_tues"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_description_"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_desc_tues"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_des_tues"
+                            android:layout_toEndOf="@id/act_show_sub_txt_des_tues"
+                            android:layout_toRightOf="@id/act_show_sub_txt_des_tues" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/show_lin_wed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/act_show_sub_txt_wednesday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_15"
+                        android:drawableEnd="@drawable/ic_collapse"
+                        android:drawableRight="@drawable/ic_collapse"
+                        android:gravity="center_vertical"
+                        android:text="@string/str_wednesday"
+                        android:textColor="@android:color/black" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_name_wed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_dish_name_"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_dish_wed"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_name_wed"
+                            android:layout_toEndOf="@id/act_show_sub_txt_name_wed"
+                            android:layout_toRightOf="@id/act_show_sub_txt_name_wed" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_ing_wed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_ingredients_list"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_ingredients_wed"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_ing_wed"
+                            android:layout_toEndOf="@id/act_show_sub_txt_ing_wed"
+                            android:layout_toRightOf="@id/act_show_sub_txt_ing_wed" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_des_wed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_description_"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_desc_wed"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_des_wed"
+                            android:layout_toEndOf="@id/act_show_sub_txt_des_wed"
+                            android:layout_toRightOf="@id/act_show_sub_txt_des_wed" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/show_lin_thurs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/act_show_sub_txt_thurs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_15"
+                        android:drawableEnd="@drawable/ic_collapse"
+                        android:drawableRight="@drawable/ic_collapse"
+                        android:gravity="center_vertical"
+                        android:text="@string/str_thursday"
+                        android:textColor="@android:color/black" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_name_thurs"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_dish_name_"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_dish_thurs"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_name_thurs"
+                            android:layout_toEndOf="@id/act_show_sub_txt_name_thurs"
+                            android:layout_toRightOf="@id/act_show_sub_txt_name_thurs" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_ing_thurs"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_ingredients_list"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_ingredients_thurs"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_ing_thurs"
+                            android:layout_toEndOf="@id/act_show_sub_txt_ing_thurs"
+                            android:layout_toRightOf="@id/act_show_sub_txt_ing_thurs" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_des_thurs"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_description_"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_desc_thurs"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_des_thurs"
+                            android:layout_toEndOf="@id/act_show_sub_txt_des_thurs"
+                            android:layout_toRightOf="@id/act_show_sub_txt_des_thurs" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/show_lin_fri"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/act_show_sub_txt_fri"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_15"
+                        android:drawableEnd="@drawable/ic_collapse"
+                        android:drawableRight="@drawable/ic_collapse"
+                        android:gravity="center_vertical"
+                        android:text="@string/str_friday"
+                        android:textColor="@android:color/black" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_name_fri"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_dish_name_"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_dish_fri"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_name_fri"
+                            android:layout_toEndOf="@id/act_show_sub_txt_name_fri"
+                            android:layout_toRightOf="@id/act_show_sub_txt_name_fri" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_ing_fri"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_ingredients_list"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_ingredients_fri"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_ing_fri"
+                            android:layout_toEndOf="@id/act_show_sub_txt_ing_fri"
+                            android:layout_toRightOf="@id/act_show_sub_txt_ing_fri" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_des_fri"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_description_"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_desc_fri"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_des_fri"
+                            android:layout_toEndOf="@id/act_show_sub_txt_des_fri"
+                            android:layout_toRightOf="@id/act_show_sub_txt_des_fri" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/show_lin_sat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/act_show_sub_txt_sat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_15"
+                        android:drawableEnd="@drawable/ic_collapse"
+                        android:drawableRight="@drawable/ic_collapse"
+                        android:gravity="center_vertical"
+                        android:text="@string/str_saturday"
+                        android:textColor="@android:color/black" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_name_sat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_dish_name_"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_dish_sat"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_name_sat"
+                            android:layout_toEndOf="@id/act_show_sub_txt_name_sat"
+                            android:layout_toRightOf="@id/act_show_sub_txt_name_sat" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_ing_sat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_ingredients_list"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_ingredients_sat"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_ing_sat"
+                            android:layout_toEndOf="@id/act_show_sub_txt_ing_sat"
+                            android:layout_toRightOf="@id/act_show_sub_txt_ing_sat" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_des_sat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_description_"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_desc_sat"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_des_sat"
+                            android:layout_toEndOf="@id/act_show_sub_txt_des_sat"
+                            android:layout_toRightOf="@id/act_show_sub_txt_des_sat" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/show_lin_sun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/act_show_sub_txt_sun"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_15"
+                        android:drawableEnd="@drawable/ic_collapse"
+                        android:drawableRight="@drawable/ic_collapse"
+                        android:gravity="center_vertical"
+                        android:text="@string/str_sunday"
+                        android:textColor="@android:color/black" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_name_sun"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_dish_name_"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_dish_sun"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_name_sun"
+                            android:layout_toEndOf="@id/act_show_sub_txt_name_sun"
+                            android:layout_toRightOf="@id/act_show_sub_txt_name_sun" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_ing_sun"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_ingredients_list"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_ingredients_sun"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_ing_sun"
+                            android:layout_toEndOf="@id/act_show_sub_txt_ing_sun"
+                            android:layout_toRightOf="@id/act_show_sub_txt_ing_sun" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
+                        android:layout_marginLeft="@dimen/dimen_15"
+                        android:layout_marginTop="@dimen/dimen_15">
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_des_sun"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_description_"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/act_show_sub_txt_desc_sun"
+                            style="@style/txt_profile"
+                            android:layout_alignTop="@id/act_show_sub_txt_des_sun"
+                            android:layout_toEndOf="@id/act_show_sub_txt_des_sun"
+                            android:layout_toRightOf="@id/act_show_sub_txt_des_sun" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+</layout>
