@@ -1,5 +1,6 @@
 package com.conestoga.whereismyfood.models;
 
+import com.conestoga.whereismyfood.utils.CommonUtils;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -113,6 +114,18 @@ public class SubscriptionModel {
     @SerializedName("images")
     private ArrayList<String> imageList;
 
+    private String ratings;
+
+    private String ratingCount;
+
+    public String getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(String ratings) {
+        this.ratings = ratings;
+    }
+
     public ArrayList<DailyDetail> getDailyDetailList() {
         return dailyDetailList;
     }
@@ -120,7 +133,7 @@ public class SubscriptionModel {
     public void setDailyDetailList(ArrayList<DailyDetail> dailyDetailList) {
         this.dailyDetailList = dailyDetailList;
     }
-    
+
     public ArrayList<String> getImageList() {
         return imageList;
     }
@@ -193,8 +206,25 @@ public class SubscriptionModel {
         this.price = price;
     }
 
+    public String getRatingCount() {
+        return ratingCount;
+    }
+
+    public void setRatingCount(String ratingCount) {
+        this.ratingCount = ratingCount;
+    }
+
     public boolean isMonday() {
-        return isMonday;
+        if (isMonday) {
+            return isMonday;
+        }
+        if (CommonUtils.isNullString(dishNameMon)) {
+            isMonday = false;
+            return isMonday;
+        } else {
+            isMonday = true;
+            return isMonday;
+        }
     }
 
     public void setMonday(boolean monday) {
@@ -202,7 +232,16 @@ public class SubscriptionModel {
     }
 
     public boolean isTuesday() {
-        return isTuesday;
+        if (isTuesday) {
+            return isTuesday;
+        }
+        if (CommonUtils.isNullString(dishNameTue)) {
+            isTuesday = false;
+            return isTuesday;
+        } else {
+            isTuesday = true;
+            return isTuesday;
+        }
     }
 
     public void setTuesday(boolean tuesday) {
@@ -210,7 +249,16 @@ public class SubscriptionModel {
     }
 
     public boolean isWednesday() {
-        return isWednesday;
+        if (isWednesday) {
+            return isWednesday;
+        }
+        if (CommonUtils.isNullString(dishNameWed)) {
+            isWednesday = false;
+            return isWednesday;
+        } else {
+            isWednesday = true;
+            return isWednesday;
+        }
     }
 
     public void setWednesday(boolean wednesday) {
@@ -218,7 +266,16 @@ public class SubscriptionModel {
     }
 
     public boolean isThursday() {
-        return isThursday;
+        if (isThursday) {
+            return isThursday;
+        }
+        if (CommonUtils.isNullString(dishNameThurs)) {
+            isThursday = false;
+            return isThursday;
+        } else {
+            isThursday = true;
+            return isThursday;
+        }
     }
 
     public void setThursday(boolean thursday) {
@@ -226,7 +283,16 @@ public class SubscriptionModel {
     }
 
     public boolean isFriday() {
-        return isFriday;
+        if (isFriday) {
+            return isFriday;
+        }
+        if (CommonUtils.isNullString(dishNameFri)) {
+            isFriday = false;
+            return isFriday;
+        } else {
+            isFriday = true;
+            return isFriday;
+        }
     }
 
     public void setFriday(boolean friday) {
@@ -234,7 +300,16 @@ public class SubscriptionModel {
     }
 
     public boolean isSaturday() {
-        return isSaturday;
+        if (isSaturday) {
+            return isSaturday;
+        }
+        if (CommonUtils.isNullString(dishNameSat)) {
+            isSaturday = false;
+            return isSaturday;
+        } else {
+            isSaturday = true;
+            return isSaturday;
+        }
     }
 
     public void setSaturday(boolean saturday) {
@@ -242,7 +317,16 @@ public class SubscriptionModel {
     }
 
     public boolean isSunday() {
-        return isSunday;
+        if (isSunday) {
+            return isSunday;
+        }
+        if (CommonUtils.isNullString(dishNameSun)) {
+            isSunday = false;
+            return isSunday;
+        } else {
+            isSunday = true;
+            return isSunday;
+        }
     }
 
     public void setSunday(boolean sunday) {

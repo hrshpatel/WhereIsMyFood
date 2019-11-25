@@ -4,6 +4,7 @@ import com.conestoga.whereismyfood.models.AddressDetails;
 import com.conestoga.whereismyfood.models.SubscriptionModel;
 import com.conestoga.whereismyfood.models.UserDetails;
 import com.conestoga.whereismyfood.response.AddAddress;
+import com.conestoga.whereismyfood.response.GetSubById;
 import com.conestoga.whereismyfood.response.GetSubscriptionResponse;
 import com.conestoga.whereismyfood.response.GetUserDetails;
 import com.conestoga.whereismyfood.response.SignUp;
@@ -49,5 +50,8 @@ public interface APIInterface {
 
     @GET("getSubscription.php")
     Call<GetSubscriptionResponse> getSubscription();
+
+    @GET("getSubById.php")
+    Call<GetSubById> getSubById(@Query("sub_id") String subId);
 
 }

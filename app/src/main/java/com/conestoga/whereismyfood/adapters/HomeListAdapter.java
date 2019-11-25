@@ -1,6 +1,7 @@
 package com.conestoga.whereismyfood.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.conestoga.whereismyfood.R;
+import com.conestoga.whereismyfood.activities.ShowSubscriptionActivity;
 import com.conestoga.whereismyfood.models.SubscriptionModel;
 import com.conestoga.whereismyfood.utils.AppSharedPref;
+import com.conestoga.whereismyfood.utils.CommonUtils;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -42,7 +45,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeVi
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
 
-        SubscriptionModel subscriptionModel = mSubscriptionModelList.get(position);
+        final SubscriptionModel subscriptionModel = mSubscriptionModelList.get(position);
 
         holder.txtPrice.setText("$" + subscriptionModel.getPrice());
         holder.txtSubName.setText(subscriptionModel.getSubName());
@@ -52,6 +55,16 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeVi
         holder.itemViewPager.setAdapter(imagePagerAdapter);
         holder.itemViewPager.setOffscreenPageLimit(0);
         holder.itemTabLayout.setupWithViewPager(holder.itemViewPager, true);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ShowSubscriptionActivity.class);
+                intent.putExtra(CommonUtils.INTENT_SUB_ID, subscriptionModel.getSubId());
+                mContext.startActivity(intent);
+            }
+        });
+
     }
 
     @Override

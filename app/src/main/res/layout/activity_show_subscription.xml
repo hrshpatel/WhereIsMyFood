@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="subModel"
+            type="com.conestoga.whereismyfood.models.SubscriptionModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,7 +26,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -48,6 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_10"
+                    android:text="@{subModel.subName}"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/dimen_24_sp"
                     android:textStyle="bold" />
@@ -57,6 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_10"
+                    android:text="@{subModel.vendorName}"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/dimen_18_sp" />
 
@@ -76,7 +86,7 @@
                         android:drawableStart="@drawable/ic_star"
                         android:drawableLeft="@drawable/ic_star"
                         android:gravity="center"
-                        android:text="4.5"
+                        android:text="@{subModel.ratings}"
                         android:textColor="@android:color/black" />
 
 
@@ -87,38 +97,40 @@
                         android:layout_marginEnd="@dimen/dimen_10"
                         android:layout_marginRight="@dimen/dimen_10"
                         android:layout_weight="1"
-                        android:text="20 Ratings"
+                        android:text="@{subModel.ratingCount + ` ratings`}"
                         android:textColor="@android:color/black" />
 
                     <TextView
                         android:id="@+id/act_show_sub_txt_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Price"
+                        android:text="@{'$' + subModel.price}"
                         android:textColor="@android:color/black" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/act_show_sub_txt_monday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:drawableEnd="@drawable/ic_collapse"
+                    android:drawableRight="@drawable/ic_collapse"
+                    android:gravity="center_vertical"
+                    android:text="@string/str_monday"
+                    android:textColor="@android:color/black" />
 
                 <LinearLayout
                     android:id="@+id/show_lin_mon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/act_show_sub_txt_monday"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_15"
-                        android:drawableEnd="@drawable/ic_collapse"
-                        android:drawableRight="@drawable/ic_collapse"
-                        android:gravity="center_vertical"
-                        android:text="@string/str_monday"
-                        android:textColor="@android:color/black" />
+                    android:orientation="vertical"
+                    android:visibility="@{subModel.isMonday ? View.VISIBLE : View.GONE}">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -134,12 +146,14 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_name_mon"
                             android:layout_toEndOf="@id/act_show_sub_txt_name_mon"
-                            android:layout_toRightOf="@id/act_show_sub_txt_name_mon" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_name_mon"
+                            android:text="@{subModel.dishNameMon}" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -155,12 +169,14 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_ing_mon"
                             android:layout_toEndOf="@id/act_show_sub_txt_ing_mon"
-                            android:layout_toRightOf="@id/act_show_sub_txt_ing_mon" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_ing_mon"
+                            android:text="@{subModel.ingredientsMon}" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -176,30 +192,34 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_des_mon"
                             android:layout_toEndOf="@id/act_show_sub_txt_des_mon"
-                            android:layout_toRightOf="@id/act_show_sub_txt_des_mon" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_des_mon"
+                            android:text="@{subModel.dishDescMon}" />
                     </RelativeLayout>
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/act_show_sub_txt_tuesday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:drawableEnd="@drawable/ic_collapse"
+                    android:drawableRight="@drawable/ic_collapse"
+                    android:gravity="center_vertical"
+                    android:text="@string/str_tuesday"
+                    android:textColor="@android:color/black" />
 
                 <LinearLayout
                     android:id="@+id/show_lin_tues"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="@{subModel.isTuesday ? View.VISIBLE : View.GONE}">
 
-                    <TextView
-                        android:id="@+id/act_show_sub_txt_tuesday"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_15"
-                        android:drawableEnd="@drawable/ic_collapse"
-                        android:drawableRight="@drawable/ic_collapse"
-                        android:gravity="center_vertical"
-                        android:text="@string/str_tuesday"
-                        android:textColor="@android:color/black" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -215,12 +235,14 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_name_tues"
                             android:layout_toEndOf="@id/act_show_sub_txt_name_tues"
-                            android:layout_toRightOf="@id/act_show_sub_txt_name_tues" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_name_tues"
+                            android:text="@{subModel.dishNameTue}" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -236,12 +258,14 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_ing_tues"
                             android:layout_toEndOf="@id/act_show_sub_txt_ing_tues"
-                            android:layout_toRightOf="@id/act_show_sub_txt_ing_tues" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_ing_tues"
+                            android:text="@{subModel.ingredientsTue}" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -257,30 +281,34 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_des_tues"
                             android:layout_toEndOf="@id/act_show_sub_txt_des_tues"
-                            android:layout_toRightOf="@id/act_show_sub_txt_des_tues" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_des_tues"
+                            android:text="@{subModel.dishDescTue}" />
                     </RelativeLayout>
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/act_show_sub_txt_wednesday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:drawableEnd="@drawable/ic_collapse"
+                    android:drawableRight="@drawable/ic_collapse"
+                    android:gravity="center_vertical"
+                    android:text="@string/str_wednesday"
+                    android:textColor="@android:color/black" />
 
                 <LinearLayout
                     android:id="@+id/show_lin_wed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="@{subModel.isWednesday ? View.VISIBLE : View.GONE}">
 
-                    <TextView
-                        android:id="@+id/act_show_sub_txt_wednesday"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_15"
-                        android:drawableEnd="@drawable/ic_collapse"
-                        android:drawableRight="@drawable/ic_collapse"
-                        android:gravity="center_vertical"
-                        android:text="@string/str_wednesday"
-                        android:textColor="@android:color/black" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -296,12 +324,14 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_name_wed"
                             android:layout_toEndOf="@id/act_show_sub_txt_name_wed"
-                            android:layout_toRightOf="@id/act_show_sub_txt_name_wed" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_name_wed"
+                            android:text="@{subModel.dishNameWed}" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -317,12 +347,14 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_ing_wed"
                             android:layout_toEndOf="@id/act_show_sub_txt_ing_wed"
-                            android:layout_toRightOf="@id/act_show_sub_txt_ing_wed" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_ing_wed"
+                            android:text="@{subModel.ingredientsWed}" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -338,30 +370,34 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_des_wed"
                             android:layout_toEndOf="@id/act_show_sub_txt_des_wed"
-                            android:layout_toRightOf="@id/act_show_sub_txt_des_wed" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_des_wed"
+                            android:text="@{subModel.dishDescWed}" />
                     </RelativeLayout>
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/act_show_sub_txt_thurs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:drawableEnd="@drawable/ic_collapse"
+                    android:drawableRight="@drawable/ic_collapse"
+                    android:gravity="center_vertical"
+                    android:text="@string/str_thursday"
+                    android:textColor="@android:color/black" />
 
                 <LinearLayout
                     android:id="@+id/show_lin_thurs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="@{subModel.isThursday ? View.VISIBLE : View.GONE}">
 
-                    <TextView
-                        android:id="@+id/act_show_sub_txt_thurs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_15"
-                        android:drawableEnd="@drawable/ic_collapse"
-                        android:drawableRight="@drawable/ic_collapse"
-                        android:gravity="center_vertical"
-                        android:text="@string/str_thursday"
-                        android:textColor="@android:color/black" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -377,12 +413,14 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_name_thurs"
                             android:layout_toEndOf="@id/act_show_sub_txt_name_thurs"
-                            android:layout_toRightOf="@id/act_show_sub_txt_name_thurs" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_name_thurs"
+                            android:text="@{subModel.dishNameThurs}" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -398,12 +436,14 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_ing_thurs"
                             android:layout_toEndOf="@id/act_show_sub_txt_ing_thurs"
-                            android:layout_toRightOf="@id/act_show_sub_txt_ing_thurs" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_ing_thurs"
+                            android:text="@{subModel.ingredientsThurs}" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -419,30 +459,34 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_des_thurs"
                             android:layout_toEndOf="@id/act_show_sub_txt_des_thurs"
-                            android:layout_toRightOf="@id/act_show_sub_txt_des_thurs" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_des_thurs"
+                            android:text="@{subModel.dishDescThurs}" />
                     </RelativeLayout>
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/act_show_sub_txt_fri"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:drawableEnd="@drawable/ic_collapse"
+                    android:drawableRight="@drawable/ic_collapse"
+                    android:gravity="center_vertical"
+                    android:text="@string/str_friday"
+                    android:textColor="@android:color/black" />
 
                 <LinearLayout
                     android:id="@+id/show_lin_fri"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="@{subModel.isFriday ? View.VISIBLE : View.GONE}">
 
-                    <TextView
-                        android:id="@+id/act_show_sub_txt_fri"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_15"
-                        android:drawableEnd="@drawable/ic_collapse"
-                        android:drawableRight="@drawable/ic_collapse"
-                        android:gravity="center_vertical"
-                        android:text="@string/str_friday"
-                        android:textColor="@android:color/black" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -458,12 +502,14 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_name_fri"
                             android:layout_toEndOf="@id/act_show_sub_txt_name_fri"
-                            android:layout_toRightOf="@id/act_show_sub_txt_name_fri" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_name_fri"
+                            android:text="@{subModel.dishNameFri}" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -479,12 +525,14 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_ing_fri"
                             android:layout_toEndOf="@id/act_show_sub_txt_ing_fri"
-                            android:layout_toRightOf="@id/act_show_sub_txt_ing_fri" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_ing_fri"
+                            android:text="@{subModel.ingredientsFri}" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -500,30 +548,34 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_des_fri"
                             android:layout_toEndOf="@id/act_show_sub_txt_des_fri"
-                            android:layout_toRightOf="@id/act_show_sub_txt_des_fri" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_des_fri"
+                            android:text="@{subModel.dishDescFri}" />
                     </RelativeLayout>
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/act_show_sub_txt_sat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:drawableEnd="@drawable/ic_collapse"
+                    android:drawableRight="@drawable/ic_collapse"
+                    android:gravity="center_vertical"
+                    android:text="@string/str_saturday"
+                    android:textColor="@android:color/black" />
 
                 <LinearLayout
                     android:id="@+id/show_lin_sat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="@{subModel.isSaturday ? View.VISIBLE : View.GONE}">
 
-                    <TextView
-                        android:id="@+id/act_show_sub_txt_sat"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_15"
-                        android:drawableEnd="@drawable/ic_collapse"
-                        android:drawableRight="@drawable/ic_collapse"
-                        android:gravity="center_vertical"
-                        android:text="@string/str_saturday"
-                        android:textColor="@android:color/black" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -539,12 +591,14 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_name_sat"
                             android:layout_toEndOf="@id/act_show_sub_txt_name_sat"
-                            android:layout_toRightOf="@id/act_show_sub_txt_name_sat" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_name_sat"
+                            android:text="@{subModel.dishNameSat}" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -560,12 +614,14 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_ing_sat"
                             android:layout_toEndOf="@id/act_show_sub_txt_ing_sat"
-                            android:layout_toRightOf="@id/act_show_sub_txt_ing_sat" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_ing_sat"
+                            android:text="@{subModel.ingredientsSat}" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15"
                         android:layout_marginLeft="@dimen/dimen_15"
                         android:layout_marginTop="@dimen/dimen_15">
 
@@ -581,26 +637,28 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_des_sat"
                             android:layout_toEndOf="@id/act_show_sub_txt_des_sat"
-                            android:layout_toRightOf="@id/act_show_sub_txt_des_sat" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_des_sat"
+                            android:text="@{subModel.dishDescSat}" />
                     </RelativeLayout>
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/act_show_sub_txt_sun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_15"
+                    android:drawableEnd="@drawable/ic_collapse"
+                    android:drawableRight="@drawable/ic_collapse"
+                    android:gravity="center_vertical"
+                    android:text="@string/str_sunday"
+                    android:textColor="@android:color/black" />
 
                 <LinearLayout
                     android:id="@+id/show_lin_sun"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/act_show_sub_txt_sun"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_15"
-                        android:drawableEnd="@drawable/ic_collapse"
-                        android:drawableRight="@drawable/ic_collapse"
-                        android:gravity="center_vertical"
-                        android:text="@string/str_sunday"
-                        android:textColor="@android:color/black" />
+                    android:orientation="vertical"
+                    android:visibility="@{subModel.isSunday ? View.VISIBLE : View.GONE}">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -621,7 +679,8 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_name_sun"
                             android:layout_toEndOf="@id/act_show_sub_txt_name_sun"
-                            android:layout_toRightOf="@id/act_show_sub_txt_name_sun" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_name_sun"
+                            android:text="@{subModel.dishNameSun}" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -643,7 +702,8 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_ing_sun"
                             android:layout_toEndOf="@id/act_show_sub_txt_ing_sun"
-                            android:layout_toRightOf="@id/act_show_sub_txt_ing_sun" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_ing_sun"
+                            android:text="@{subModel.ingredientsSun}" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -665,9 +725,24 @@
                             style="@style/txt_profile"
                             android:layout_alignTop="@id/act_show_sub_txt_des_sun"
                             android:layout_toEndOf="@id/act_show_sub_txt_des_sun"
-                            android:layout_toRightOf="@id/act_show_sub_txt_des_sun" />
+                            android:layout_toRightOf="@id/act_show_sub_txt_des_sun"
+                            android:text="@{subModel.dishDescSun}" />
                     </RelativeLayout>
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_25"
+                    android:layout_marginBottom="@dimen/dimen_15"
+                    android:gravity="center"
+                    android:text="@string/str_reviews" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_ratings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10" />
 
             </LinearLayout>
 

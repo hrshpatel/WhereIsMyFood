@@ -122,5 +122,6 @@
     <string name="str_description_">Description :</string>
     <string name="str_ingredients_list">Ingredients list :</string>
     <string name="str_dish_name_">Dish Name :</string>
+    <string name="str_reviews">Reviews</string>
 
 </resources>
