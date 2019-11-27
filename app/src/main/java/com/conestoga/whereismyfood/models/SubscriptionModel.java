@@ -1,11 +1,14 @@
 package com.conestoga.whereismyfood.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.conestoga.whereismyfood.utils.CommonUtils;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class SubscriptionModel {
+public class SubscriptionModel implements Parcelable {
 
     @SerializedName("user_id")
     private String userId;
@@ -500,4 +503,112 @@ public class SubscriptionModel {
     public void setDishDescSun(String dishDescSun) {
         this.dishDescSun = dishDescSun;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.userId);
+        dest.writeList(this.dailyDetailList);
+        dest.writeString(this.subId);
+        dest.writeString(this.phone_no);
+        dest.writeString(this.emailId);
+        dest.writeString(this.subDescription);
+        dest.writeString(this.subName);
+        dest.writeString(this.vendorName);
+        dest.writeString(this.price);
+        dest.writeByte(this.isMonday ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.isTuesday ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.isWednesday ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.isThursday ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.isFriday ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.isSaturday ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.isSunday ? (byte) 1 : (byte) 0);
+        dest.writeString(this.dishNameMon);
+        dest.writeString(this.ingredientsMon);
+        dest.writeString(this.dishDescMon);
+        dest.writeString(this.dishNameTue);
+        dest.writeString(this.ingredientsTue);
+        dest.writeString(this.dishDescTue);
+        dest.writeString(this.dishNameWed);
+        dest.writeString(this.ingredientsWed);
+        dest.writeString(this.dishDescWed);
+        dest.writeString(this.dishNameThurs);
+        dest.writeString(this.ingredientsThurs);
+        dest.writeString(this.dishDescThurs);
+        dest.writeString(this.dishNameFri);
+        dest.writeString(this.ingredientsFri);
+        dest.writeString(this.dishDescFri);
+        dest.writeString(this.dishNameSat);
+        dest.writeString(this.ingredientsSat);
+        dest.writeString(this.dishDescSat);
+        dest.writeString(this.dishNameSun);
+        dest.writeString(this.ingredientsSun);
+        dest.writeString(this.dishDescSun);
+        dest.writeStringList(this.imageList);
+        dest.writeString(this.ratings);
+        dest.writeString(this.ratingCount);
+    }
+
+    public SubscriptionModel() {
+    }
+
+    protected SubscriptionModel(Parcel in) {
+        this.userId = in.readString();
+        this.dailyDetailList = new ArrayList<DailyDetail>();
+        in.readList(this.dailyDetailList, DailyDetail.class.getClassLoader());
+        this.subId = in.readString();
+        this.phone_no = in.readString();
+        this.emailId = in.readString();
+        this.subDescription = in.readString();
+        this.subName = in.readString();
+        this.vendorName = in.readString();
+        this.price = in.readString();
+        this.isMonday = in.readByte() != 0;
+        this.isTuesday = in.readByte() != 0;
+        this.isWednesday = in.readByte() != 0;
+        this.isThursday = in.readByte() != 0;
+        this.isFriday = in.readByte() != 0;
+        this.isSaturday = in.readByte() != 0;
+        this.isSunday = in.readByte() != 0;
+        this.dishNameMon = in.readString();
+        this.ingredientsMon = in.readString();
+        this.dishDescMon = in.readString();
+        this.dishNameTue = in.readString();
+        this.ingredientsTue = in.readString();
+        this.dishDescTue = in.readString();
+        this.dishNameWed = in.readString();
+        this.ingredientsWed = in.readString();
+        this.dishDescWed = in.readString();
+        this.dishNameThurs = in.readString();
+        this.ingredientsThurs = in.readString();
+        this.dishDescThurs = in.readString();
+        this.dishNameFri = in.readString();
+        this.ingredientsFri = in.readString();
+        this.dishDescFri = in.readString();
+        this.dishNameSat = in.readString();
+        this.ingredientsSat = in.readString();
+        this.dishDescSat = in.readString();
+        this.dishNameSun = in.readString();
+        this.ingredientsSun = in.readString();
+        this.dishDescSun = in.readString();
+        this.imageList = in.createStringArrayList();
+        this.ratings = in.readString();
+        this.ratingCount = in.readString();
+    }
+
+    public static final Parcelable.Creator<SubscriptionModel> CREATOR = new Parcelable.Creator<SubscriptionModel>() {
+        @Override
+        public SubscriptionModel createFromParcel(Parcel source) {
+            return new SubscriptionModel(source);
+        }
+
+        @Override
+        public SubscriptionModel[] newArray(int size) {
+            return new SubscriptionModel[size];
+        }
+    };
 }

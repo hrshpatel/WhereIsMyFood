@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="subModel"
+            type="com.conestoga.whereismyfood.models.SubscriptionModel" />
+
+        <variable
+            name="userDetails"
+            type="com.conestoga.whereismyfood.models.UserDetails" />
+    </data>
+
+    <LinearLayout
+        style="@style/linearLayout_activity"
+        android:padding="@dimen/dimen_0">
+
+        <include
+            android:id="@+id/toolbar_include"
+            layout="@layout/application_toolbar" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_15">
+
+                <EditText
+                    android:id="@+id/edt_receiver_name"
+                    style="@style/editText_signup"
+                    android:layout_marginTop="@dimen/dimen_0"
+                    android:drawableStart="@drawable/ic_user"
+                    android:drawableLeft="@drawable/ic_user"
+                    android:hint="@string/str_receiver_s_name"
+                    android:importantForAutofill="no"
+                    android:inputType="textCapSentences"
+                    android:text="@{userDetails.firstName + ` ` + userDetails.lastName}" />
+
+                <EditText
+                    android:id="@+id/edt_email"
+                    style="@style/editText_signup"
+                    android:drawableStart="@drawable/ic_mail"
+                    android:drawableLeft="@drawable/ic_mail"
+                    android:hint="@string/hint_email"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress"
+                    android:text="@={userDetails.emailId}" />
+
+                <EditText
+                    android:id="@+id/edt_phone"
+                    style="@style/editText_signup"
+                    android:drawableStart="@drawable/ic_phone"
+                    android:drawableLeft="@drawable/ic_phone"
+                    android:hint="@string/hint_phone"
+                    android:importantForAutofill="no"
+                    android:inputType="phone"
+                    android:text="@={userDetails.phoneNo}" />
+
+                <TextView
+                    android:id="@+id/txt_select_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:text="@string/str_select_time" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:text="@string/str_select_days" />
+
+                <CheckBox
+                    android:id="@+id/chk_monday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:checked="true"
+                    android:text="@string/str_monday"
+                    android:visibility="@{subModel.monday ? View.VISIBLE : View.GONE}" />
+
+                <CheckBox
+                    android:id="@+id/chk_tuesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:checked="true"
+                    android:text="@string/str_tuesday"
+                    android:visibility="@{subModel.tuesday ? View.VISIBLE : View.GONE}" />
+
+                <CheckBox
+                    android:id="@+id/chk_wednesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:checked="true"
+                    android:text="@string/str_wednesday"
+                    android:visibility="@{subModel.wednesday ? View.VISIBLE : View.GONE}" />
+
+                <CheckBox
+                    android:id="@+id/chk_thursday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:checked="true"
+                    android:text="@string/str_thursday"
+                    android:visibility="@{subModel.thursday ? View.VISIBLE : View.GONE}" />
+
+                <CheckBox
+                    android:id="@+id/chk_friday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:checked="true"
+                    android:text="@string/str_friday"
+                    android:visibility="@{subModel.friday ? View.VISIBLE : View.GONE}" />
+
+                <CheckBox
+                    android:id="@+id/chk_saturday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:checked="true"
+                    android:text="@string/str_saturday"
+                    android:visibility="@{subModel.saturday ? View.VISIBLE : View.GONE}" />
+
+                <CheckBox
+                    android:id="@+id/chk_sunday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:checked="true"
+                    android:text="@string/str_sunday"
+                    android:visibility="@{subModel.sunday ? View.VISIBLE : View.GONE}" />
+
+                <TextView
+                    android:id="@+id/txt_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:text="@{`Price: $` + subModel.price}" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_addresses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_10" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>

@@ -24,8 +24,9 @@ import java.util.regex.Pattern;
 
 public class CommonUtils {
 
-    public static final String BASE_URL = "http://10.192.95.13/Capstone_project/apis/";
+    public static final String BASE_URL = "http://10.0.2.2/Capstone_project/apis/";
     public static final String INTENT_SUB_ID = "SUB_ID";
+    public static final String INTENT_SUB_MODEL = "Sub_model";
     private final static Pattern FIRST_LAST_NAME_PATTERN = Pattern.compile("^[A-Za-z0-9]+[A-Za-z-\\.\\-\\_\\']*$");
     public final static Pattern DISH_NAME_PATTERN = Pattern.compile("^[A-Za-z0-9]+[a-zA-Z0-9\\(\\)\\.\\-\\_\\{\\}\\@\\*\\s*]*$");
     private final static Pattern INVALID_EMAIL_PATTERN = Pattern.compile("^[0-9-]+[_0-9-]*(\\.[_0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");

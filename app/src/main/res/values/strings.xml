@@ -123,5 +123,10 @@
     <string name="str_ingredients_list">Ingredients list :</string>
     <string name="str_dish_name_">Dish Name :</string>
     <string name="str_reviews">Reviews</string>
+    <string name="str_checkout">Checkout</string>
+    <string name="str_receiver_s_name">Receiver\'s name</string>
+    <string name="str_select_days">Select days.</string>
+    <string name="str_select_time">Select time for receiving meal.</string>
+    <string name="str_canada">Canada</string>
 
 </resources>

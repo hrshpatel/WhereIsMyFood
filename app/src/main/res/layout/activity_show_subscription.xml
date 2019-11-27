@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
+
+        <variable
+            name="userType"
+            type="String" />
+
         <variable
             name="subModel"
             type="com.conestoga.whereismyfood.models.SubscriptionModel" />
@@ -17,7 +23,9 @@
         android:orientation="vertical"
         tools:context=".activities.ShowSubscriptionActivity">
 
-        <include layout="@layout/application_toolbar" />
+        <include
+            android:id="@+id/toolbar_include"
+            layout="@layout/application_toolbar" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -26,8 +34,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:animateLayoutChanges="true"
                 android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -729,6 +737,18 @@
                             android:text="@{subModel.dishDescSun}" />
                     </RelativeLayout>
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_checkout"
+                    style="@style/button_signup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:paddingLeft="@dimen/dimen_20"
+                    android:paddingRight="@dimen/dimen_20"
+                    android:text="@string/str_checkout"
+                    android:visibility="@{userType.equals(`0`) ? View.VISIBLE : View.GONE}" />
 
                 <TextView
                     android:layout_width="match_parent"

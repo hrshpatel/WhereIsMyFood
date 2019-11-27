@@ -8,6 +8,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
@@ -62,6 +64,9 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+
+import com.conestoga.whereismyfood.databinding.ActivityAddSubsciptionBinding;
+
 import retrofit2.Response;
 
 public class AddSubsciptionActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
@@ -70,65 +75,21 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
 
     private AwesomeValidation mAwesomeValidation;
-    private ViewPager mViewPager;
-    private EditText mEdtName;
-    private EditText mEdtVendorName;
-    private EditText mEdtDescription;
-    private EditText mEdtPrice;
-    private CheckBox mChkMonday;
-    private LinearLayout mLinMonday;
-    private EditText mEdtMonDishName;
-    private EditText mEdtMonIngredients;
-    private EditText mEdtMonDesc;
-    private CheckBox mChkTuesday;
-    private LinearLayout mLinTuesday;
-    private EditText mEdtTuesDishName;
-    private EditText mEdtTuesIngredients;
-    private EditText mEdtTuesDesc;
-    private CheckBox mChkWednesday;
-    private LinearLayout mLinWednesday;
-    private EditText mEdtWedDishName;
-    private EditText mEdtWedIngredients;
-    private EditText mEdtWedDesc;
-    private CheckBox mChkThursday;
-    private LinearLayout mLinThursday;
-    private EditText mEdtThursDishName;
-    private EditText mEdtThursIngredients;
-    private EditText mEdtThursDesc;
-    private CheckBox mChkFriday;
-    private LinearLayout mLinFriday;
-    private EditText mEdtFriDishName;
-    private EditText mEdtFriIngredients;
-    private EditText mEdtFriDesc;
-    private CheckBox mChkSat;
-    private LinearLayout mLinSat;
-    private EditText mEdtSatDishName;
-    private EditText mEdtSatIngredients;
-    private EditText mEdtSatDesc;
-    private CheckBox mChkSun;
-    private LinearLayout mLinSun;
-    private EditText mEdtSunDishName;
-    private EditText mEdtSunIngredients;
-    private EditText mEdtSunDesc;
-    private Button mBtnSave;
-    private Button mBtnAddPhoto;
-    private ScrollView mScrollView;
     private APIInterface mApiInterface;
     private AppSharedPref mSharedPref;
-    private Toolbar mToolbar;
-    private TextView toolbarTitle;
-    private View mRoot;
     private File mFileImagePath;
 
     private ArrayList<File> mImageFileList;
     private ArrayList<String> mImagePathList;
     private ImagePagerAdapter imagePagerAdapter;
-    private TabLayout mTabLayout;
+    private ActivityAddSubsciptionBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_subsciption);
+//        setContentView(R.layout.activity_add_subsciption);
+
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_subsciption);
 
         setUpToolbar();
         initView();
@@ -147,51 +108,51 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
         switch (compoundButton.getId()) {
             case R.id.act_sub_chk_monday:
                 if (b) {
-                    mLinMonday.setVisibility(View.VISIBLE);
+                    mBinding.actSubLinMonday.setVisibility(View.VISIBLE);
                 } else {
-                    mLinMonday.setVisibility(View.GONE);
+                    mBinding.actSubLinMonday.setVisibility(View.GONE);
                 }
                 break;
             case R.id.act_sub_chk_tuesday:
                 if (b) {
-                    mLinTuesday.setVisibility(View.VISIBLE);
+                    mBinding.actSubLinTuesday.setVisibility(View.VISIBLE);
                 } else {
-                    mLinTuesday.setVisibility(View.GONE);
+                    mBinding.actSubLinTuesday.setVisibility(View.GONE);
                 }
                 break;
             case R.id.act_sub_chk_wednesday:
                 if (b) {
-                    mLinWednesday.setVisibility(View.VISIBLE);
+                    mBinding.actSubLinWednesday.setVisibility(View.VISIBLE);
                 } else {
-                    mLinWednesday.setVisibility(View.GONE);
+                    mBinding.actSubLinWednesday.setVisibility(View.GONE);
                 }
                 break;
             case R.id.act_sub_chk_thursday:
                 if (b) {
-                    mLinThursday.setVisibility(View.VISIBLE);
+                    mBinding.actSubLinThursday.setVisibility(View.VISIBLE);
                 } else {
-                    mLinThursday.setVisibility(View.GONE);
+                    mBinding.actSubLinThursday.setVisibility(View.GONE);
                 }
                 break;
             case R.id.act_sub_chk_friday:
                 if (b) {
-                    mLinFriday.setVisibility(View.VISIBLE);
+                    mBinding.actSubLinFriday.setVisibility(View.VISIBLE);
                 } else {
-                    mLinFriday.setVisibility(View.GONE);
+                    mBinding.actSubLinFriday.setVisibility(View.GONE);
                 }
                 break;
             case R.id.act_sub_chk_sat:
                 if (b) {
-                    mLinSat.setVisibility(View.VISIBLE);
+                    mBinding.actSubLinSat.setVisibility(View.VISIBLE);
                 } else {
-                    mLinSat.setVisibility(View.GONE);
+                    mBinding.actSubLinSat.setVisibility(View.GONE);
                 }
                 break;
             case R.id.act_sub_chk_sun:
                 if (b) {
-                    mLinSun.setVisibility(View.VISIBLE);
+                    mBinding.actSubLinSun.setVisibility(View.VISIBLE);
                 } else {
-                    mLinSun.setVisibility(View.GONE);
+                    mBinding.actSubLinSun.setVisibility(View.GONE);
                 }
                 break;
         }
@@ -219,7 +180,7 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
                     selectImage();
                 } else {
                     if (!(shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
-                        Snackbar snackbar = Snackbar.make(mRoot, getString(R.string.permission_never_asked)
+                        Snackbar snackbar = Snackbar.make(mBinding.actAddSubRoot, getString(R.string.permission_never_asked)
                                 , Snackbar.LENGTH_INDEFINITE);
                         snackbar.setAction(getString(R.string.allow), new View.OnClickListener() {
                             @Override
@@ -239,15 +200,15 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
     }
 
     private void setListeners() {
-        mChkMonday.setOnCheckedChangeListener(this);
-        mChkTuesday.setOnCheckedChangeListener(this);
-        mChkWednesday.setOnCheckedChangeListener(this);
-        mChkThursday.setOnCheckedChangeListener(this);
-        mChkFriday.setOnCheckedChangeListener(this);
-        mChkSat.setOnCheckedChangeListener(this);
-        mChkSun.setOnCheckedChangeListener(this);
+        mBinding.actSubChkMonday.setOnCheckedChangeListener(this);
+        mBinding.actSubChkTuesday.setOnCheckedChangeListener(this);
+        mBinding.actSubChkWednesday.setOnCheckedChangeListener(this);
+        mBinding.actSubChkThursday.setOnCheckedChangeListener(this);
+        mBinding.actSubChkFriday.setOnCheckedChangeListener(this);
+        mBinding.actSubChkSat.setOnCheckedChangeListener(this);
+        mBinding.actSubChkSun.setOnCheckedChangeListener(this);
 
-        mBtnAddPhoto.setOnClickListener(new View.OnClickListener() {
+        mBinding.actSubBtnAddPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -268,136 +229,136 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
             }
         });
 
-        mBtnSave.setOnClickListener(new View.OnClickListener() {
+        mBinding.actSubBtnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mAwesomeValidation.validate()) {
-                    if (mChkMonday.isChecked() && CommonUtils.isNullString(mEdtMonDishName.getText().toString())) {
-                        mEdtMonDishName.setError(getString(R.string.str_no_dish_name));
-                        mScrollView.smoothScrollTo(0, mEdtMonDishName.getBottom());
-                    } else if (mChkMonday.isChecked() && !CommonUtils.checkDishName(mEdtMonDishName.getText().toString())) {
-                        mEdtMonDishName.setError(getString(R.string.str_invalid_dish_name));
-                        mScrollView.smoothScrollTo(0, mEdtMonDishName.getBottom());
-                    } else if (mChkMonday.isChecked() && CommonUtils.isNullString(mEdtMonDesc.getText().toString())) {
-                        mEdtMonDesc.setError(getString(R.string.str_no_description));
-                        mScrollView.smoothScrollTo(0, mEdtMonDesc.getBottom());
-                    } else if (mChkMonday.isChecked() && !CommonUtils.checkDishName(mEdtMonDesc.getText().toString())) {
-                        mEdtMonDesc.setError(getString(R.string.str_invalid_description));
-                        mScrollView.smoothScrollTo(0, mEdtMonDesc.getBottom());
-                    } else if (mChkMonday.isChecked() && CommonUtils.isNullString(mEdtMonIngredients.getText().toString())) {
-                        mEdtMonIngredients.setError(getString(R.string.str_no_ingredients));
-                        mScrollView.smoothScrollTo(0, mEdtMonIngredients.getBottom());
-                    } else if (mChkMonday.isChecked() && !CommonUtils.checkDishName(mEdtMonIngredients.getText().toString())) {
-                        mEdtMonIngredients.setError(getString(R.string.str_invalid_ingredients));
-                        mScrollView.smoothScrollTo(0, mEdtMonIngredients.getBottom());
-                    } else if (mChkTuesday.isChecked() && CommonUtils.isNullString(mEdtTuesDishName.getText().toString())) {
-                        mEdtTuesDishName.setError(getString(R.string.str_no_dish_name));
-                        mScrollView.smoothScrollTo(0, mEdtTuesDishName.getBottom());
-                    } else if (mChkTuesday.isChecked() && !CommonUtils.checkDishName(mEdtTuesDishName.getText().toString())) {
-                        mEdtTuesDishName.setError(getString(R.string.str_invalid_dish_name));
-                        mScrollView.smoothScrollTo(0, mEdtTuesDishName.getBottom());
-                    } else if (mChkTuesday.isChecked() && CommonUtils.isNullString(mEdtTuesDesc.getText().toString())) {
-                        mEdtTuesDesc.setError(getString(R.string.str_no_description));
-                        mScrollView.smoothScrollTo(0, mEdtTuesDesc.getBottom());
-                    } else if (mChkTuesday.isChecked() && !CommonUtils.checkDishName(mEdtTuesDesc.getText().toString())) {
-                        mEdtTuesDesc.setError(getString(R.string.str_invalid_description));
-                        mScrollView.smoothScrollTo(0, mEdtTuesDesc.getBottom());
-                    } else if (mChkTuesday.isChecked() && CommonUtils.isNullString(mEdtTuesIngredients.getText().toString())) {
-                        mEdtTuesIngredients.setError(getString(R.string.str_no_ingredients));
-                        mScrollView.smoothScrollTo(0, mEdtTuesIngredients.getBottom());
-                    } else if (mChkTuesday.isChecked() && !CommonUtils.checkDishName(mEdtTuesIngredients.getText().toString())) {
-                        mEdtTuesIngredients.setError(getString(R.string.str_invalid_ingredients));
-                        mScrollView.smoothScrollTo(0, mEdtTuesIngredients.getBottom());
-                    } else if (mChkWednesday.isChecked() && CommonUtils.isNullString(mEdtWedDishName.getText().toString())) {
-                        mEdtWedDishName.setError(getString(R.string.str_no_dish_name));
-                        mScrollView.smoothScrollTo(0, mEdtWedDishName.getBottom());
-                    } else if (mChkWednesday.isChecked() && !CommonUtils.checkDishName(mEdtWedDishName.getText().toString())) {
-                        mEdtWedDishName.setError(getString(R.string.str_invalid_dish_name));
-                        mScrollView.smoothScrollTo(0, mEdtWedDishName.getBottom());
-                    } else if (mChkWednesday.isChecked() && CommonUtils.isNullString(mEdtWedDesc.getText().toString())) {
-                        mEdtWedDesc.setError(getString(R.string.str_no_description));
-                        mScrollView.smoothScrollTo(0, mEdtWedDesc.getBottom());
-                    } else if (mChkWednesday.isChecked() && !CommonUtils.checkDishName(mEdtWedDesc.getText().toString())) {
-                        mEdtWedDesc.setError(getString(R.string.str_invalid_description));
-                        mScrollView.smoothScrollTo(0, mEdtWedDesc.getBottom());
-                    } else if (mChkWednesday.isChecked() && CommonUtils.isNullString(mEdtWedIngredients.getText().toString())) {
-                        mEdtWedIngredients.setError(getString(R.string.str_no_ingredients));
-                        mScrollView.smoothScrollTo(0, mEdtWedIngredients.getBottom());
-                    } else if (mChkWednesday.isChecked() && !CommonUtils.checkDishName(mEdtWedIngredients.getText().toString())) {
-                        mEdtWedIngredients.setError(getString(R.string.str_invalid_ingredients));
-                        mScrollView.smoothScrollTo(0, mEdtWedIngredients.getBottom());
-                    } else if (mChkThursday.isChecked() && CommonUtils.isNullString(mEdtThursDishName.getText().toString())) {
-                        mEdtThursDishName.setError(getString(R.string.str_no_dish_name));
-                        mScrollView.smoothScrollTo(0, mEdtThursDishName.getBottom());
-                    } else if (mChkThursday.isChecked() && !CommonUtils.checkDishName(mEdtThursDishName.getText().toString())) {
-                        mEdtThursDishName.setError(getString(R.string.str_invalid_dish_name));
-                        mScrollView.smoothScrollTo(0, mEdtThursDishName.getBottom());
-                    } else if (mChkThursday.isChecked() && CommonUtils.isNullString(mEdtThursDesc.getText().toString())) {
-                        mEdtThursDesc.setError(getString(R.string.str_no_description));
-                        mScrollView.smoothScrollTo(0, mEdtThursDesc.getBottom());
-                    } else if (mChkThursday.isChecked() && !CommonUtils.checkDishName(mEdtThursDesc.getText().toString())) {
-                        mEdtThursDesc.setError(getString(R.string.str_invalid_description));
-                        mScrollView.smoothScrollTo(0, mEdtThursDesc.getBottom());
-                    } else if (mChkThursday.isChecked() && CommonUtils.isNullString(mEdtThursIngredients.getText().toString())) {
-                        mEdtThursIngredients.setError(getString(R.string.str_no_ingredients));
-                        mScrollView.smoothScrollTo(0, mEdtThursIngredients.getBottom());
-                    } else if (mChkThursday.isChecked() && !CommonUtils.checkDishName(mEdtThursIngredients.getText().toString())) {
-                        mEdtThursIngredients.setError(getString(R.string.str_invalid_ingredients));
-                        mScrollView.smoothScrollTo(0, mEdtThursIngredients.getBottom());
-                    } else if (mChkFriday.isChecked() && CommonUtils.isNullString(mEdtFriDishName.getText().toString())) {
-                        mEdtFriDishName.setError(getString(R.string.str_no_dish_name));
-                        mScrollView.smoothScrollTo(0, mEdtFriDishName.getBottom());
-                    } else if (mChkFriday.isChecked() && !CommonUtils.checkDishName(mEdtFriDishName.getText().toString())) {
-                        mEdtFriDishName.setError(getString(R.string.str_invalid_dish_name));
-                        mScrollView.smoothScrollTo(0, mEdtFriDishName.getBottom());
-                    } else if (mChkFriday.isChecked() && CommonUtils.isNullString(mEdtFriDesc.getText().toString())) {
-                        mEdtFriDesc.setError(getString(R.string.str_no_description));
-                        mScrollView.smoothScrollTo(0, mEdtFriDesc.getBottom());
-                    } else if (mChkFriday.isChecked() && !CommonUtils.checkDishName(mEdtFriDesc.getText().toString())) {
-                        mEdtFriDesc.setError(getString(R.string.str_invalid_description));
-                        mScrollView.smoothScrollTo(0, mEdtFriDesc.getBottom());
-                    } else if (mChkFriday.isChecked() && CommonUtils.isNullString(mEdtFriIngredients.getText().toString())) {
-                        mEdtFriIngredients.setError(getString(R.string.str_no_ingredients));
-                        mScrollView.smoothScrollTo(0, mEdtFriIngredients.getBottom());
-                    } else if (mChkFriday.isChecked() && !CommonUtils.checkDishName(mEdtFriIngredients.getText().toString())) {
-                        mEdtFriIngredients.setError(getString(R.string.str_invalid_ingredients));
-                        mScrollView.smoothScrollTo(0, mEdtFriIngredients.getBottom());
-                    } else if (mChkSat.isChecked() && CommonUtils.isNullString(mEdtSatDishName.getText().toString())) {
-                        mEdtSatDishName.setError(getString(R.string.str_no_dish_name));
-                        mScrollView.smoothScrollTo(0, mEdtSatDishName.getBottom());
-                    } else if (mChkSat.isChecked() && !CommonUtils.checkDishName(mEdtSatDishName.getText().toString())) {
-                        mEdtSatDishName.setError(getString(R.string.str_invalid_dish_name));
-                        mScrollView.smoothScrollTo(0, mEdtSatDishName.getBottom());
-                    } else if (mChkSat.isChecked() && CommonUtils.isNullString(mEdtSatDesc.getText().toString())) {
-                        mEdtSatDesc.setError(getString(R.string.str_no_description));
-                        mScrollView.smoothScrollTo(0, mEdtSatDesc.getBottom());
-                    } else if (mChkSat.isChecked() && !CommonUtils.checkDishName(mEdtSatDesc.getText().toString())) {
-                        mEdtSatDesc.setError(getString(R.string.str_invalid_description));
-                        mScrollView.smoothScrollTo(0, mEdtSatDesc.getBottom());
-                    } else if (mChkSat.isChecked() && CommonUtils.isNullString(mEdtSatIngredients.getText().toString())) {
-                        mEdtSatIngredients.setError(getString(R.string.str_no_ingredients));
-                        mScrollView.smoothScrollTo(0, mEdtSatIngredients.getBottom());
-                    } else if (mChkSat.isChecked() && !CommonUtils.checkDishName(mEdtSatIngredients.getText().toString())) {
-                        mEdtSatIngredients.setError(getString(R.string.str_invalid_ingredients));
-                        mScrollView.smoothScrollTo(0, mEdtSatIngredients.getBottom());
-                    } else if (mChkSun.isChecked() && CommonUtils.isNullString(mEdtSunDishName.getText().toString())) {
-                        mEdtSunDishName.setError(getString(R.string.str_no_dish_name));
-                        mScrollView.smoothScrollTo(0, mEdtSunDishName.getBottom());
-                    } else if (mChkSun.isChecked() && !CommonUtils.checkDishName(mEdtSunDishName.getText().toString())) {
-                        mEdtSunDishName.setError(getString(R.string.str_invalid_dish_name));
-                        mScrollView.smoothScrollTo(0, mEdtSunDishName.getBottom());
-                    } else if (mChkSun.isChecked() && CommonUtils.isNullString(mEdtSunDesc.getText().toString())) {
-                        mEdtSunDesc.setError(getString(R.string.str_no_description));
-                        mScrollView.smoothScrollTo(0, mEdtSunDesc.getBottom());
-                    } else if (mChkSun.isChecked() && !CommonUtils.checkDishName(mEdtSunDesc.getText().toString())) {
-                        mEdtSunDesc.setError(getString(R.string.str_invalid_description));
-                        mScrollView.smoothScrollTo(0, mEdtSunDesc.getBottom());
-                    } else if (mChkSun.isChecked() && CommonUtils.isNullString(mEdtSunIngredients.getText().toString())) {
-                        mEdtSunIngredients.setError(getString(R.string.str_no_ingredients));
-                        mScrollView.smoothScrollTo(0, mEdtSunIngredients.getBottom());
-                    } else if (mChkSun.isChecked() && !CommonUtils.checkDishName(mEdtSunIngredients.getText().toString())) {
-                        mEdtSunIngredients.setError(getString(R.string.str_invalid_ingredients));
-                        mScrollView.smoothScrollTo(0, mEdtSunIngredients.getBottom());
+                    if (mBinding.actSubChkMonday.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtMonDishName.getText().toString())) {
+                        mBinding.actSubEdtMonDishName.setError(getString(R.string.str_no_dish_name));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtMonDishName.getBottom());
+                    } else if (mBinding.actSubChkMonday.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtMonDishName.getText().toString())) {
+                        mBinding.actSubEdtMonDishName.setError(getString(R.string.str_invalid_dish_name));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtMonDishName.getBottom());
+                    } else if (mBinding.actSubChkMonday.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtMonDesc.getText().toString())) {
+                        mBinding.actSubEdtMonDesc.setError(getString(R.string.str_no_description));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtMonDesc.getBottom());
+                    } else if (mBinding.actSubChkMonday.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtMonDesc.getText().toString())) {
+                        mBinding.actSubEdtMonDesc.setError(getString(R.string.str_invalid_description));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtMonDesc.getBottom());
+                    } else if (mBinding.actSubChkMonday.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtMonIngredients.getText().toString())) {
+                        mBinding.actSubEdtMonIngredients.setError(getString(R.string.str_no_ingredients));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtMonIngredients.getBottom());
+                    } else if (mBinding.actSubChkMonday.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtMonIngredients.getText().toString())) {
+                        mBinding.actSubEdtMonIngredients.setError(getString(R.string.str_invalid_ingredients));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtMonIngredients.getBottom());
+                    } else if (mBinding.actSubChkTuesday.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtTuesDishName.getText().toString())) {
+                        mBinding.actSubEdtTuesDishName.setError(getString(R.string.str_no_dish_name));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtTuesDishName.getBottom());
+                    } else if (mBinding.actSubChkTuesday.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtTuesDishName.getText().toString())) {
+                        mBinding.actSubEdtTuesDishName.setError(getString(R.string.str_invalid_dish_name));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtTuesDishName.getBottom());
+                    } else if (mBinding.actSubChkTuesday.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtTuesDesc.getText().toString())) {
+                        mBinding.actSubEdtTuesDesc.setError(getString(R.string.str_no_description));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtTuesDesc.getBottom());
+                    } else if (mBinding.actSubChkTuesday.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtTuesDesc.getText().toString())) {
+                        mBinding.actSubEdtTuesDesc.setError(getString(R.string.str_invalid_description));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtTuesDesc.getBottom());
+                    } else if (mBinding.actSubChkTuesday.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtTuesIngredients.getText().toString())) {
+                        mBinding.actSubEdtTuesIngredients.setError(getString(R.string.str_no_ingredients));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtTuesIngredients.getBottom());
+                    } else if (mBinding.actSubChkTuesday.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtTuesIngredients.getText().toString())) {
+                        mBinding.actSubEdtTuesIngredients.setError(getString(R.string.str_invalid_ingredients));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtTuesIngredients.getBottom());
+                    } else if (mBinding.actSubChkWednesday.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtWedDishName.getText().toString())) {
+                        mBinding.actSubEdtWedDishName.setError(getString(R.string.str_no_dish_name));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtWedDishName.getBottom());
+                    } else if (mBinding.actSubChkWednesday.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtWedDishName.getText().toString())) {
+                        mBinding.actSubEdtWedDishName.setError(getString(R.string.str_invalid_dish_name));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtWedDishName.getBottom());
+                    } else if (mBinding.actSubChkWednesday.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtWedDesc.getText().toString())) {
+                        mBinding.actSubEdtWedDesc.setError(getString(R.string.str_no_description));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtWedDesc.getBottom());
+                    } else if (mBinding.actSubChkWednesday.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtWedDesc.getText().toString())) {
+                        mBinding.actSubEdtWedDesc.setError(getString(R.string.str_invalid_description));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtWedDesc.getBottom());
+                    } else if (mBinding.actSubChkWednesday.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtWedIngredients.getText().toString())) {
+                        mBinding.actSubEdtWedIngredients.setError(getString(R.string.str_no_ingredients));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtWedIngredients.getBottom());
+                    } else if (mBinding.actSubChkWednesday.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtWedIngredients.getText().toString())) {
+                        mBinding.actSubEdtWedIngredients.setError(getString(R.string.str_invalid_ingredients));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtWedIngredients.getBottom());
+                    } else if (mBinding.actSubChkThursday.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtThursDishName.getText().toString())) {
+                        mBinding.actSubEdtThursDishName.setError(getString(R.string.str_no_dish_name));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtThursDishName.getBottom());
+                    } else if (mBinding.actSubChkThursday.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtThursDishName.getText().toString())) {
+                        mBinding.actSubEdtThursDishName.setError(getString(R.string.str_invalid_dish_name));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtThursDishName.getBottom());
+                    } else if (mBinding.actSubChkThursday.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtThursDesc.getText().toString())) {
+                        mBinding.actSubEdtThursDesc.setError(getString(R.string.str_no_description));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtThursDesc.getBottom());
+                    } else if (mBinding.actSubChkThursday.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtThursDesc.getText().toString())) {
+                        mBinding.actSubEdtThursDesc.setError(getString(R.string.str_invalid_description));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtThursDesc.getBottom());
+                    } else if (mBinding.actSubChkThursday.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtThursIngredients.getText().toString())) {
+                        mBinding.actSubEdtThursIngredients.setError(getString(R.string.str_no_ingredients));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtThursIngredients.getBottom());
+                    } else if (mBinding.actSubChkThursday.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtThursIngredients.getText().toString())) {
+                        mBinding.actSubEdtThursIngredients.setError(getString(R.string.str_invalid_ingredients));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtThursIngredients.getBottom());
+                    } else if (mBinding.actSubChkFriday.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtFriDishName.getText().toString())) {
+                        mBinding.actSubEdtFriDishName.setError(getString(R.string.str_no_dish_name));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtFriDishName.getBottom());
+                    } else if (mBinding.actSubChkFriday.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtFriDishName.getText().toString())) {
+                        mBinding.actSubEdtFriDishName.setError(getString(R.string.str_invalid_dish_name));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtFriDishName.getBottom());
+                    } else if (mBinding.actSubChkFriday.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtFriDesc.getText().toString())) {
+                        mBinding.actSubEdtFriDesc.setError(getString(R.string.str_no_description));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtFriDesc.getBottom());
+                    } else if (mBinding.actSubChkFriday.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtFriDesc.getText().toString())) {
+                        mBinding.actSubEdtFriDesc.setError(getString(R.string.str_invalid_description));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtFriDesc.getBottom());
+                    } else if (mBinding.actSubChkFriday.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtFriIngredients.getText().toString())) {
+                        mBinding.actSubEdtFriIngredients.setError(getString(R.string.str_no_ingredients));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtFriIngredients.getBottom());
+                    } else if (mBinding.actSubChkFriday.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtFriIngredients.getText().toString())) {
+                        mBinding.actSubEdtFriIngredients.setError(getString(R.string.str_invalid_ingredients));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtFriIngredients.getBottom());
+                    } else if (mBinding.actSubChkSat.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtSatDishName.getText().toString())) {
+                        mBinding.actSubEdtSatDishName.setError(getString(R.string.str_no_dish_name));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtSatDishName.getBottom());
+                    } else if (mBinding.actSubChkSat.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtSatDishName.getText().toString())) {
+                        mBinding.actSubEdtSatDishName.setError(getString(R.string.str_invalid_dish_name));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtSatDishName.getBottom());
+                    } else if (mBinding.actSubChkSat.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtSatDesc.getText().toString())) {
+                        mBinding.actSubEdtSatDesc.setError(getString(R.string.str_no_description));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtSatDesc.getBottom());
+                    } else if (mBinding.actSubChkSat.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtSatDesc.getText().toString())) {
+                        mBinding.actSubEdtSatDesc.setError(getString(R.string.str_invalid_description));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtSatDesc.getBottom());
+                    } else if (mBinding.actSubChkSat.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtSatIngredients.getText().toString())) {
+                        mBinding.actSubEdtSatIngredients.setError(getString(R.string.str_no_ingredients));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtSatIngredients.getBottom());
+                    } else if (mBinding.actSubChkSat.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtSatIngredients.getText().toString())) {
+                        mBinding.actSubEdtSatIngredients.setError(getString(R.string.str_invalid_ingredients));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtSatIngredients.getBottom());
+                    } else if (mBinding.actSubChkSun.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtSunDishName.getText().toString())) {
+                        mBinding.actSubEdtSunDishName.setError(getString(R.string.str_no_dish_name));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtSunDishName.getBottom());
+                    } else if (mBinding.actSubChkSun.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtSunDishName.getText().toString())) {
+                        mBinding.actSubEdtSunDishName.setError(getString(R.string.str_invalid_dish_name));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtSunDishName.getBottom());
+                    } else if (mBinding.actSubChkSun.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtSunDesc.getText().toString())) {
+                        mBinding.actSubEdtSunDesc.setError(getString(R.string.str_no_description));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtSunDesc.getBottom());
+                    } else if (mBinding.actSubChkSun.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtSunDesc.getText().toString())) {
+                        mBinding.actSubEdtSunDesc.setError(getString(R.string.str_invalid_description));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtSunDesc.getBottom());
+                    } else if (mBinding.actSubChkSun.isChecked() && CommonUtils.isNullString(mBinding.actSubEdtSunIngredients.getText().toString())) {
+                        mBinding.actSubEdtSunIngredients.setError(getString(R.string.str_no_ingredients));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtSunIngredients.getBottom());
+                    } else if (mBinding.actSubChkSun.isChecked() && !CommonUtils.checkDishName(mBinding.actSubEdtSunIngredients.getText().toString())) {
+                        mBinding.actSubEdtSunIngredients.setError(getString(R.string.str_invalid_ingredients));
+                        mBinding.actSubScrollView.smoothScrollTo(0, mBinding.actSubEdtSunIngredients.getBottom());
                     } else {
                         if (CommonUtils.isInternetAvailable(AddSubsciptionActivity.this)) {
                             SubscriptionModel subscriptionModel = new SubscriptionModel();
@@ -405,58 +366,58 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
                             subscriptionModel.setUserId(mSharedPref.getUserId());
                             subscriptionModel.setPhone_no(mSharedPref.getPhoneNumber());
                             subscriptionModel.setEmailId(mSharedPref.getEmailId());
-                            subscriptionModel.setSubDescription(mEdtDescription.getText().toString());
-                            subscriptionModel.setSubName(mEdtName.getText().toString());
-                            subscriptionModel.setVendorName(mEdtVendorName.getText().toString());
-                            subscriptionModel.setPrice(mEdtPrice.getText().toString());
+                            subscriptionModel.setSubDescription(mBinding.actSubEdtDescription.getText().toString());
+                            subscriptionModel.setSubName(mBinding.actSubEdtName.getText().toString());
+                            subscriptionModel.setVendorName(mBinding.actSubEdtVendorName.getText().toString());
+                            subscriptionModel.setPrice(mBinding.actSubEdtPrice.getText().toString());
 
-                            if (mChkMonday.isChecked()) {
+                            if (mBinding.actSubChkMonday.isChecked()) {
                                 subscriptionModel.setMonday(true);
-                                subscriptionModel.setDishNameMon(mEdtMonDishName.getText().toString());
-                                subscriptionModel.setIngredientsMon(mEdtMonIngredients.getText().toString());
-                                subscriptionModel.setDishDescMon(mEdtMonDesc.getText().toString());
+                                subscriptionModel.setDishNameMon(mBinding.actSubEdtMonDishName.getText().toString());
+                                subscriptionModel.setIngredientsMon(mBinding.actSubEdtMonIngredients.getText().toString());
+                                subscriptionModel.setDishDescMon(mBinding.actSubEdtMonDesc.getText().toString());
                             }
 
-                            if (mChkTuesday.isChecked()) {
+                            if (mBinding.actSubChkTuesday.isChecked()) {
                                 subscriptionModel.setTuesday(true);
-                                subscriptionModel.setDishNameTue(mEdtTuesDishName.getText().toString());
-                                subscriptionModel.setIngredientsTue(mEdtTuesIngredients.getText().toString());
-                                subscriptionModel.setDishDescTue(mEdtTuesDesc.getText().toString());
+                                subscriptionModel.setDishNameTue(mBinding.actSubEdtTuesDishName.getText().toString());
+                                subscriptionModel.setIngredientsTue(mBinding.actSubEdtTuesIngredients.getText().toString());
+                                subscriptionModel.setDishDescTue(mBinding.actSubEdtTuesDesc.getText().toString());
                             }
 
-                            if (mChkWednesday.isChecked()) {
+                            if (mBinding.actSubChkWednesday.isChecked()) {
                                 subscriptionModel.setWednesday(true);
-                                subscriptionModel.setDishNameWed(mEdtWedDishName.getText().toString());
-                                subscriptionModel.setIngredientsWed(mEdtWedIngredients.getText().toString());
-                                subscriptionModel.setDishDescWed(mEdtWedDesc.getText().toString());
+                                subscriptionModel.setDishNameWed(mBinding.actSubEdtWedDishName.getText().toString());
+                                subscriptionModel.setIngredientsWed(mBinding.actSubEdtWedIngredients.getText().toString());
+                                subscriptionModel.setDishDescWed(mBinding.actSubEdtWedDesc.getText().toString());
                             }
 
-                            if (mChkThursday.isChecked()) {
+                            if (mBinding.actSubChkThursday.isChecked()) {
                                 subscriptionModel.setThursday(true);
-                                subscriptionModel.setDishNameThurs(mEdtThursDishName.getText().toString());
-                                subscriptionModel.setIngredientsThurs(mEdtThursIngredients.getText().toString());
-                                subscriptionModel.setDishDescThurs(mEdtThursDesc.getText().toString());
+                                subscriptionModel.setDishNameThurs(mBinding.actSubEdtThursDishName.getText().toString());
+                                subscriptionModel.setIngredientsThurs(mBinding.actSubEdtThursIngredients.getText().toString());
+                                subscriptionModel.setDishDescThurs(mBinding.actSubEdtThursDesc.getText().toString());
                             }
 
-                            if (mChkFriday.isChecked()) {
+                            if (mBinding.actSubChkFriday.isChecked()) {
                                 subscriptionModel.setFriday(true);
-                                subscriptionModel.setDishNameFri(mEdtFriDishName.getText().toString());
-                                subscriptionModel.setIngredientsFri(mEdtFriIngredients.getText().toString());
-                                subscriptionModel.setDishDescFri(mEdtFriDesc.getText().toString());
+                                subscriptionModel.setDishNameFri(mBinding.actSubEdtFriDishName.getText().toString());
+                                subscriptionModel.setIngredientsFri(mBinding.actSubEdtFriIngredients.getText().toString());
+                                subscriptionModel.setDishDescFri(mBinding.actSubEdtFriDesc.getText().toString());
                             }
 
-                            if (mChkSat.isChecked()) {
+                            if (mBinding.actSubChkSat.isChecked()) {
                                 subscriptionModel.setSaturday(true);
-                                subscriptionModel.setDishNameSat(mEdtSatDishName.getText().toString());
-                                subscriptionModel.setIngredientsSat(mEdtSatIngredients.getText().toString());
-                                subscriptionModel.setDishDescSat(mEdtSatDesc.getText().toString());
+                                subscriptionModel.setDishNameSat(mBinding.actSubEdtSatDishName.getText().toString());
+                                subscriptionModel.setIngredientsSat(mBinding.actSubEdtSatIngredients.getText().toString());
+                                subscriptionModel.setDishDescSat(mBinding.actSubEdtSatDesc.getText().toString());
                             }
 
-                            if (mChkSun.isChecked()) {
+                            if (mBinding.actSubChkSun.isChecked()) {
                                 subscriptionModel.setSunday(true);
-                                subscriptionModel.setDishNameSun(mEdtSunDishName.getText().toString());
-                                subscriptionModel.setIngredientsSun(mEdtSunIngredients.getText().toString());
-                                subscriptionModel.setDishDescSun(mEdtSunDesc.getText().toString());
+                                subscriptionModel.setDishNameSun(mBinding.actSubEdtSunDishName.getText().toString());
+                                subscriptionModel.setIngredientsSun(mBinding.actSubEdtSunIngredients.getText().toString());
+                                subscriptionModel.setDishDescSun(mBinding.actSubEdtSunDesc.getText().toString());
                             }
 
                             ProgressDialogUtil.showProgress(AddSubsciptionActivity.this, "Loading", "Please Wait...", false);
@@ -568,10 +529,10 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
     private void addValidations() {
         mAwesomeValidation.addValidation(this, R.id.act_sub_edt_name, CommonUtils.DISH_NAME_PATTERN
                 , R.string.str_enter_valid_subscription_name);
-        mAwesomeValidation.addValidation(mEdtVendorName, CommonUtils.DISH_NAME_PATTERN
+        mAwesomeValidation.addValidation(mBinding.actSubEdtVendorName, CommonUtils.DISH_NAME_PATTERN
                 , getResources().getString(R.string.toast_no_valid_vname));
-        mAwesomeValidation.addValidation(mEdtDescription, CommonUtils.DISH_NAME_PATTERN, getString(R.string.str_invalid_description));
-        mAwesomeValidation.addValidation(mEdtPrice, Range.greaterThan(1f), getString(R.string.str_enter_price));
+        mAwesomeValidation.addValidation(mBinding.actSubEdtDescription, CommonUtils.DISH_NAME_PATTERN, getString(R.string.str_invalid_description));
+        mAwesomeValidation.addValidation(mBinding.actSubEdtPrice, Range.greaterThan(1f), getString(R.string.str_enter_price));
     }
 
     private void setUpToolbar() {
@@ -582,11 +543,9 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
 
-        mToolbar = findViewById(R.id.toolbar);
-        toolbarTitle = findViewById(R.id.toolbar_title);
-        toolbarTitle.setText(getString(R.string.str_add_sub));
+        mBinding.includeToolbar.toolbarTitle.setText(getString(R.string.str_add_sub));
 
-        setSupportActionBar(mToolbar);
+        setSupportActionBar(mBinding.includeToolbar.toolbar);
 
         ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {
@@ -606,60 +565,10 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
         mAwesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         mApiInterface = APIClient.getClient().create(APIInterface.class);
 
-        mBtnSave = findViewById(R.id.act_sub_btn_save);
-        mBtnAddPhoto = findViewById(R.id.act_sub_btn_add_photo);
-
-        mScrollView = findViewById(R.id.act_sub_scroll_view);
-
-        mViewPager = findViewById(R.id.act_add_sub_view_pager);
-        mEdtName = findViewById(R.id.act_sub_edt_name);
-        mEdtVendorName = findViewById(R.id.act_sub_edt_vendor_name);
-        mEdtDescription = findViewById(R.id.act_sub_edt_description);
-        mEdtPrice = findViewById(R.id.act_sub_edt_price);
-        mChkMonday = findViewById(R.id.act_sub_chk_monday);
-        mLinMonday = findViewById(R.id.act_sub_lin_monday);
-        mEdtMonDishName = findViewById(R.id.act_sub_edt_mon_dish_name);
-        mEdtMonIngredients = findViewById(R.id.act_sub_edt_mon_ingredients);
-        mEdtMonDesc = findViewById(R.id.act_sub_edt_mon_desc);
-        mChkTuesday = findViewById(R.id.act_sub_chk_tuesday);
-        mLinTuesday = findViewById(R.id.act_sub_lin_tuesday);
-        mEdtTuesDishName = findViewById(R.id.act_sub_edt_tues_dish_name);
-        mEdtTuesIngredients = findViewById(R.id.act_sub_edt_tues_ingredients);
-        mEdtTuesDesc = findViewById(R.id.act_sub_edt_tues_desc);
-        mChkWednesday = findViewById(R.id.act_sub_chk_wednesday);
-        mLinWednesday = findViewById(R.id.act_sub_lin_wednesday);
-        mEdtWedDishName = findViewById(R.id.act_sub_edt_wed_dish_name);
-        mEdtWedIngredients = findViewById(R.id.act_sub_edt_wed_ingredients);
-        mEdtWedDesc = findViewById(R.id.act_sub_edt_wed_desc);
-        mChkThursday = findViewById(R.id.act_sub_chk_thursday);
-        mLinThursday = findViewById(R.id.act_sub_lin_thursday);
-        mEdtThursDishName = findViewById(R.id.act_sub_edt_thurs_dish_name);
-        mEdtThursIngredients = findViewById(R.id.act_sub_edt_thurs_ingredients);
-        mEdtThursDesc = findViewById(R.id.act_sub_edt_thurs_desc);
-        mChkFriday = findViewById(R.id.act_sub_chk_friday);
-        mLinFriday = findViewById(R.id.act_sub_lin_friday);
-        mEdtFriDishName = findViewById(R.id.act_sub_edt_fri_dish_name);
-        mEdtFriIngredients = findViewById(R.id.act_sub_edt_fri_ingredients);
-        mEdtFriDesc = findViewById(R.id.act_sub_edt_fri_desc);
-        mChkSat = findViewById(R.id.act_sub_chk_sat);
-        mLinSat = findViewById(R.id.act_sub_lin_sat);
-        mEdtSatDishName = findViewById(R.id.act_sub_edt_sat_dish_name);
-        mEdtSatIngredients = findViewById(R.id.act_sub_edt_sat_ingredients);
-        mEdtSatDesc = findViewById(R.id.act_sub_edt_sat_desc);
-        mChkSun = findViewById(R.id.act_sub_chk_sun);
-        mLinSun = findViewById(R.id.act_sub_lin_sun);
-        mEdtSunDishName = findViewById(R.id.act_sub_edt_sun_dish_name);
-        mEdtSunIngredients = findViewById(R.id.act_sub_edt_sun_ingredients);
-        mEdtSunDesc = findViewById(R.id.act_sub_edt_sun_desc);
-
-        mTabLayout = findViewById(R.id.act_add_sub_tab_layout);
-
-        mRoot = findViewById(R.id.act_add_sub_root);
-
         imagePagerAdapter = new ImagePagerAdapter(this, mImagePathList);
-        mViewPager.setAdapter(imagePagerAdapter);
-        mViewPager.setOffscreenPageLimit(0);
-        mTabLayout.setupWithViewPager(mViewPager, true);
+        mBinding.actAddSubViewPager.setAdapter(imagePagerAdapter);
+        mBinding.actAddSubViewPager.setOffscreenPageLimit(0);
+        mBinding.actAddSubTabLayout.setupWithViewPager(mBinding.actAddSubViewPager, true);
 
     }
 
@@ -692,7 +601,7 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
         mImageFileList.add(mFileImagePath);
         mImagePathList.add(mFileImagePath.getAbsolutePath());
         imagePagerAdapter = new ImagePagerAdapter(this, mImagePathList);
-        mViewPager.setAdapter(imagePagerAdapter);
+        mBinding.actAddSubViewPager.setAdapter(imagePagerAdapter);
     }
 
     /**
@@ -720,7 +629,7 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
                     mImageFileList.add(mFileImagePath);
                     mImagePathList.add(mFileImagePath.getAbsolutePath());
                     imagePagerAdapter = new ImagePagerAdapter(this, mImagePathList);
-                    mViewPager.setAdapter(imagePagerAdapter);
+                    mBinding.actAddSubViewPager.setAdapter(imagePagerAdapter);
                 }
 
             } else {

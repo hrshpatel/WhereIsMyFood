@@ -1,10 +1,13 @@
 
 package com.conestoga.whereismyfood.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DailyDetail {
+public class DailyDetail implements Parcelable {
 
     @Expose
     private String day;
@@ -57,4 +60,40 @@ public class DailyDetail {
         this.subId = subId;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.day);
+        dest.writeString(this.dishDesc);
+        dest.writeString(this.dishName);
+        dest.writeString(this.ingredients);
+        dest.writeString(this.subId);
+    }
+
+    public DailyDetail() {
+    }
+
+    protected DailyDetail(Parcel in) {
+        this.day = in.readString();
+        this.dishDesc = in.readString();
+        this.dishName = in.readString();
+        this.ingredients = in.readString();
+        this.subId = in.readString();
+    }
+
+    public static final Parcelable.Creator<DailyDetail> CREATOR = new Parcelable.Creator<DailyDetail>() {
+        @Override
+        public DailyDetail createFromParcel(Parcel source) {
+            return new DailyDetail(source);
+        }
+
+        @Override
+        public DailyDetail[] newArray(int size) {
+            return new DailyDetail[size];
+        }
+    };
 }

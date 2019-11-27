@@ -1,13 +1,18 @@
 package com.conestoga.whereismyfood.activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.conestoga.whereismyfood.R;
@@ -19,6 +24,7 @@ import com.conestoga.whereismyfood.models.DailyDetail;
 import com.conestoga.whereismyfood.models.SubscriptionModel;
 import com.conestoga.whereismyfood.response.GetSubById;
 import com.conestoga.whereismyfood.response.GetSubscriptionResponse;
+import com.conestoga.whereismyfood.utils.AppSharedPref;
 import com.conestoga.whereismyfood.utils.CommonUtils;
 import com.conestoga.whereismyfood.utils.ProgressDialogUtil;
 
@@ -40,6 +46,12 @@ public class ShowSubscriptionActivity extends AppCompatActivity implements View.
 
         initView();
         setListeners();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override
@@ -129,13 +141,40 @@ public class ShowSubscriptionActivity extends AppCompatActivity implements View.
 
                 }
                 break;
+            case R.id.btn_checkout:
+                Intent intent = new Intent(this, CheckoutActivity.class);
+                intent.putExtra(CommonUtils.INTENT_SUB_MODEL, mSubscriptionModel);
+                startActivity(intent);
+                break;
         }
+    }
+
+    private void setToolbar() {
+        Window window = getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        }
+
+        mBinding.toolbarInclude.toolbarTitle.setText(mSubscriptionModel.getSubName());
+
+        setSupportActionBar(mBinding.toolbarInclude.toolbar);
+
+        ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null) {
+            supportActionBar.setDisplayShowTitleEnabled(false);
+            supportActionBar.setDisplayHomeAsUpEnabled(true);
+            supportActionBar.setDisplayShowHomeEnabled(true);
+        }
+
     }
 
     private void initView() {
 
         mApiInterface = APIClient.getClient().create(APIInterface.class);
 
+        mBinding.setUserType(AppSharedPref.getInstance(this).getUserType());
         ProgressDialogUtil.showProgress(this, "Loading", "Please Wait...", false);
         final Call<GetSubById> subByIdApi = mApiInterface.getSubById(getIntent().getStringExtra(CommonUtils.INTENT_SUB_ID));
 
@@ -152,6 +191,7 @@ public class ShowSubscriptionActivity extends AppCompatActivity implements View.
                     mSubscriptionModel = getSubById.getSubscriptionModel();
 
                     if (mSubscriptionModel != null) {
+                        setToolbar();
                         for (DailyDetail dailyDetail :
                                 mSubscriptionModel.getDailyDetailList()) {
                             if (dailyDetail.getDay().equalsIgnoreCase("monday")) {
@@ -189,7 +229,6 @@ public class ShowSubscriptionActivity extends AppCompatActivity implements View.
                     }
                 }
 
-
             }
 
             @Override
@@ -205,6 +244,7 @@ public class ShowSubscriptionActivity extends AppCompatActivity implements View.
     }
 
     private void setListeners() {
+        mBinding.btnCheckout.setOnClickListener(this);
         mBinding.actShowSubTxtMonday.setOnClickListener(this);
         mBinding.actShowSubTxtTuesday.setOnClickListener(this);
         mBinding.actShowSubTxtWednesday.setOnClickListener(this);
