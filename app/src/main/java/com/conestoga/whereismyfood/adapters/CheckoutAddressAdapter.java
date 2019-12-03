@@ -20,6 +20,7 @@ public class CheckoutAddressAdapter extends RecyclerView.Adapter<CheckoutAddress
     private Context mContext;
     private ArrayList<AddressDetails> mAddressList;
     private int selectedIndex = 0;
+    private boolean isBinding;
 
     public CheckoutAddressAdapter(Context mContext, ArrayList<AddressDetails> mAddressList) {
         this.mContext = mContext;
@@ -36,6 +37,7 @@ public class CheckoutAddressAdapter extends RecyclerView.Adapter<CheckoutAddress
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        isBinding = true;
         holder.itemBinding.setVariable(com.conestoga.whereismyfood.BR.addressModel, mAddressList.get(position));
         holder.itemBinding.executePendingBindings();
         if (selectedIndex == position) {
@@ -47,15 +49,23 @@ public class CheckoutAddressAdapter extends RecyclerView.Adapter<CheckoutAddress
         holder.itemBinding.radioBtnSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                selectedIndex = position;
-                notifyDataSetChanged();
+                if (!isBinding) {
+                    selectedIndex = position;
+                    notifyDataSetChanged();
+                }
             }
         });
+
+        isBinding = false;
     }
 
     @Override
     public int getItemCount() {
         return mAddressList.size();
+    }
+
+    public int getSelectedIndex() {
+        return selectedIndex;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

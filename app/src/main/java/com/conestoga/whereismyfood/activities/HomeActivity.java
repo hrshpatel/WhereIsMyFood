@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -82,6 +83,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 });
 
                 dialog.show();
+                break;
+
+            case R.id.nav_order:
+                Intent intent = new Intent(HomeActivity.this, OrdersActivity.class);
+                startActivity(intent);
                 break;
         }
         return false;
@@ -173,6 +179,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setDrawerLayout() {
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        Menu nav_Menu = navigationView.getMenu();
+        if (mSharedPref.getUserType().equalsIgnoreCase("0")) {
+            nav_Menu.findItem(R.id.nav_order).setTitle(R.string.str_order_history);
+        } else {
+            nav_Menu.findItem(R.id.nav_order).setTitle(R.string.str_current_order);
+        }
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {

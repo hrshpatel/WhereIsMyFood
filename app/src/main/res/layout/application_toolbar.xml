@@ -22,11 +22,22 @@
             <TextView
                 android:id="@+id/toolbar_txt_save_edit"
                 style="@style/textView_titleBar_save"
-                android:layout_marginRight="@dimen/dimen_10"/>
+                android:layout_marginEnd="@dimen/dimen_10"
+                android:layout_marginRight="@dimen/dimen_10" />
 
             <ImageView
                 android:id="@+id/toolbar_iv_add"
                 style="@style/imageView_toolbar" />
+
+            <com.conestoga.whereismyfood.customviews.CustomSearchView
+                android:id="@+id/toolbar_iv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="@dimen/dimen_10"
+                android:layout_marginRight="@dimen/dimen_10"
+                android:visibility="gone"
+                app:searchIcon="@drawable/ic_search" />
 
         </androidx.appcompat.widget.Toolbar>
 

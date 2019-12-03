@@ -7,7 +7,7 @@
 
     <include layout="@layout/application_toolbar" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -205,16 +205,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dimen_10"
-                    android:src="@drawable/ic_add" />
+                    android:src="@drawable/ic_add_black" />
 
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/act_edit_profile_recycler_addresses"
                 android:layout_width="match_parent"
-                android:layout_marginBottom="@dimen/dimen_10"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_10" />
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

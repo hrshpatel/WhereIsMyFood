@@ -24,15 +24,15 @@ import java.util.regex.Pattern;
 
 public class CommonUtils {
 
-    public static final String BASE_URL = "http://10.0.2.2/Capstone_project/apis/";
+    public static final String BASE_URL = "http://192.168.0.21/Capstone_project/apis/";
     public static final String INTENT_SUB_ID = "SUB_ID";
     public static final String INTENT_SUB_MODEL = "Sub_model";
-    private final static Pattern FIRST_LAST_NAME_PATTERN = Pattern.compile("^[A-Za-z0-9]+[A-Za-z-\\.\\-\\_\\']*$");
+    public final static Pattern FIRST_LAST_NAME_PATTERN = Pattern.compile("^[A-Za-z0-9]+[A-Za-z-\\.\\-\\_\\']*$");
     public final static Pattern DISH_NAME_PATTERN = Pattern.compile("^[A-Za-z0-9]+[a-zA-Z0-9\\(\\)\\.\\-\\_\\{\\}\\@\\*\\s*]*$");
     private final static Pattern INVALID_EMAIL_PATTERN = Pattern.compile("^[0-9-]+[_0-9-]*(\\.[_0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-    private final static Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9-]+[_A-Za-z0-9-]*(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+    public final static Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9-]+[_A-Za-z0-9-]*(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
     private final static Pattern PASSWORD_VALIDATION = Pattern.compile("[A-Za-z0-9\\@\\#\\_\\'\\^\\*\\=\\:\\-\\+\\`]+$");
-    private final static Pattern PHONE_NO_PATTERN = Pattern.compile("^[0-9]{10}$");
+    public final static Pattern PHONE_NO_PATTERN = Pattern.compile("^[0-9]{10}$");
     private final static Pattern ZIP_CODE_PATTERN = Pattern.compile("^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$");
 
     /**

@@ -22,7 +22,7 @@
             android:id="@+id/toolbar_include"
             layout="@layout/application_toolbar" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -64,11 +64,20 @@
                     android:text="@={userDetails.phoneNo}" />
 
                 <TextView
+                    android:id="@+id/txt_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:text="@{`Price: $` + subModel.price}"
+                    android:textColor="@android:color/black" />
+
+                <TextView
                     android:id="@+id/txt_select_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_10"
-                    android:text="@string/str_select_time" />
+                    android:text="@string/str_select_time"
+                    android:textColor="@android:color/black" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -81,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_10"
-                    android:checked="true"
+                    android:checked="@{subModel.monday}"
                     android:text="@string/str_monday"
                     android:visibility="@{subModel.monday ? View.VISIBLE : View.GONE}" />
 
@@ -90,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_10"
-                    android:checked="true"
+                    android:checked="@{subModel.tuesday}"
                     android:text="@string/str_tuesday"
                     android:visibility="@{subModel.tuesday ? View.VISIBLE : View.GONE}" />
 
@@ -99,7 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_10"
-                    android:checked="true"
+                    android:checked="@{subModel.wednesday}"
                     android:text="@string/str_wednesday"
                     android:visibility="@{subModel.wednesday ? View.VISIBLE : View.GONE}" />
 
@@ -108,7 +117,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_10"
-                    android:checked="true"
+                    android:checked="@{subModel.thursday}"
                     android:text="@string/str_thursday"
                     android:visibility="@{subModel.thursday ? View.VISIBLE : View.GONE}" />
 
@@ -117,7 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_10"
-                    android:checked="true"
+                    android:checked="@{subModel.friday}"
                     android:text="@string/str_friday"
                     android:visibility="@{subModel.friday ? View.VISIBLE : View.GONE}" />
 
@@ -126,7 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_10"
-                    android:checked="true"
+                    android:checked="@{subModel.saturday}"
                     android:text="@string/str_saturday"
                     android:visibility="@{subModel.saturday ? View.VISIBLE : View.GONE}" />
 
@@ -135,16 +144,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_10"
-                    android:checked="true"
+                    android:checked="@{subModel.sunday}"
                     android:text="@string/str_sunday"
                     android:visibility="@{subModel.sunday ? View.VISIBLE : View.GONE}" />
-
-                <TextView
-                    android:id="@+id/txt_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_10"
-                    android:text="@{`Price: $` + subModel.price}" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_addresses"
@@ -153,7 +155,7 @@
                     android:layout_marginBottom="@dimen/dimen_10" />
 
             </LinearLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 

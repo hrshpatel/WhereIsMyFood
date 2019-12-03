@@ -50,6 +50,8 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeVi
         holder.txtPrice.setText("$" + subscriptionModel.getPrice());
         holder.txtSubName.setText(subscriptionModel.getSubName());
         holder.txtVendorName.setText(subscriptionModel.getVendorName());
+        holder.txtRating.setText(subscriptionModel.getRatings());
+        holder.txtRatingCount.setText(subscriptionModel.getRatingCount() + " Rating(s)");
 
         imagePagerAdapter = new ImagePagerAdapter(mContext, subscriptionModel.getImageList());
         holder.itemViewPager.setAdapter(imagePagerAdapter);

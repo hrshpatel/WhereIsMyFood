@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class AddressDetails {
 
+    @SerializedName("address_id")
+    private String addressId;
+
     @SerializedName("user_id")
     private String userId;
 
@@ -30,6 +33,14 @@ public class AddressDetails {
 
     @SerializedName("name")
     private String name;
+
+    public String getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(String addressId) {
+        this.addressId = addressId;
+    }
 
     public String getName() {
         return name;

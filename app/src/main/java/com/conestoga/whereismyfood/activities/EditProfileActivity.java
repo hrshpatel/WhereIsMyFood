@@ -140,6 +140,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         mIvAdd = findViewById(R.id.act_edit_profile_iv_add);
         mRecyclerAddresses = findViewById(R.id.act_edit_profile_recycler_addresses);
 
+        mRecyclerAddresses.setNestedScrollingEnabled(false);
         if (sharedPref.getUserType().equals("1")) {
             mRelVendorName.setVisibility(View.VISIBLE);
             mRelFirstName.setVisibility(View.GONE);

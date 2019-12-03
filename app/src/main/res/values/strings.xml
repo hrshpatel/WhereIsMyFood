@@ -128,5 +128,16 @@
     <string name="str_select_days">Select days.</string>
     <string name="str_select_time">Select time for receiving meal.</string>
     <string name="str_canada">Canada</string>
+    <string name="invalid_receiver_name">Enter valid receiver name.</string>
+    <string name="str_select_day">Select at least one day to proceed.</string>
+    <string name="str_invalid_time">Select time to continue.</string>
+    <string name="text_comment">Comment</string>
+    <string name="str_write_a_review">Write a review</string>
+    <string name="str_order_history">Order history</string>
+    <string name="title_activity_tabbed">TabbedActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="str_no_orders_found">No orders found!!</string>
+    <string name="str_current_order">Active Orders</string>
 
 </resources>

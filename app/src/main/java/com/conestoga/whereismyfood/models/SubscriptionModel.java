@@ -3,12 +3,16 @@ package com.conestoga.whereismyfood.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+
+import com.conestoga.whereismyfood.BR;
 import com.conestoga.whereismyfood.utils.CommonUtils;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class SubscriptionModel implements Parcelable {
+public class SubscriptionModel extends BaseObservable implements Parcelable {
 
     @SerializedName("user_id")
     private String userId;
@@ -36,6 +40,9 @@ public class SubscriptionModel implements Parcelable {
 
     @SerializedName("price")
     private String price;
+
+    @SerializedName("reviews")
+    private ArrayList<ReviewDetails> reviewDetailList;
 
     private boolean isMonday;
 
@@ -117,16 +124,28 @@ public class SubscriptionModel implements Parcelable {
     @SerializedName("images")
     private ArrayList<String> imageList;
 
+    @SerializedName("ratings")
     private String ratings;
 
+    @SerializedName("review_count")
     private String ratingCount;
 
+    public ArrayList<ReviewDetails> getReviewDetailList() {
+        return reviewDetailList;
+    }
+
+    public void setReviewDetailList(ArrayList<ReviewDetails> reviewDetailList) {
+        this.reviewDetailList = reviewDetailList;
+    }
+
+    @Bindable
     public String getRatings() {
         return ratings;
     }
 
     public void setRatings(String ratings) {
         this.ratings = ratings;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
     public ArrayList<DailyDetail> getDailyDetailList() {
@@ -145,6 +164,7 @@ public class SubscriptionModel implements Parcelable {
         this.imageList = imageList;
     }
 
+    @Bindable
     public String getUserId() {
         return userId;
     }
@@ -153,6 +173,7 @@ public class SubscriptionModel implements Parcelable {
         this.userId = userId;
     }
 
+    @Bindable
     public String getSubId() {
         return subId;
     }
@@ -161,347 +182,361 @@ public class SubscriptionModel implements Parcelable {
         this.subId = subId;
     }
 
+    @Bindable
     public String getPhone_no() {
         return phone_no;
     }
 
     public void setPhone_no(String phone_no) {
         this.phone_no = phone_no;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getEmailId() {
         return emailId;
     }
 
     public void setEmailId(String emailId) {
         this.emailId = emailId;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getSubDescription() {
         return subDescription;
     }
 
     public void setSubDescription(String subDescription) {
         this.subDescription = subDescription;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getSubName() {
         return subName;
     }
 
     public void setSubName(String subName) {
         this.subName = subName;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getVendorName() {
         return vendorName;
     }
 
     public void setVendorName(String vendorName) {
         this.vendorName = vendorName;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getPrice() {
         return price;
     }
 
     public void setPrice(String price) {
         this.price = price;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.price);
     }
 
+    @Bindable
     public String getRatingCount() {
         return ratingCount;
     }
 
     public void setRatingCount(String ratingCount) {
         this.ratingCount = ratingCount;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public boolean isMonday() {
-        if (isMonday) {
-            return isMonday;
-        }
-        if (CommonUtils.isNullString(dishNameMon)) {
-            isMonday = false;
-            return isMonday;
-        } else {
-            isMonday = true;
-            return isMonday;
-        }
+        return isMonday;
     }
 
     public void setMonday(boolean monday) {
         isMonday = monday;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public boolean isTuesday() {
-        if (isTuesday) {
-            return isTuesday;
-        }
-        if (CommonUtils.isNullString(dishNameTue)) {
-            isTuesday = false;
-            return isTuesday;
-        } else {
-            isTuesday = true;
-            return isTuesday;
-        }
+        return isTuesday;
     }
 
     public void setTuesday(boolean tuesday) {
         isTuesday = tuesday;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public boolean isWednesday() {
-        if (isWednesday) {
-            return isWednesday;
-        }
-        if (CommonUtils.isNullString(dishNameWed)) {
-            isWednesday = false;
-            return isWednesday;
-        } else {
-            isWednesday = true;
-            return isWednesday;
-        }
+        return isWednesday;
     }
 
     public void setWednesday(boolean wednesday) {
         isWednesday = wednesday;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public boolean isThursday() {
-        if (isThursday) {
-            return isThursday;
-        }
-        if (CommonUtils.isNullString(dishNameThurs)) {
-            isThursday = false;
-            return isThursday;
-        } else {
-            isThursday = true;
-            return isThursday;
-        }
+        return isThursday;
     }
 
     public void setThursday(boolean thursday) {
         isThursday = thursday;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public boolean isFriday() {
-        if (isFriday) {
-            return isFriday;
-        }
-        if (CommonUtils.isNullString(dishNameFri)) {
-            isFriday = false;
-            return isFriday;
-        } else {
-            isFriday = true;
-            return isFriday;
-        }
+        return isFriday;
     }
 
     public void setFriday(boolean friday) {
         isFriday = friday;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public boolean isSaturday() {
-        if (isSaturday) {
-            return isSaturday;
-        }
-        if (CommonUtils.isNullString(dishNameSat)) {
-            isSaturday = false;
-            return isSaturday;
-        } else {
-            isSaturday = true;
-            return isSaturday;
-        }
+        return isSaturday;
     }
 
     public void setSaturday(boolean saturday) {
         isSaturday = saturday;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public boolean isSunday() {
-        if (isSunday) {
-            return isSunday;
-        }
-        if (CommonUtils.isNullString(dishNameSun)) {
-            isSunday = false;
-            return isSunday;
-        } else {
-            isSunday = true;
-            return isSunday;
-        }
+        return isSunday;
     }
 
     public void setSunday(boolean sunday) {
         isSunday = sunday;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getDishNameMon() {
         return dishNameMon;
     }
 
     public void setDishNameMon(String dishNameMon) {
         this.dishNameMon = dishNameMon;
+        isMonday = !CommonUtils.isNullString(dishNameMon);
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getIngredientsMon() {
         return ingredientsMon;
     }
 
     public void setIngredientsMon(String ingredientsMon) {
         this.ingredientsMon = ingredientsMon;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getDishDescMon() {
         return dishDescMon;
     }
 
     public void setDishDescMon(String dishDescMon) {
         this.dishDescMon = dishDescMon;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getDishNameTue() {
         return dishNameTue;
     }
 
     public void setDishNameTue(String dishNameTue) {
         this.dishNameTue = dishNameTue;
+        isTuesday = !CommonUtils.isNullString(dishNameTue);
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getIngredientsTue() {
         return ingredientsTue;
     }
 
     public void setIngredientsTue(String ingredientsTue) {
         this.ingredientsTue = ingredientsTue;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getDishDescTue() {
         return dishDescTue;
     }
 
     public void setDishDescTue(String dishDescTue) {
         this.dishDescTue = dishDescTue;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getDishNameWed() {
         return dishNameWed;
     }
 
     public void setDishNameWed(String dishNameWed) {
         this.dishNameWed = dishNameWed;
+        isWednesday = !CommonUtils.isNullString(dishNameWed);
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getIngredientsWed() {
         return ingredientsWed;
     }
 
     public void setIngredientsWed(String ingredientsWed) {
         this.ingredientsWed = ingredientsWed;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getDishDescWed() {
         return dishDescWed;
     }
 
     public void setDishDescWed(String dishDescWed) {
         this.dishDescWed = dishDescWed;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getDishNameThurs() {
         return dishNameThurs;
     }
 
     public void setDishNameThurs(String dishNameThurs) {
         this.dishNameThurs = dishNameThurs;
+        isThursday = !CommonUtils.isNullString(dishNameThurs);
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getIngredientsThurs() {
         return ingredientsThurs;
     }
 
     public void setIngredientsThurs(String ingredientsThurs) {
         this.ingredientsThurs = ingredientsThurs;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getDishDescThurs() {
         return dishDescThurs;
     }
 
     public void setDishDescThurs(String dishDescThurs) {
         this.dishDescThurs = dishDescThurs;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getDishNameFri() {
         return dishNameFri;
     }
 
     public void setDishNameFri(String dishNameFri) {
         this.dishNameFri = dishNameFri;
+        isFriday = !CommonUtils.isNullString(dishNameFri);
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getIngredientsFri() {
         return ingredientsFri;
     }
 
     public void setIngredientsFri(String ingredientsFri) {
         this.ingredientsFri = ingredientsFri;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getDishDescFri() {
         return dishDescFri;
     }
 
     public void setDishDescFri(String dishDescFri) {
         this.dishDescFri = dishDescFri;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getDishNameSat() {
         return dishNameSat;
     }
 
     public void setDishNameSat(String dishNameSat) {
         this.dishNameSat = dishNameSat;
+        isSaturday = !CommonUtils.isNullString(dishNameSat);
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getIngredientsSat() {
         return ingredientsSat;
     }
 
     public void setIngredientsSat(String ingredientsSat) {
         this.ingredientsSat = ingredientsSat;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getDishDescSat() {
         return dishDescSat;
     }
 
     public void setDishDescSat(String dishDescSat) {
         this.dishDescSat = dishDescSat;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getDishNameSun() {
         return dishNameSun;
     }
 
     public void setDishNameSun(String dishNameSun) {
         this.dishNameSun = dishNameSun;
+        isSunday = !CommonUtils.isNullString(dishNameSun);
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getIngredientsSun() {
         return ingredientsSun;
     }
 
     public void setIngredientsSun(String ingredientsSun) {
         this.ingredientsSun = ingredientsSun;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
+    @Bindable
     public String getDishDescSun() {
         return dishDescSun;
     }
 
     public void setDishDescSun(String dishDescSun) {
         this.dishDescSun = dishDescSun;
+        notifyPropertyChanged(com.conestoga.whereismyfood.BR.subModel);
     }
 
     @Override
@@ -512,7 +547,7 @@ public class SubscriptionModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.userId);
-        dest.writeList(this.dailyDetailList);
+        dest.writeTypedList(this.dailyDetailList);
         dest.writeString(this.subId);
         dest.writeString(this.phone_no);
         dest.writeString(this.emailId);
@@ -520,6 +555,7 @@ public class SubscriptionModel implements Parcelable {
         dest.writeString(this.subName);
         dest.writeString(this.vendorName);
         dest.writeString(this.price);
+        dest.writeList(this.reviewDetailList);
         dest.writeByte(this.isMonday ? (byte) 1 : (byte) 0);
         dest.writeByte(this.isTuesday ? (byte) 1 : (byte) 0);
         dest.writeByte(this.isWednesday ? (byte) 1 : (byte) 0);
@@ -558,8 +594,7 @@ public class SubscriptionModel implements Parcelable {
 
     protected SubscriptionModel(Parcel in) {
         this.userId = in.readString();
-        this.dailyDetailList = new ArrayList<DailyDetail>();
-        in.readList(this.dailyDetailList, DailyDetail.class.getClassLoader());
+        this.dailyDetailList = in.createTypedArrayList(DailyDetail.CREATOR);
         this.subId = in.readString();
         this.phone_no = in.readString();
         this.emailId = in.readString();
@@ -567,6 +602,8 @@ public class SubscriptionModel implements Parcelable {
         this.subName = in.readString();
         this.vendorName = in.readString();
         this.price = in.readString();
+        this.reviewDetailList = new ArrayList<ReviewDetails>();
+        in.readList(this.reviewDetailList, ReviewDetails.class.getClassLoader());
         this.isMonday = in.readByte() != 0;
         this.isTuesday = in.readByte() != 0;
         this.isWednesday = in.readByte() != 0;

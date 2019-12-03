@@ -14,7 +14,11 @@ public class UserDetails extends BaseObservable {
     private String emailId;
     @SerializedName("first_name")
     private String firstName;
-    @SerializedName("id")
+
+    @SerializedName("user_img_url")
+    private String profilePicUrl;
+
+    @SerializedName("user_id")
     private String id;
     @SerializedName("last_name")
     private String lastName;
@@ -54,6 +58,14 @@ public class UserDetails extends BaseObservable {
 
     public void setOldPassword(String oldPassword) {
         this.oldPassword = oldPassword;
+    }
+
+    public String getProfilePicUrl() {
+        return profilePicUrl;
+    }
+
+    public void setProfilePicUrl(String profilePicUrl) {
+        this.profilePicUrl = profilePicUrl;
     }
 
     @Bindable
