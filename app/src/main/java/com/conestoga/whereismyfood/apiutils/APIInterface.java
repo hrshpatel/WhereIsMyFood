@@ -34,8 +34,9 @@ public interface APIInterface {
     @POST("register.php")
     Call<SignUp> registerUser(@Body UserDetails userDetails);
 
+    @Multipart
     @POST("updateAccount.php")
-    Call<SignUp> updateAccount(@Body UserDetails userDetails);
+    Call<SignUp> updateAccount(@Part("json") RequestBody jsonBody, @Part MultipartBody.Part imageFile);
 
     @POST("login.php")
     Call<SignUp> loginUser(@Body UserDetails userDetails);

@@ -77,6 +77,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mTxtSignUp = findViewById(R.id.act_login_txt_signup);
     }
 
+    /**
+     * Sets listeners on all required user interfaces
+     *
+     * @Date : 18/10/2019
+     */
     private void setListeners() {
         mBtnLogin.setOnClickListener(this);
         mTxtSignUp.setOnClickListener(this);
@@ -130,6 +135,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             sharedPref.setUserId(responseDetails.getId());
                             sharedPref.setUserType(responseDetails.getUserType());
                             sharedPref.setEmailId(responseDetails.getEmailId());
+                            sharedPref.setImageUrl(responseDetails.getProfilePicUrl());
 
                             if (responseDetails.getUserType().equals("0")) {
                                 sharedPref.setFirstName(responseDetails.getFirstName());

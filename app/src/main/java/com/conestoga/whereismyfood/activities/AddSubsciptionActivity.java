@@ -69,6 +69,11 @@ import com.conestoga.whereismyfood.databinding.ActivityAddSubsciptionBinding;
 
 import retrofit2.Response;
 
+/**
+ * {@link AddSubsciptionActivity} is used to add new subscription when logged in user is vendor type.
+ *
+ * @Date : 1/12/2019
+ */
 public class AddSubsciptionActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
     private static final int STORAGE_PERMS = 452;
@@ -199,6 +204,11 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
         }
     }
 
+    /**
+     * Sets listeners on all required user interfaces
+     *
+     * @Date : 30/10/2019
+     */
     private void setListeners() {
         mBinding.actSubChkMonday.setOnCheckedChangeListener(this);
         mBinding.actSubChkTuesday.setOnCheckedChangeListener(this);
@@ -448,6 +458,7 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
                                     } else if (signUpResponse.getSuccess() == 1) {
                                         Toast.makeText(AddSubsciptionActivity.this,
                                                 signUpResponse.getMessage(), Toast.LENGTH_LONG).show();
+                                        finish();
                                     }
                                 }
 
@@ -570,6 +581,7 @@ public class AddSubsciptionActivity extends AppCompatActivity implements Compoun
         mBinding.actAddSubViewPager.setOffscreenPageLimit(0);
         mBinding.actAddSubTabLayout.setupWithViewPager(mBinding.actAddSubViewPager, true);
 
+        mBinding.actSubEdtVendorName.setText(mSharedPref.getVendorName());
     }
 
     /**

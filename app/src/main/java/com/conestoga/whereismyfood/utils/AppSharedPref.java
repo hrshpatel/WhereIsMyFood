@@ -84,6 +84,14 @@ public class AppSharedPref {
         return sh.getString("email_id", "");
     }
 
+    public void setImageUrl(String imgUrl) {
+        sh.edit().putString("img_url", imgUrl).apply();
+    }
+
+    public String getImageUrl() {
+        return sh.getString("img_url", "");
+    }
+
     public void setVendorName(String vendorName) {
         sh.edit().putString("vendor_name", vendorName).apply();
     }
@@ -117,6 +125,7 @@ public class AppSharedPref {
         setUserId("");
         setUserType("");
         setVendorName("");
+        setImageUrl("");
     }
 
 }

@@ -342,6 +342,11 @@ public class ShowSubscriptionActivity extends AppCompatActivity implements View.
 
     }
 
+    /**
+     * Sets listeners on all required user interfaces
+     *
+     * @Date : 19/11/2019
+     */
     private void setListeners() {
         mBinding.btnCheckout.setOnClickListener(this);
         mBinding.actShowSubTxtMonday.setOnClickListener(this);

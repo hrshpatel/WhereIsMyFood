@@ -24,7 +24,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeVi
 
     private final AppSharedPref mSharedPref;
     private final Context mContext;
-    private final ArrayList<SubscriptionModel> mSubscriptionModelList;
+    private ArrayList<SubscriptionModel> mSubscriptionModelList;
     private ImagePagerAdapter imagePagerAdapter;
 
     public HomeListAdapter(Context context, ArrayList<SubscriptionModel> subscriptionModelList) {
@@ -72,6 +72,11 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.HomeVi
     @Override
     public int getItemCount() {
         return mSubscriptionModelList.size();
+    }
+
+    public void setSubscriptionList(ArrayList<SubscriptionModel> mSubscriptionModelList) {
+        this.mSubscriptionModelList = mSubscriptionModelList;
+        notifyDataSetChanged();
     }
 
     class HomeViewHolder extends RecyclerView.ViewHolder {

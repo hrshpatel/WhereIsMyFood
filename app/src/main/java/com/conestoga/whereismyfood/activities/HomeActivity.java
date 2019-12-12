@@ -25,8 +25,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.conestoga.whereismyfood.R;
+import com.conestoga.whereismyfood.customviews.RoundedImageView;
 import com.conestoga.whereismyfood.fragments.HomeFragment;
 import com.conestoga.whereismyfood.utils.AppSharedPref;
+import com.conestoga.whereismyfood.utils.CommonUtils;
 import com.google.android.material.navigation.NavigationView;
 
 import static androidx.core.view.GravityCompat.START;
@@ -44,6 +46,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private ImageView mIvEdtProfile;
     private ImageView mIvAdd;
     private AppSharedPref mSharedPref;
+    private RoundedImageView mIvProfilePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,11 +156,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         mNavigationView = findViewById(R.id.nav_view);
         mTxtDrwrName = mNavigationView.getHeaderView(0).findViewById(R.id.drwr_txt_name);
         mTxtDrwrEmail = mNavigationView.getHeaderView(0).findViewById(R.id.drwr_txt_email);
+        mIvProfilePic = mNavigationView.getHeaderView(0).findViewById(R.id.drwr_iv_user_pic);
         mIvEdtProfile = mNavigationView.getHeaderView(0).findViewById(R.id.drwr_iv_edit_profile);
         setDrawerLayout();
         setDefaultFragment(HomeFragment.newInstance());
     }
 
+    /**
+     * Sets listeners on all required user interfaces
+     *
+     * @Date : 2/11/2019
+     */
     private void setListeners() {
         mNavigationView.setNavigationItemSelectedListener(this);
         mIvEdtProfile.setOnClickListener(this);
@@ -178,7 +187,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.closeDrawer(START);
     }
 
-    private void setDrawerLayout() {
+    public void setDrawerLayout() {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         Menu nav_Menu = navigationView.getMenu();
@@ -236,7 +245,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             mTxtDrwrName.setText(mSharedPref.getFirstName() + " " + mSharedPref.getLastName());
         }
 
-
+        if (!CommonUtils.isNullString(mSharedPref.getImageUrl())) {
+            CommonUtils.loadImage(getApplicationContext(), mSharedPref.getImageUrl(), mIvProfilePic);
+        }
     }
 
 }

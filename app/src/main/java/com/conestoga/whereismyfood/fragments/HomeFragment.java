@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.conestoga.whereismyfood.R;
+import com.conestoga.whereismyfood.activities.HomeActivity;
 import com.conestoga.whereismyfood.activities.LoginActivity;
 import com.conestoga.whereismyfood.adapters.HomeListAdapter;
 import com.conestoga.whereismyfood.adapters.SearchViewAdapter;
@@ -28,6 +29,7 @@ import com.conestoga.whereismyfood.customviews.CustomSearchView;
 import com.conestoga.whereismyfood.models.SubscriptionModel;
 import com.conestoga.whereismyfood.response.GetSubscriptionResponse;
 import com.conestoga.whereismyfood.utils.AppSharedPref;
+import com.conestoga.whereismyfood.utils.CommonUtils;
 import com.conestoga.whereismyfood.utils.ProgressDialogUtil;
 
 import org.w3c.dom.Text;
@@ -72,6 +74,7 @@ public class HomeFragment extends Fragment {
 
                     for (int i = 0; i < mSubscriptionList.size(); i++) {
                         mHintsList.add(mSubscriptionList.get(i).getSubName());
+                        mHintsList.add(mSubscriptionList.get(i).getVendorName());
                     }
 
                     SearchViewAdapter adapter = new SearchViewAdapter(getActivity()
@@ -126,6 +129,10 @@ public class HomeFragment extends Fragment {
                 subscriptionApi = mApiInterface.getSubscription();
                 subscriptionApi.enqueue(subscriptionResponse);
             }
+
+            if (getActivity() instanceof HomeActivity) {
+                ((HomeActivity) getActivity()).setDrawerLayout();
+            }
         }
     }
 
@@ -149,13 +156,18 @@ public class HomeFragment extends Fragment {
 //        }
     }
 
+    /**
+     * Sets listeners on all required user interfaces
+     *
+     * @Date : 22/10/2019
+     */
     private void setListeners() {
         mCustomSearchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.e("///////////", "Clicked");
                 if (view instanceof TextView) {
                     String selectedText = ((TextView) view).getText().toString();
+                    mCustomSearchView.setQuery(selectedText, false);
 
                     for (int j = 0; j < mSubscriptionList.size(); j++) {
                         if (selectedText.equalsIgnoreCase(mSubscriptionList.get(j).getSubName())) {
@@ -164,9 +176,41 @@ public class HomeFragment extends Fragment {
                             mRecyclerView.getAdapter().notifyDataSetChanged();
                             mSubscriptionList.add(subscriptionModel);
                             mRecyclerView.getAdapter().notifyDataSetChanged();
+                        } else if (selectedText.equalsIgnoreCase(mSubscriptionList.get(j).getVendorName())) {
+                            SubscriptionModel subscriptionModel = mSubscriptionList.get(j);
+                            mSubscriptionList.clear();
+                            mRecyclerView.getAdapter().notifyDataSetChanged();
+                            mSubscriptionList.add(subscriptionModel);
+                            mRecyclerView.getAdapter().notifyDataSetChanged();
                         }
                     }
                 }
+            }
+        });
+
+        mCustomSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                /*
+                                    if (list.get(i).getSubName().toLowerCase().contains(filterString)) {
+                        nlist.add(list.get(i).getSubName());
+                    } else if (list.get(i).getVendorName().toLowerCase().contains(filterString)) {
+                        nlist.add(list.get(i).getVendorName());
+                    }
+
+                 */
+                if (CommonUtils.isNullString(newText)) {
+                    mSubscriptionList.clear();
+                    mRecyclerView.getAdapter().notifyDataSetChanged();
+                    mSubscriptionList.addAll(mOriginalList);
+                    mRecyclerView.getAdapter().notifyDataSetChanged();
+                }
+                return false;
             }
         });
 

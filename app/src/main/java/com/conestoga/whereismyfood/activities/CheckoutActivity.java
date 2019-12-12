@@ -43,6 +43,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * {@link CheckoutActivity} is used to perform checkout operations like selecting meal days and pay.
+ *
+ * @author : Harsh Patel
+ * @Date :  19/10/2019
+ */
 public class CheckoutActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private ActivityCheckoutBinding mBinding;
@@ -104,9 +110,11 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
                         if (CommonUtils.isInternetAvailable(this)) {
                             OrderDetail orderDetail = new OrderDetail();
 
-                            orderDetail.setAddressId(mUserDetails.getAddressDetailsList()
-                                    .get(((CheckoutAddressAdapter) mBinding.recyclerAddresses.getAdapter())
-                                            .getSelectedIndex()).getAddressId());
+                            if (mUserDetails.getAddressDetailsList().size() > 0) {
+                                orderDetail.setAddressId(mUserDetails.getAddressDetailsList()
+                                        .get(((CheckoutAddressAdapter) mBinding.recyclerAddresses.getAdapter())
+                                                .getSelectedIndex()).getAddressId());
+                            }
 
                             orderDetail.setDaysSelected(daysArray.toString());
                             orderDetail.setEmailId(mBinding.edtEmail.getText().toString());
@@ -179,6 +187,11 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         return true;
     }
 
+    /**
+     * Used to set validations for user selections
+     *
+     * @Date : 19/10/2019
+     */
     private void setValidations() {
         mAwesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
 
@@ -187,6 +200,11 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         mAwesomeValidation.addValidation(mBinding.edtPhone, CommonUtils.PHONE_NO_PATTERN, getString(R.string.toast_invalid_phone));
     }
 
+    /**
+     * Sets listeners on all required user interfaces
+     *
+     * @Date : 19/10/2019
+     */
     private void setListeners() {
         mBinding.toolbarInclude.toolbarTxtSaveEdit.setVisibility(View.VISIBLE);
         mBinding.toolbarInclude.toolbarTxtSaveEdit.setText(R.string.str_checkout);

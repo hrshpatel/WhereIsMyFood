@@ -60,17 +60,24 @@
                     android:id="@+id/act_sub_edt_name"
                     style="@style/editText_signup"
                     android:hint="@string/str_subscription_name"
-                    android:imeOptions="actionNext" />
+                    android:imeOptions="actionNext"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName" />
 
                 <EditText
                     android:id="@+id/act_sub_edt_vendor_name"
                     style="@style/editText_signup"
-                    android:hint="@string/hint_vendor_name" />
+                    android:editable="false"
+                    android:hint="@string/hint_vendor_name"
+                    android:importantForAutofill="no"
+                    android:inputType="none" />
 
                 <EditText
                     android:id="@+id/act_sub_edt_description"
                     style="@style/editText_signup"
                     android:hint="@string/str_description"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
                     android:maxLength="1000"
                     android:maxLines="7"
                     android:singleLine="false" />

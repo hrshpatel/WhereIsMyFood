@@ -89,6 +89,11 @@ public class SignupUserFragment extends Fragment implements View.OnClickListener
         mBtnSignup = view.findViewById(R.id.frg_signup_btn_signup);
     }
 
+    /**
+     * Sets listeners on all required user interfaces
+     *
+     * @Date : 19/10/2019
+     */
     private void setListeners() {
         mBtnSignup.setOnClickListener(this);
     }

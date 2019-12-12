@@ -13,8 +13,10 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.conestoga.whereismyfood.R;
 
 import java.io.ByteArrayOutputStream;
@@ -24,7 +26,7 @@ import java.util.regex.Pattern;
 
 public class CommonUtils {
 
-    public static final String BASE_URL = "http://192.168.0.21/Capstone_project/apis/";
+    public static final String BASE_URL = "http://10.192.99.171/Capstone_project/apis/";
     public static final String INTENT_SUB_ID = "SUB_ID";
     public static final String INTENT_SUB_MODEL = "Sub_model";
     public final static Pattern FIRST_LAST_NAME_PATTERN = Pattern.compile("^[A-Za-z0-9]+[A-Za-z-\\.\\-\\_\\']*$");
@@ -286,4 +288,10 @@ public class CommonUtils {
         }
     }
 
+    public static void loadImage(Context mContext, String imageUri, ImageView mImageView) {
+        Glide.with(mContext)
+                .load(imageUri)
+                .into(mImageView);
+
+    }
 }

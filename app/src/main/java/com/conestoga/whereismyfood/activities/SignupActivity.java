@@ -45,6 +45,11 @@ public class SignupActivity extends AppCompatActivity {
         setupViewPager();
     }
 
+    /**
+     * Sets listeners on all required user interfaces
+     *
+     * @Date : 01/11/2019
+     */
     private void setListeners() {
 
         mTabLayoutLogin.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

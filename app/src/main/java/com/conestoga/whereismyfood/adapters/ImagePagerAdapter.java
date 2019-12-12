@@ -11,6 +11,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
 import com.conestoga.whereismyfood.R;
+import com.conestoga.whereismyfood.utils.CommonUtils;
 
 import java.util.ArrayList;
 
@@ -53,10 +54,7 @@ public class ImagePagerAdapter extends PagerAdapter {
 
             final String imageUri = imagePathList.get(position);
 
-            Glide.with(mContext)
-                    .load(imageUri)
-                    .into(mImageView);
-
+            CommonUtils.loadImage(mContext, imageUri, mImageView);
             return itemView;
         }
     }

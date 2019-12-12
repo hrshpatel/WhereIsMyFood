@@ -15,6 +15,13 @@ public class SignUp {
     @SerializedName("success")
     private int mSuccess;
 
+    @SerializedName("img_url")
+    private String imgUrl;
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
     public UserDetails getUserDetails() {
         return mUserDetails;
     }
